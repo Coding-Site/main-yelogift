@@ -41,6 +41,7 @@ Route::prefix('admin')->group(function(){
                 Route::prefix('codes')->controller(App\Http\Controllers\Admin\ProductPartCodeController::class)->group(function(){
                     Route::post('/','index');
                     Route::post('/store','store');
+                    Route::post('/upload','uploadCodes');
                     Route::get('/delete/{id}','destroy');
                 });
             });

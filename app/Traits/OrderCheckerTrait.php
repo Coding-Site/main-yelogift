@@ -2,6 +2,7 @@
 namespace App\Traits;
 
 use App\Models\Order;
+use App\Models\ProductPartCode;
 
 trait OrderCheckerTrait
 {
@@ -17,6 +18,15 @@ trait OrderCheckerTrait
         }
         return false;
     }
+    function checkCodeIsFound($code){
+        $all_code = ProductPartCode::all();
+        foreach($all_code as $code){
+            if(decrypt($code->code) == $code){
+                return true;
+            }
+        }
+        return false;
 
+    }
 
 }

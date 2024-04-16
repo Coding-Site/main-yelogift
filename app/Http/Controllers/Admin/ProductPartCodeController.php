@@ -3,17 +3,19 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use App\Models\ProductPart;
 use App\Models\ProductPartCode;
 use App\Models\Setting;
 use App\Traits\APIHandleClass;
+use App\Traits\OrderCheckerTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ProductPartCodeController extends Controller
 {
-    use APIHandleClass;
+    use APIHandleClass,OrderCheckerTrait;
     /**
      * Display a listing of the resource.
      */
@@ -28,6 +30,9 @@ class ProductPartCodeController extends Controller
         }
         if( decrypt($password->value) == $request->password){
             $codes = ProductPartCode::where('part_id', $request->part_id)->get();
+            foreach($codes as $code){
+                $code->code = decrypt($code->code);
+            }
             $this->setData($codes);
             return $this->returnResponse();
         }
@@ -52,10 +57,16 @@ class ProductPartCodeController extends Controller
             $this->setStatusMessage(false);
             return $this->returnResponse();
         }
+        if($this->checkCodeIsFound($request->code)){
+            $this->setMessage(__('translate.code_is_founded'));
+            $this->setStatusCode(400);
+            $this->setStatusMessage(false);
+            return $this->returnResponse();
+        }
         $code = new ProductPartCode;
         $code->part_id = $request->part_id;
         $code->product_id = ProductPart::find($request->part_id)->product_id;
-        $code->code = $request->code;
+        $code->code = encrypt($request->code);
         $code->save();
         $this->setMessage(__('translate.Product Part Code Added Successfully'));
         return $this->returnResponse();
@@ -74,7 +85,7 @@ class ProductPartCodeController extends Controller
             $this->setStatusMessage(false);
             return $this->returnResponse();
         }
-
+        $product_id = ProductPart::find($request->part_id)->product_id;
         $file = $request->file('codesFile');
         $extension = $file->getClientOriginalExtension();
         if ($extension === 'csv') {
@@ -82,17 +93,19 @@ class ProductPartCodeController extends Controller
             while (($line = fgetcsv($codes)) !== false) {
                 $code = new ProductPartCode;
                 $code->part_id = $request->part_id;
-                $code->code = $line[0];
+                $code->product_id = $product_id;
+                $code->code = encrypt($line[0]);
                 $code->save();
             }
         } elseif ($extension === 'xlsx') {
-            Excel::load($file->getPathname(), function($reader) use ($request) {
+            Excel::load($file->getPathname(), function($reader) use ($request,$product_id) {
                 // Loop through each row of the Excel file
-                $reader->each(function($row) use ($request) {
+                $reader->each(function($row) use ($request,$product_id) {
                     // Assuming you want only the first column
                     $code = new ProductPartCode;
+                    $code->product_id = $product_id;
                     $code->part_id = $request->part_id;
-                    $code->code = $row->get(0);
+                    $code->code = encrypt($row->get(0));
                     $code->save();
                 });
             });
@@ -101,8 +114,9 @@ class ProductPartCodeController extends Controller
             $contents = array_map('trim', $contents); // Trim whitespace from each line
             foreach($contents as $content) {
                 $code = new ProductPartCode;
+                $code->product_id = $product_id;
                 $code->part_id = $request->part_id;
-                $code->code = $content;
+                $code->code = encrypt($content);
                 $code->save();
             }
         } else {
