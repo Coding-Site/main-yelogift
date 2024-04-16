@@ -34,16 +34,17 @@ Route::prefix('admin')->group(function(){
                 Route::get('/delete/{id}','destroy');
             });
             Route::prefix('parts')->controller(App\Http\Controllers\Admin\ProductPartController::class)->group(function(){
-                Route::get('/{product_id}','index');
+                Route::get('get/{product_id}','index');
                 Route::post('/store','store');
                 Route::post('/update','update');
                 Route::get('/delete/{id}','destroy');
+                Route::prefix('codes')->controller(App\Http\Controllers\Admin\ProductPartCodeController::class)->group(function(){
+                    Route::post('/','index');
+                    Route::post('/store','store');
+                    Route::get('/delete/{id}','destroy');
+                });
             });
-            Route::prefix('codes')->controller(App\Http\Controllers\Admin\ProductPartCodeController::class)->group(function(){
-                Route::get('/{product_part_id}','index');
-                Route::post('/store','store');
-                Route::get('/delete/{id}','destroy');
-            });
+
         });
         Route::prefix('page')->controller(App\Http\Controllers\Admin\PageController::class)->group(function(){
            Route::get('/','index');

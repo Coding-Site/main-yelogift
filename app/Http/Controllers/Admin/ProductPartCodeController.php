@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\ProductPart;
 use App\Models\ProductPartCode;
 use App\Models\Setting;
 use App\Traits\APIHandleClass;
@@ -18,7 +19,14 @@ class ProductPartCodeController extends Controller
      */
     public function index(Request $request)
     {
-        if( decrypt(Setting::where('key', 'password_code')->first()->value) == $request->password){
+        $password = Setting::where('key', 'password_code')->first();
+        if(!$password){
+            Setting::create([
+                'key' => 'password_code',
+                'value' => encrypt($request->password)
+            ]);
+        }
+        if( decrypt($password->value) == $request->password){
             $codes = ProductPartCode::where('part_id', $request->part_id)->get();
             $this->setData($codes);
             return $this->returnResponse();
@@ -46,6 +54,7 @@ class ProductPartCodeController extends Controller
         }
         $code = new ProductPartCode;
         $code->part_id = $request->part_id;
+        $code->product_id = ProductPart::find($request->part_id)->product_id;
         $code->code = $request->code;
         $code->save();
         $this->setMessage(__('translate.Product Part Code Added Successfully'));
