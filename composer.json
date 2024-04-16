@@ -10,6 +10,7 @@
         "laravel/sanctum": "^4.0",
         "laravel/socialite": "^5.12",
         "laravel/tinker": "^2.9",
+        "maatwebsite/excel": "^3.1",
         "socialiteproviders/apple": "^5.0",
         "socialiteproviders/binance": "^4.1",
         "tymon/jwt-auth": "^2.1"
