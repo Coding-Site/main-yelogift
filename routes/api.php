@@ -92,6 +92,10 @@ Route::prefix('user')->group(function(){
        Route::get('/','index');
        Route::post('/checkout','store');
     });
+    Route::prefix('reviews')->middleware('auth:web')->controller(App\Http\Controllers\User\ProductReviewController::class)->group(function(){
+        Route::get('/','index');
+        Route::post('/store','store');
+    });
 });
 
 

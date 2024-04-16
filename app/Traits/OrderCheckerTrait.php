@@ -3,9 +3,9 @@ namespace App\Traits;
 
 use App\Models\Order;
 
-class OrderCheckerTrait
+trait OrderCheckerTrait
 {
-    function checkOrder($product_id){
+    function checkProductOrder($product_id){
         $user = auth()->user()->id;
         $orders = Order::with('OrderProduct')->where('user_id',$user)->get();
         foreach($orders as $order){
@@ -17,5 +17,6 @@ class OrderCheckerTrait
         }
         return false;
     }
+
 
 }
