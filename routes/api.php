@@ -58,6 +58,12 @@ Route::prefix('admin')->group(function(){
            Route::get('/','index');
            Route::post('delivery/code','delivery_code');
         });
+        Route::prefix('slider')->controller(App\Http\Controllers\Admin\SliderController::class)->group(function(){
+           Route::get('/','index');
+           Route::post('store','store');
+           Route::post('update','update');
+           Route::get('delete/{id}','destroy');
+        });
     });
 });
 
@@ -65,7 +71,10 @@ Route::prefix('home')->controller(App\Http\Controllers\User\HomeController::clas
     Route::get('products/popular','popular');
     Route::get('categories','category');
     Route::get('products','product');
+    Route::get('sliders','slider');
+    Route::post('subscribe','subscribe');
 });
+
 
 Route::prefix('user')->group(function(){
     Route::prefix('auth')->controller(App\Http\Controllers\User\AuthController::class)->group(function(){
@@ -84,3 +93,7 @@ Route::prefix('user')->group(function(){
        Route::post('/checkout','store');
     });
 });
+
+
+
+
