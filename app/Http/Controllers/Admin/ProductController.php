@@ -95,9 +95,7 @@ class ProductController extends Controller
             'name' => 'required',                           // The name of the product is required
             'description' => 'required',                    // The description of the product is required
             "category_id"=>'required|exists:categories,id', // The category ID of the product is required and must exist in the categories table
-            "price"=>'required|min:0.00|not_in:0',         // The price of the product is required, must be a positive number, and cannot be 0
             "image"=>'nullable|image',                      // The image of the product is optional and must be an image file
-            "discount"=>'required|min:0.00|not_in:0',      // The discount of the product is required, must be a positive number, and cannot be 0
         ]);
 
         // If the validation fails, return the errors
@@ -116,7 +114,7 @@ class ProductController extends Controller
         $product->name = $request->name;
         $product->description =  $request->description;
         $product->category_id = $request->category_id;
-        $product->price = $request->price;
+        $product->price = 0;
 
         // If an image is provided, update the image path
         if($request->hasFile('image')){
@@ -124,7 +122,7 @@ class ProductController extends Controller
         }
 
         // Update the discount of the product
-        $product->discount = $request->discount;
+        $product->discount = 0;
 
         // Save the updated product to the database
         $product->save();

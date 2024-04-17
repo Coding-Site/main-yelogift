@@ -39,6 +39,7 @@ class CartController extends Controller
         // Validate the request data
         $validator = Validator::make($request->all(), [
             'product_id' => 'required|exists:products,id',
+            'product_part_id'=>'required|exists:product_parts,id',
             'quantity' => 'required|min:1|numeric',
         ]);
 
@@ -52,7 +53,7 @@ class CartController extends Controller
 
         // Check if the cart item already exists for the user and the product
         $cart = Cart::where('user_id', auth()->user()->id)
-            ->where('product_id', $request->product_id)
+            ->where('product_id', $request->product_id)->where('product_part_id',$request->product_part_id)
             ->first();
 
         // If the cart item exists, update the quantity, otherwise create a new cart item
@@ -62,6 +63,7 @@ class CartController extends Controller
             $cart = new Cart;
             $cart->user_id = auth()->user()->id;
             $cart->product_id = $request->product_id;
+            $cart->product_part_id = $request->product_part_id;
             $cart->quantity = $request->quantity;
         }
 

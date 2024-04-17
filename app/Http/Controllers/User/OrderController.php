@@ -86,6 +86,7 @@ class OrderController extends Controller
             foreach ($carts as $cart) {
                 $products->order_id = $order->id;
                 $products->product_id = $cart->product_id;
+                $products->product_part_id = $cart->product_part_id;
                 $products->quantity = $cart->quantity;
                 $products->price = $cart->product->price;
                 $products->save();
