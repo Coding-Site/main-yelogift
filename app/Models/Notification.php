@@ -5,12 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Order extends Model
+class Notification extends Model
 {
     use HasFactory;
-    function OrderProduct()
-    {
-        return $this->hasMany(OrderProduct::class);
+    function notificationUsers(){
+        return $this->hasMany(NotificationUser::class);
     }
-
 }
