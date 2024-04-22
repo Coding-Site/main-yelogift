@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->text('title');
             $table->float('price');
-            $table->decimal('discount',8,2);
             $table->foreignId('product_id');
             $table->timestamps();
         });
