@@ -104,6 +104,10 @@ class HomeController extends Controller
         // The 'category' relationship is loaded to fetch the category associated with the product
         // The 'product_parts' relationship is loaded to fetch the parts associated with the product
         $product = Product::with('category','product_parts')->find($product_id);
+        foreach($product->product_parts as $part){
+            $part->priceDiscount = round($part->price - $part->discount,2);
+
+        }
 
         // Set the data to be returned in the response
         $this->setData($product);
