@@ -18,4 +18,7 @@ class OrderProduct extends Model
     function order_code(){
         return $this->hasMany(OrderCode::class);
     }
+    function product_part(){
+        return $this->belongsTo(ProductPart::class);
+    }
 }

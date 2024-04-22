@@ -31,6 +31,15 @@ class OrderController extends Controller
         $this->setData($order);
         return $this->returnResponse();
     }
+    public function get($id){
+        $order = Order::with(['OrderProduct', 'OrderProduct.product','OrderProduct.product_part'])
+        ->where('user_id', auth()->user()->id)
+        ->find($id);
+
+        // Set the order data and return the response
+        $this->setData($order);
+        return $this->returnResponse();
+    }
     /**
      * Store a new order for the authenticated user.
      *
