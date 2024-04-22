@@ -12,4 +12,7 @@ class Product extends Model
     {
         return $this->belongsTo(Category::class);
     }
+    function product_parts(){
+        return $this->hasMany(ProductPart::class);
+    }
 }

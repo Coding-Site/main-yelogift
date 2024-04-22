@@ -97,7 +97,9 @@ Route::prefix('admin')->group(function(){
 Route::prefix('home')->controller(\App\Http\Controllers\User\HomeController::class)->group(function(){
     Route::get('products/popular','popular');
     Route::get('categories','category');
+    Route::get('categories/{id}','getCategory');
     Route::get('products','product');
+    Route::get('products/{id}','gerProduct');
     Route::get('sliders','slider');
     Route::post('subscribe','subscribe');
 });

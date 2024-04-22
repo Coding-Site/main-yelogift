@@ -53,6 +53,17 @@ class HomeController extends Controller
         // Return the response
         return $this->returnResponse();
     }
+    public function getCategory($category_id){
+        // Retrieve all categories from the database, using eager loading to reduce the number of queries
+        // The 'products' relationship is loaded to fetch the products associated with each category
+        $categories = Category::with('products')->find($category_id);
+
+        // Set the data to be returned in the response
+        $this->setData($categories);
+
+        // Return the response
+        return $this->returnResponse();
+    }
     /**
      * Retrieve all products with their associated categories.
      *
@@ -76,6 +87,30 @@ class HomeController extends Controller
         return $this->returnResponse();
     }
 
+    /**
+     * Retrieve a specific product with its associated category and parts.
+     *
+     * This function retrieves a specific product from the database, using eager loading to
+     * reduce the number of queries. The retrieved product along with its associated category
+     * and parts are then set as the data for the API response. Finally, the function returns
+     * the API response.
+     *
+     * @param int $product_id The ID of the product to retrieve
+     * @return \Illuminate\Http\JsonResponse The API response containing the product, its
+     *                                       associated category, and parts.
+     */
+    public function gerProduct($product_id){
+        // Retrieve a specific product from the database, using eager loading to reduce the number of queries
+        // The 'category' relationship is loaded to fetch the category associated with the product
+        // The 'product_parts' relationship is loaded to fetch the parts associated with the product
+        $product = Product::with('category','product_parts')->find($product_id);
+
+        // Set the data to be returned in the response
+        $this->setData($product);
+
+        // Return the response
+        return $this->returnResponse();
+    }
     /**
      * Retrieve all sliders from the database.
      *
