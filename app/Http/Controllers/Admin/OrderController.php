@@ -24,11 +24,11 @@ class OrderController extends Controller
     public function index()
     {
         // Retrieve all orders with their associated order products and order codes
-        $orders = Order::with(['OrderProducts.product','OrderProducts.order_code'])->get();
+        $orders = Order::with(['OrderProduct','OrderProduct.product','OrderProduct.order_code'])->get();
 
         // Decrypt the code of each order code
         $orders->each(function ($order) {
-            $order->OrderProducts->each(function ($product) {
+            $order->OrderProduct->each(function ($product) {
                 $product->order_code->each(function ($code) {
                     $code->code = decrypt($code->code);
                 });

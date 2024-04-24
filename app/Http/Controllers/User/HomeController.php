@@ -99,7 +99,7 @@ class HomeController extends Controller
      * @return \Illuminate\Http\JsonResponse The API response containing the product, its
      *                                       associated category, and parts.
      */
-    public function gerProduct($product_id){
+    public function getProduct($product_id){
         // Retrieve a specific product from the database, using eager loading to reduce the number of queries
         // The 'category' relationship is loaded to fetch the category associated with the product
         // The 'product_parts' relationship is loaded to fetch the parts associated with the product
