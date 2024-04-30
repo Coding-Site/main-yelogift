@@ -19,7 +19,7 @@ class CartController extends Controller
     public function index(){
         // Retrieve all carts for the authenticated user.
         // The 'auth' helper function is used to get the authenticated user's id.
-        $carts = Cart::where('user_id', auth('api')->user()->id)->get();
+        $carts = Cart::where('user_id', auth('web')->user()->id)->with('product','product_part')->get();
 
         // Set the data to be sent in the response.
         $this->setData($carts);

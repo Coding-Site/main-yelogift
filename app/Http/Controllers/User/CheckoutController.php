@@ -10,7 +10,7 @@ class CheckoutController extends Controller
 {
     use PaymentHandleTrait;
     function checkout(Request $request){
-        
+
         return $this->initiateBinancePay(1212,"test","test",25.35);
     }
 }

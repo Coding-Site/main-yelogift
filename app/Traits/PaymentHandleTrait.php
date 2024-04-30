@@ -27,25 +27,19 @@ trait PaymentHandleTrait
             "merchantTradeNo" => mt_rand(982538, 9825382937292),
             "orderAmount" => $price,
             "currency" => "USDT",
-            "goods" => array([
+            "goods" => array(
                 "goodsType" => "02",
                 "goodsCategory" => "6000",
                 "referenceGoodsId" => $product_id,
                 "goodsName" => $product_name,
                 "goodsDetail" => $product_description
-            ], [
-                "goodsType" => "02",
-                "goodsCategory" => "6000",
-                "referenceGoodsId" => $product_id + 1,
-                "goodsName" => $product_name,
-                "goodsDetail" => $product_description
-            ])
+            )
         );
         // return ($request);
-        return [
-            'encode' => json_encode($request),
-            'decode' => json_decode(json_encode($request))
-        ];
+        // return [
+        //     'encode' => json_encode($request),
+        //     'decode' => json_decode(json_encode($request))
+        // ];
         // exit;
         $json_request = json_encode($request);
         $payload = $timestamp . "\n" . $nonce . "\n" . $json_request . "\n";

@@ -7,6 +7,7 @@ use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Traits\APIHandleClass;
+use App\Traits\PaymentHandleTrait;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -14,7 +15,7 @@ use Illuminate\Support\Facades\Validator;
 
 class OrderController extends Controller
 {
-    use APIHandleClass;
+    use APIHandleClass,PaymentHandleTrait;
     /**
      * Retrieves the orders for the authenticated user.
      *
@@ -35,6 +36,7 @@ class OrderController extends Controller
         $order = Order::with(['OrderProduct', 'OrderProduct.product','OrderProduct.product_part'])
         ->where('user_id', auth()->user()->id)
         ->find($id);
+
 
         // Set the order data and return the response
         $this->setData($order);
@@ -89,6 +91,9 @@ class OrderController extends Controller
             $order->payment_method = "pay";
             $order->currency = "usd";
             $order->save();
+
+            $pay = $this->initiateBinancePay($order->id,'Order From Website','order from '.$request->name.' from email '.$request->email.' by id '.$order->id ,$totalPrice);
+
 
             // Create order products for each cart
             $products = new OrderProduct;
