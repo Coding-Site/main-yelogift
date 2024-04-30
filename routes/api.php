@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\User\CheckoutController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -75,6 +76,7 @@ Route::prefix('admin')->group(function(){
         });
         Route::prefix('slider')->controller(\App\Http\Controllers\Admin\SliderController::class)->group(function(){
            Route::get('/','index');
+           Route::get('get/{id}','get');
            Route::post('store','store');
            Route::post('update','update');
            Route::get('delete/{id}','destroy');
@@ -132,6 +134,10 @@ Route::prefix('user')->group(function(){
     });
     Route::get('/notification',[\App\Http\Controllers\User\NotificationUserController::class,'index'])->middleware('auth:web');
 
+});
+
+Route::controller(\App\Http\Controllers\User\CheckoutController::class)->group(function(){
+    Route::get('/checkout','checkout');
 });
 
 

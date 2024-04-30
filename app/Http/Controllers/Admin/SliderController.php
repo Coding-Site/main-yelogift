@@ -55,6 +55,18 @@ class SliderController extends Controller
         }
     }
 
+    function show($id){
+        try{
+            $slider = Slider::find($id);
+            $this->setData($slider);
+            return $this->returnResponse();
+        }catch(Exception $e){
+            $this->setMessage($e->getMessage());
+            $this->setStatusCode(400);
+            $this->setStatusMessage(false);
+            return $this->returnResponse();
+        }
+    }
     /**
      * Update the specified resource in storage.
      */
