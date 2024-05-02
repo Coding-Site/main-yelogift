@@ -24,6 +24,7 @@ Route::prefix('admin')->group(function(){
     Route::middleware('auth:admin')->group(function(){
         Route::prefix('category')->controller(\App\Http\Controllers\Admin\CategoryController::class)->group(function(){
             Route::get('/','index');
+            Route::get('/get/{id}','get');
             Route::post('/store','store');
             Route::post('/update','update');
             Route::get('/delete/{id}','destroy');
@@ -31,6 +32,7 @@ Route::prefix('admin')->group(function(){
         Route::prefix('product')->group(function(){
             Route::controller(\App\Http\Controllers\Admin\ProductController::class)->group(function(){
                 Route::get('/','index');
+                Route::get('/get/{id}','get');
                 Route::post('/store','store');
                 Route::post('/update','update');
                 Route::get('/delete/{id}','destroy');

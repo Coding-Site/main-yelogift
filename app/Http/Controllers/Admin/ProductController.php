@@ -32,6 +32,12 @@ class ProductController extends Controller
         // Return the API response
         return $this->returnResponse();
     }
+
+    function get($id){
+        $product = Product::find($id);
+        $this->setData($product);
+        return $this->returnResponse();
+    }
     /**
      * Store a newly created resource in storage.
      *

@@ -28,6 +28,13 @@ class CategoryController extends Controller
         return $this->returnResponse();
     }
 
+    public function get($id){
+        $category = Category::find($id);
+        $this->setData($category);
+        return $this->returnResponse();
+    }
+
+
     /**
      * Store a newly created resource in storage.
      *
