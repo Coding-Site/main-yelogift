@@ -27,13 +27,14 @@ trait PaymentHandleTrait
             "merchantTradeNo" => mt_rand(982538, 9825382937292),
             "orderAmount" => $price,
             "currency" => "USDT",
-            "goods" => array(
+            "description"=> "Payment for Order " . $product_id,
+            "goods" => array([
                 "goodsType" => "02",
                 "goodsCategory" => "6000",
                 "referenceGoodsId" => $product_id,
                 "goodsName" => $product_name,
                 "goodsDetail" => $product_description
-            )
+            ])
         );
         // return ($request);
         // return [
@@ -54,7 +55,7 @@ trait PaymentHandleTrait
         $headers[] = "BinancePay-Signature: $signature";
 
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($ch, CURLOPT_URL, "https://bpay.binanceapi.com/binancepay/openapi/v2/order");
+        curl_setopt($ch, CURLOPT_URL, "https://bpay.binanceapi.com/binancepay/openapi/v3/order");
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $json_request);

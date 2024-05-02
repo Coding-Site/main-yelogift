@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderProduct;
+use App\Models\PaymentSetting;
 use App\Traits\APIHandleClass;
 use App\Traits\PaymentHandleTrait;
+use CryptoPay\Binancepay\BinancePay;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -92,7 +94,6 @@ class OrderController extends Controller
             $order->currency = "usd";
             $order->save();
 
-            $pay = $this->initiateBinancePay($order->id,'Order From Website','order from '.$request->name.' from email '.$request->email.' by id '.$order->id ,$totalPrice);
 
 
             // Create order products for each cart
@@ -126,6 +127,108 @@ class OrderController extends Controller
 
         // Return the JSON response
         return $this->returnResponse();
+    }
+    public function binance_pay(Request $request){
+        $order = Order::with(['OrderProduct', 'OrderProduct.product'])->find($request->order_id);
+        $pay = $this->initiateBinancePay($order->id,'Order From Website','order from '.$order->name.' from email '.$order->email.' by id '.$order->id ,$order->price);
+
+
+         $user = auth()->user();
+
+        $data['order_amount'] =  25.17;
+        $data['package_id'] = $order->id; // referenceGoodsId: id from the DB Table that user choose to purchase
+        $data['goods_name'] = 'Order From Website';
+        $data['goods_detail'] = 'order from '.$order->name.' from email '.$order->email.' by id '.$order->id;
+        $data['buyer'] = [
+            "referenceBuyerId" => $user->id,
+            "buyerEmail" => $user->email,
+            "buyerName" => [
+                "firstName" => $user->name,
+                "lastName" => " "
+            ]
+        ];
+        $data['trx_id'] = $order->id; // used to identify the transaction after payment has been processed
+        $data['merchant_trade_no'] = now().mt_rand(982538, 9825382937292) ; // Provide an unique code;
+
+        $order->payment_method = "binance";
+        $order->payment_id = $data['merchant_trade_no'];
+        $order->save();
+
+        $binancePay = new BinancePay("binancepay/openapi/v2/order");
+        $res = $binancePay->createOrder($data);
+
+        if ($res['status'] === 'SUCCESS') {
+            $this->setData($res['data']);
+            return $this->returnResponse();
+        }
+
+        $this->setMessage($res['message']);
+        $this->setStatusCode(400);
+        $this->setStatusMessage(false);
+        return $this->returnResponse();
+
+    }
+
+    public function returnCallback(Request $request)
+    {
+        return $this->checkOrderStatus($request);
+    }
+
+    // GET /binancepay/cancelURL
+    public function cancelCallback(Request $request)
+    {
+        return $this->checkOrderStatus($request);
+    }
+
+    private function checkOrderStatus(Request $request)
+    {
+        $transaction = order::findOr($request->get('trx-id'), function () {
+
+        });
+
+        $order_status = (new BinancePay("binancepay/openapi/v2/order/query"))
+                            ->query(['merchantTradeNo' => $transaction->merchant_trade_no]);
+
+        // Save transaction status or whatever you like according to the order status
+        if($order_status['status'] == 'SUCCESS'){
+            $transaction->status = 1;
+            $transaction->save();
+        }
+        return redirect()->url('https://yelogift-front.coding-site.com/');
+
+
+        // $transaction->update(['status' => $order_status['data']['status']];
+        // dd($order_status);
+
+        // ITS UPTO YOU 😎
+    }
+    public function currancy(){
+        $payment = PaymentSetting::all();
+        $this->setData($payment);
+        return $this->returnResponse();
+    }
+    public function pay_by_currancy(Request $request){
+
+        $validator = Validator::make($request->all(), [
+            'currency_id'=>'required|exists:payment_settings,id',
+            'order_id'=>'required|exists:orders,id',
+            'invoice'=>'required|file'
+        ]);
+
+        if ($validator->fails()) {
+            $this->setMessage($validator->errors()->first());
+            $this->setStatusCode(400);
+            $this->setStatusMessage(false);
+            return $this->returnResponse();
+        }
+        $order = Order::find($request->order_id);
+        $order->payment_method = "currancy";
+        $order->payment_id = $request->currency_id;
+        $order->invoice = $request->invoice->store('invoice');
+        $order->save();
+        $this->setMessage('payment Success !');
+        return $this->returnResponse();
+
     }
 
 }

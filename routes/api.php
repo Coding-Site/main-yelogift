@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\User\CheckoutController;
+use App\Http\Controllers\User\OrderController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -123,6 +124,10 @@ Route::prefix('user')->group(function(){
        Route::get('/','index');
        Route::get('/get/{id}','get');
        Route::post('/checkout','store');
+       Route::post('/binance/pay','binance_pay');
+       Route::get('/currancy','currancy');
+       Route::get('/pay_by_currancy','pay_by_currancy');
+
     });
     Route::prefix('reviews')->middleware('auth:web')->controller(\App\Http\Controllers\User\ProductReviewController::class)->group(function(){
         Route::get('get/{id}','index');
@@ -138,6 +143,11 @@ Route::prefix('user')->group(function(){
 
 Route::controller(\App\Http\Controllers\User\CheckoutController::class)->group(function(){
     Route::get('/checkout','checkout');
+});
+
+Route::controller(\App\Http\Controllers\User\OrderController::class)->group(function(){
+    Route::post('/binancepay/callback','returnCallback');
+    Route::post('/binancepay/cancel','cancelCallback');
 });
 
 
