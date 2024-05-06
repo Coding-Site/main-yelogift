@@ -4,7 +4,7 @@ namespace App\Traits;
 
 trait PaymentHandleTrait
 {
-    public function initiateBinancePay($product_id, $product_name, $product_description, $price)
+    public function initiateBinancePay($pay_id,$product_id, $product_name, $product_description, $price)
     {
         // Generate nonce string
         $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -24,7 +24,7 @@ trait PaymentHandleTrait
             "orderTags" => array(
                 "ifProfitSharing" => false
             ),
-            "merchantTradeNo" => mt_rand(982538, 9825382937292),
+            "merchantTradeNo" => $pay_id,
             "orderAmount" => $price,
             "currency" => "USDT",
             "description"=> "Payment for Order " . $product_id,
