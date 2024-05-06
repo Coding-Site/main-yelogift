@@ -135,7 +135,7 @@ class OrderController extends Controller
 
          $user = auth()->user();
 
-        $data['order_amount'] =  25.17;
+        $data['order_amount'] =  $order->price;
         $data['package_id'] = $order->id; // referenceGoodsId: id from the DB Table that user choose to purchase
         $data['goods_name'] = 'Order From Website';
         $data['goods_detail'] = 'order from '.$order->name.' from email '.$order->email.' by id '.$order->id;
@@ -144,7 +144,7 @@ class OrderController extends Controller
             "buyerEmail" => $user->email,
             "buyerName" => [
                 "firstName" => $user->name,
-                "lastName" => " "
+                "lastName" => $user->name
             ]
         ];
         $data['trx_id'] = $order->id; // used to identify the transaction after payment has been processed
