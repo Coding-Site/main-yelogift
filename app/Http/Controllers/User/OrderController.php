@@ -148,7 +148,7 @@ class OrderController extends Controller
             ]
         ];
         $data['trx_id'] = $order->id; // used to identify the transaction after payment has been processed
-        $data['merchant_trade_no'] = now().mt_rand(982538, 9825382937292) ; // Provide an unique code;
+        $data['merchant_trade_no'] = mt_rand(982538, 9825382937292) ; // Provide an unique code;
 
         $order->payment_method = "binance";
         $order->payment_id = $data['merchant_trade_no'];
