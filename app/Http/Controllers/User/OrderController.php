@@ -161,7 +161,7 @@ class OrderController extends Controller
             $this->setData([
                 'order'=>$order,
                 'pay_data'=>
- $res['data']
+        $res['data']
         ]);
             return $this->returnResponse();
         }
