@@ -128,7 +128,7 @@ Route::prefix('user')->group(function(){
        Route::post('/checkout','store');
        Route::post('/binance/pay','binance_pay');
        Route::get('/currancy','currancy');
-       Route::get('/pay/currancy','pay_by_currancy');
+       Route::post('/pay/currancy','pay_by_currancy');
 
     });
     Route::prefix('reviews')->middleware('auth:web')->controller(\App\Http\Controllers\User\ProductReviewController::class)->group(function(){
