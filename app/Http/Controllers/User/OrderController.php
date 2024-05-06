@@ -130,7 +130,7 @@ class OrderController extends Controller
     }
     public function binance_pay(Request $request){
         $order = Order::with(['OrderProduct', 'OrderProduct.product'])->find($request->order_id);
-        $pay = $this->initiateBinancePay($order->id,'Order From Website','order from '.$order->name.' from email '.$order->email.' by id '.$order->id ,$order->price);
+        // $pay = $this->initiateBinancePay($order->id,'Order From Website','order from '.$order->name.' from email '.$order->email.' by id '.$order->id ,$order->price);
 
 
          $user = auth()->user();
@@ -157,8 +157,13 @@ class OrderController extends Controller
         $binancePay = new BinancePay("binancepay/openapi/v2/order");
         $res = $binancePay->createOrder($data);
 
+        return $res;
         if ($res['status'] === 'SUCCESS') {
-            $this->setData($res['data']);
+            $this->setData([
+                'order'=>$order,
+                'pay_data'=>
+ $res['data']
+        ]);
             return $this->returnResponse();
         }
 
