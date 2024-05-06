@@ -157,7 +157,6 @@ class OrderController extends Controller
         $binancePay = new BinancePay("binancepay/openapi/v2/order");
         $res = $binancePay->createOrder($data);
 
-        return $res;
         if ($res['status'] === 'SUCCESS') {
             $this->setData([
                 'order'=>$order,
