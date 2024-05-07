@@ -56,10 +56,7 @@ class OrderController extends Controller
         try {
             // Validate the request
             $validator = Validator::make($request->all(), [
-                "name" => "required",
-                'email' => 'required|email',
-                "phone" => 'required',
-                "country" => 'required'
+                'email' => 'email',
             ]);
 
             // If the validation fails, return the error response
@@ -82,10 +79,10 @@ class OrderController extends Controller
             // Create a new order
             $order = new Order();
             $order->user_id = auth()->user()->id;
-            $order->name = $request->name;
-            $order->email = $request->email;
-            $order->phone = $request->phone;
-            $order->country = $request->country;
+            $order->name = $request->name?$request->name:"none";
+            $order->email = $request->email?$request->email:"none";
+            $order->phone = $request->phone?$request->phone:"none";
+            $order->country = $request->country?$request->country:"none";
             $order->price = $totalPrice;
             $order->status = 0;
             $order->payment_status = 0;
