@@ -125,9 +125,13 @@ class CartController extends Controller
      */
     function destroy($id)
     {
+        if($id == "all"){
+            Cart::where('user_id',auth()->user()->id)->delete();
+            $this->setMessage(__('translate.cart_deleted_success'));
+            return $this->returnResponse();
+        }
         // Find the cart item by ID
         $cart = Cart::find($id);
-
         // If the cart item does not exist, return an error message
         if (!$cart) {
             $this->setMessage(__('translate.cart_not_found'));
