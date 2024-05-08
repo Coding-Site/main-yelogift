@@ -8,6 +8,7 @@ use App\Models\OrderCode;
 use App\Models\OrderProduct;
 use App\Traits\APIHandleClass;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class OrderController extends Controller
@@ -53,8 +54,10 @@ class OrderController extends Controller
     {
         // Validate the request
         $validator = Validator::make($request->all(), [
-            'order_product_id' => 'required|exists:orders,id',
-            'code' => 'required',
+            'order_id'=>'required|exists:orders,id',
+            'order_codes'=>'required|array',
+            'order_codes.*.order_product_id' => 'required|exists:order_products,id',
+            'order_codes.*.code' => 'required|array',
         ]);
 
         // If the validation fails, return the error response
@@ -64,39 +67,37 @@ class OrderController extends Controller
             $this->setStatusMessage(false);
             return $this->returnResponse();
         }
+        DB::beginTransaction();
+        foreach($request->order_codes as $order_code){
+            // Get the order product and the count of order codes
+            $order_product = OrderProduct::find($order_code->order_product_id);
+            $order_code = OrderCode::where('order_product_id', $order_code->order_product_id)->count();
 
-        // Get the order product and the count of order codes
-        $order_product = OrderProduct::find($request->order_product_id);
-        $order_code = OrderCode::where('order_product_id', $request->order_product_id)->count();
-
-        // If the order code count is greater than or equal to the quantity, return an error response
-        if ($order_code >= $order_product->quantity) {
-            $this->setMessage(__('translate.order_code_limitation'));
-            $this->setStatusCode('400');
-            $this->setStatusMessage(false);
-            return $this->returnResponse();
+            // If the order code count is greater than or equal to the quantity, return an error response
+            if ($order_code >= $order_product->quantity) {
+                $this->setMessage(__('translate.order_code_limitation'));
+                $this->setStatusCode('400');
+                $this->setStatusMessage(false);
+                return $this->returnResponse();
+            }
+            foreach($order_code->code as $code){
+                $order_code_unique = OrderCode::where('code', encrypt($code))->first();
+                if ($order_code_unique) {
+                    $this->setMessage(__('translate.order_code_found_later'));
+                    $this->setStatusCode('400');
+                    $this->setStatusMessage(false);
+                    return $this->returnResponse();
+                }
+                // Create a new order code and save it
+                $order = new OrderCode;
+                $order->order_product_id = $request->order_product_id;
+                $order->code = encrypt($code);
+                $order->save();
+            }
         }
-
-        // Check if the code already exists
-        $order_code_unique = OrderCode::where('code', encrypt($request->code))->first();
-
-        // If the code exists, return an error response
-        if ($order_code_unique) {
-            $this->setMessage(__('translate.order_code_found_later'));
-            $this->setStatusCode('400');
-            $this->setStatusMessage(false);
-            return $this->returnResponse();
-        }
-
-        // Create a new order code and save it
-        $order = new OrderCode;
-        $order->order_product_id = $request->order_product_id;
-        $order->code = encrypt($request->code);
-        $order->save();
-
+        DB::commit();
         // Set the success response
         $this->setMessage(__('translate.order_code_store_success'));
-        $this->setData($order);
         return $this->returnResponse();
     }
 }
