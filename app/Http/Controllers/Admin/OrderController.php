@@ -57,7 +57,7 @@ class OrderController extends Controller
             'order_id'=>'required|exists:orders,id',
             'order_codes'=>'required|array',
             'order_codes.*.order_product_id' => 'required|exists:order_products,id',
-            'order_codes.*.code' => 'required|array',
+            'order_codes.*.code' => 'required',
         ]);
 
         // If the validation fails, return the error response
@@ -80,20 +80,18 @@ class OrderController extends Controller
                 $this->setStatusMessage(false);
                 return $this->returnResponse();
             }
-            foreach($order_code->code as $code){
-                $order_code_unique = OrderCode::where('code', encrypt($code))->first();
-                if ($order_code_unique) {
-                    $this->setMessage(__('translate.order_code_found_later'));
-                    $this->setStatusCode('400');
-                    $this->setStatusMessage(false);
-                    return $this->returnResponse();
-                }
-                // Create a new order code and save it
-                $order = new OrderCode;
-                $order->order_product_id = $request->order_product_id;
-                $order->code = encrypt($code);
-                $order->save();
+            $order_code_unique = OrderCode::where('code', encrypt($order_code->code))->first();
+            if ($order_code_unique) {
+                $this->setMessage(__('translate.order_code_found_later'));
+                $this->setStatusCode('400');
+                $this->setStatusMessage(false);
+                return $this->returnResponse();
             }
+            // Create a new order code and save it
+            $order = new OrderCode;
+            $order->order_product_id = $request->order_product_id;
+            $order->code = encrypt($order_code->code);
+            $order->save();
         }
         DB::commit();
         // Set the success response
