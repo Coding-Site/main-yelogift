@@ -40,6 +40,26 @@ class OrderController extends Controller
         $this->setData($orders);
         return $this->returnResponse();
     }
+
+    public function get($order_id){
+        // Retrieve all orders with their associated order products and order codes
+        $orders = Order::with(['OrderProduct','OrderProduct.product','OrderProduct.order_code'])->find($order_id);
+
+        // Decrypt the code of each order code
+        $orders->each(function ($order) {
+            $order->OrderProduct->each(function ($product) {
+                $product->order_code->each(function ($code) {
+                    $code->code = decrypt($code->code);
+                });
+            });
+        });
+        // Set the data to be returned and return the response
+        $this->setData($orders);
+        return $this->returnResponse();
+    }
+
+
+
     /**
      * Store a newly created resource in storage.
      *

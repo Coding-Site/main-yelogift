@@ -75,6 +75,7 @@ Route::prefix('admin')->group(function(){
         });
         Route::prefix('orders')->controller(\App\Http\Controllers\Admin\OrderController::class)->group(function(){
            Route::get('/','index');
+           Route::get('/get/{id}','get');
            Route::post('delivery/code','delivery_code');
         });
         Route::prefix('slider')->controller(\App\Http\Controllers\Admin\SliderController::class)->group(function(){
