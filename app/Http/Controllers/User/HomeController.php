@@ -56,10 +56,12 @@ class HomeController extends Controller
     public function getCategory($category_id){
         // Retrieve all categories from the database, using eager loading to reduce the number of queries
         // The 'products' relationship is loaded to fetch the products associated with each category
-        $categories = Category::with('products')->find($category_id);
-
+        $category = Category::find($category_id);
+        
+        $products = Product::where('category_id', $category_id)->paginate(1);
+        $category->products=$products;
         // Set the data to be returned in the response
-        $this->setData($categories);
+        $this->setData($category);
 
         // Return the response
         return $this->returnResponse();
