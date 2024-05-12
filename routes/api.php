@@ -21,7 +21,7 @@ Route::prefix('admin')->group(function(){
     Route::prefix('auth')->controller(\App\Http\Controllers\Admin\AuthController::class)->group(function(){
         Route::post('/login', 'login');
     });
-    Route::middleware('auth:admin')->group(function(){
+    Route::prefix('auth')->group(function(){
         Route::prefix('category')->controller(\App\Http\Controllers\Admin\CategoryController::class)->group(function(){
             Route::get('/','index');
             Route::get('/get/{id}','get');
@@ -37,6 +37,11 @@ Route::prefix('admin')->group(function(){
                 Route::post('/update','update');
                 Route::get('/delete/{id}','destroy');
             });
+
+
+
+
+            
             Route::prefix('parts')->controller(\App\Http\Controllers\Admin\ProductPartController::class)->group(function(){
                 Route::get('get/{product_id}','index');
                 Route::post('/store','store');

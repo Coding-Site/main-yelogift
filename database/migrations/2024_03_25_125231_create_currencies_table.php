@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('symbol');
             $table->decimal('charge_rate',10,10);
-            $table->decimal('charge_percent',8,10);
+            $table->decimal('charge_percent',10,10);
             $table->timestamps();
         });
     }

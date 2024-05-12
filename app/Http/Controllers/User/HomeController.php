@@ -78,7 +78,7 @@ class HomeController extends Controller
     public function product(){
         // Retrieve all products from the database, using eager loading to reduce the number of queries
         // The 'category' relationship is loaded to fetch the categories associated with each product
-        $products = Product::with('category')->inRandomOrder()->get();
+        $products = Product::with('category')->inRandomOrder()->paginate(10);
 
         // Set the data to be returned in the response
         $this->setData($products);
