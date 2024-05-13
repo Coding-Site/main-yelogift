@@ -85,7 +85,7 @@ Route::prefix('admin')->group(function(){
         });
         Route::prefix('slider')->controller(\App\Http\Controllers\Admin\SliderController::class)->group(function(){
            Route::get('/','index');
-           Route::get('get/{id}','show');
+           Route::get('/{id}','show');
            Route::post('store','store');
            Route::post('update','update');
            Route::get('delete/{id}','destroy');
