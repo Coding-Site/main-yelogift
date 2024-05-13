@@ -8,7 +8,7 @@ use App\Traits\APIHandleClass;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-
+use Illuminate\Support\Facades\Storage;
 class SliderController extends Controller
 {
     use APIHandleClass;
@@ -75,9 +75,9 @@ class SliderController extends Controller
         try{
             $validator = Validator::make($request->all(),[
                 'id'=>'required|exists:sliders',
-                'title' => 'required',
+                'title' => 'nullable',
                 'image' => 'nullable|image',
-                'description' => 'required',
+                'description' => 'nullable',
             ]);
 
             if($validator->fails()){
@@ -87,10 +87,12 @@ class SliderController extends Controller
                 return $this->returnResponse();
             }
             $slider = Slider::find($request->id);
-            $slider->title = $request->title;
-            $slider->description = $request->description;
+            if($request->title){$slider->title = $request->title;}
+            if($request->description){$slider->description = $request->description;}
             if($request->hasFile('image')){
+                $image=$slider->image;
                 $slider->image = $request->image->store('sliders', 'public');
+                Storage::delete('public/'.$image);
             }
             $slider->save();
             $this->setData($slider);

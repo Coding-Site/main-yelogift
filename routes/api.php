@@ -21,7 +21,7 @@ Route::prefix('admin')->group(function(){
     Route::prefix('auth')->controller(\App\Http\Controllers\Admin\AuthController::class)->group(function(){
         Route::post('/login', 'login');
     });
-    Route::middleware('auth:admin')->group(function(){
+    Route::prefix('auth')->group(function(){
         Route::prefix('category')->controller(\App\Http\Controllers\Admin\CategoryController::class)->group(function(){
             Route::get('/','index');
             Route::get('/get/{id}','get');
