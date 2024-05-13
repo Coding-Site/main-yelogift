@@ -89,7 +89,7 @@ class SliderController extends Controller
             $slider = Slider::find($request->id);
             if($request->title){$slider->title = $request->title;}
             if($request->description){$slider->description = $request->description;}
-            if($request->hasFile('image')){
+            if($request->file('image')){
                 $image=$slider->image;
                 $slider->image = $request->image->store('sliders', 'public');
                 Storage::delete('public/'.$image);
