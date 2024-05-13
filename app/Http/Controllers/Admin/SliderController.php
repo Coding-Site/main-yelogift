@@ -76,7 +76,7 @@ class SliderController extends Controller
             $validator = Validator::make($request->all(),[
                 'id'=>'required|exists:sliders',
                 'title' => 'nullable',
-                'image' => 'nullable|image',
+                'image' => 'nullable',
                 'description' => 'nullable',
             ]);
 
