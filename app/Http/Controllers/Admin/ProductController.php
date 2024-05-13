@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Traits\APIHandleClass;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -97,11 +98,13 @@ class ProductController extends Controller
     {
         // Validate the request data
         $validator = Validator::make($request->all(), [
-            'product_id'=>'required|exists:products,id',  // The product ID of the product is required and must exist in the products table
-            'name' => 'required',                           // The name of the product is required
-            'description' => 'required',                    // The description of the product is required
-            "category_id"=>'required|exists:categories,id', // The category ID of the product is required and must exist in the categories table
-            "image"=>'nullable|image',                      // The image of the product is optional and must be an image file
+            'product_id'=>'required|exists:products,id',  // The product ID of the product is optional and must exist in the products table
+            'name' => 'nullable',                           // The name of the product is optional
+            'description' => 'nullable',                    // The description of the product is optional
+            "category_id"=>'nullable|exists:categories,id', // The category ID of the product is optional and must exist in the categories table
+            "image"=>'nullable',                      // The image of the product is optional and must be an image file
+            'price'=>'nullable|numeric',
+            'discount'=>'nullable|numeric'
         ]);
 
         // If the validation fails, return the errors
@@ -117,18 +120,17 @@ class ProductController extends Controller
         $product = Product::find($request->product_id);
 
         // Update the properties of the product
-        $product->name = $request->name;
-        $product->description =  $request->description;
-        $product->category_id = $request->category_id;
-        $product->price = 0;
-
+        if($request->name){$product->name = $request->name;}
+        if($request->description){$product->description = $request->description;}
+        if($request->price){$product->price = $request->price;}
+        if($request->discount){$product->discount = $request->discount;}
+        if($request->category_id){$product->category_id = $request->category_id;}
         // If an image is provided, update the image path
-        if($request->hasFile('image')){
+        if($request->file('image')){
+            $image=$product->image;
             $product->image = $request->image->store('products','public');
+            Storage::delete('public/'.$image);
         }
-
-        // Update the discount of the product
-        $product->discount = 0;
 
         // Save the updated product to the database
         $product->save();

@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Traits\APIHandleClass;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
@@ -90,8 +91,8 @@ class CategoryController extends Controller
         // Validate the request data
         $validator = Validator::make($request->all(), [
             'category_id' => 'required|exists:categories,id', // Category id must exist in the categories table
-            'name' => 'required|unique:categories', // Category name must be unique
-            'icon' => 'nullable|image', // Category icon is required
+            'name' => 'nullable|unique:categories', // Category name must be unique
+            'icon' => 'nullable', 
         ]);
 
         // If the validation fails, return the errors
@@ -107,9 +108,11 @@ class CategoryController extends Controller
         $category = Category::find($request->category_id);
 
         // Update the category name and icon
-        $category->name = $request->name;
-        if($request->hasFile('icon')){
+        if($request->name){$category->name=$request->name;}
+        if($request->file('icon')){
+            $icon=$category->icon;
             $category->icon = $request->icon->store('categories', 'public');
+            Storage::delete('public/'.$icon);
 
         }
         // Save the changes to the database
