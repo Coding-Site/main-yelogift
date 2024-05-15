@@ -7,6 +7,7 @@ use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\PaymentSetting;
+use App\Models\User;
 use App\Traits\APIHandleClass;
 use App\Traits\PaymentHandleTrait;
 use CryptoPay\Binancepay\BinancePay;
@@ -68,14 +69,18 @@ class OrderController extends Controller
             }
 
             // Start a database transaction
-            DB::beginTransaction();
+            // DB::beginTransaction();
 
             // Retrieve the carts of the authenticated user
-            $carts = Cart::with('product')->where('user_id', auth()->user()->id)->get();
-
+            $carts = Cart::where('user_id', auth()->user()->id)->with('product','product_part')->get();
+            
             // Calculate the total price of the carts
             $totalPrice = $carts->sum('product.price');
-
+            $price = 0;
+            foreach($carts as $cart){
+                $price = $price + $cart->product_part->price * $cart->quantity;
+                $cart->delete();
+            }
             // Create a new order
             $order = new Order();
             $order->user_id = auth()->user()->id;
@@ -83,7 +88,7 @@ class OrderController extends Controller
             $order->email = $request->email?$request->email:"none";
             $order->phone = $request->phone?$request->phone:"none";
             $order->country = $request->country?$request->country:"none";
-            $order->price = $totalPrice;
+            $order->price = $price;
             $order->status = 0;
             $order->payment_status = 0;
             $order->payment_id = 0;
@@ -122,7 +127,7 @@ class OrderController extends Controller
             $this->setStatusMessage(false);
         }
 
-        // Return the JSON response
+        //Return the JSON response
         return $this->returnResponse();
     }
     public function binance_pay(Request $request){
@@ -130,7 +135,7 @@ class OrderController extends Controller
         // $pay = $this->initiateBinancePay($order->id,'Order From Website','order from '.$order->name.' from email '.$order->email.' by id '.$order->id ,$order->price);
 
 
-         $user = auth()->user();
+        $user = auth()->user();
 
         $data['order_amount'] =  $order->price;
         $data['package_id'] = $order->id; // referenceGoodsId: id from the DB Table that user choose to purchase
@@ -158,18 +163,18 @@ class OrderController extends Controller
             $this->setData([
                 'order'=>$order,
                 'pay_data'=>
-        $res['data']
+        $res
         ]);
             return $this->returnResponse();
         }
 
-        $this->setMessage($res['message']);
+        $this->setMessage($res['errorMessage']);
         $this->setStatusCode(400);
         $this->setStatusMessage(false);
         return $this->returnResponse();
 
     }
-
+    
     public function returnCallback(Request $request)
     {
         return $this->checkOrderStatus($request);
@@ -192,7 +197,7 @@ class OrderController extends Controller
 
         // Save transaction status or whatever you like according to the order status
         if($order_status['status'] == 'SUCCESS'){
-            $transaction->status = 1;
+            $transaction->payment_status = 1;
             $transaction->save();
         }
         return redirect()->url('https://yelogift-front.coding-site.com/');

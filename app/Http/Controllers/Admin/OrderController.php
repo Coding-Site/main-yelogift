@@ -25,16 +25,16 @@ class OrderController extends Controller
     public function index()
     {
         // Retrieve all orders with their associated order products and order codes
-        $orders = Order::with(['OrderProduct','OrderProduct.product','OrderProduct.order_code'])->get();
-
+        $orders = Order::with(['OrderProduct','OrderProduct.product','OrderProduct.order_code','OrderProduct.product_part'])->get();
+        
         // Decrypt the code of each order code
-        $orders->each(function ($order) {
-            $order->OrderProduct->each(function ($product) {
-                $product->order_code->each(function ($code) {
-                    $code->code = decrypt($code->code);
-                });
-            });
-        });
+        foreach($orders as $order) {
+            foreach($order->OrderProduct as $product) {
+                foreach($product->order_code as $code) {
+                    $code->decrypt_code = decrypt($code->code);
+               };
+             };
+        };
 
         // Set the data to be returned and return the response
         $this->setData($orders);
@@ -43,13 +43,13 @@ class OrderController extends Controller
 
     public function get($order_id){
         // Retrieve all orders with their associated order products and order codes
-        $orders = Order::with(['OrderProduct','OrderProduct.product','OrderProduct.order_code'])->find($order_id);
+        $orders = Order::with(['OrderProduct','OrderProduct.product','OrderProduct.order_code','OrderProduct.product_part'])->find($order_id);
 
         // Decrypt the code of each order code
         $orders->each(function ($order) {
             $order->OrderProduct->each(function ($product) {
                 $product->order_code->each(function ($code) {
-                    $code->code = decrypt($code->code);
+                    $code->decrypt_code = decrypt($code->code);
                 });
             });
         });

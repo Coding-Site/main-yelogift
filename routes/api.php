@@ -15,13 +15,12 @@ Route::get('unauth', function () {
         'message' => __('translate.unauthorized'),
     ]);
 })->name('login');
-
+Route::controller(\App\Http\Controllers\Admin\AuthController::class)->group(function(){
+    Route::post('/login', 'login');
+});
 // admin/*  routes for admin panel
 Route::prefix('admin')->group(function(){
-    Route::prefix('auth')->controller(\App\Http\Controllers\Admin\AuthController::class)->group(function(){
-        Route::post('/login', 'login');
-    });
-    Route::prefix('auth')->group(function(){
+    Route::prefix('admin')->group(function(){
         Route::prefix('category')->controller(\App\Http\Controllers\Admin\CategoryController::class)->group(function(){
             Route::get('/','index');
             Route::get('/get/{id}','get');
@@ -37,10 +36,6 @@ Route::prefix('admin')->group(function(){
                 Route::post('/update','update');
                 Route::get('/delete/{id}','destroy');
             });
-
-
-
-
             
             Route::prefix('parts')->controller(\App\Http\Controllers\Admin\ProductPartController::class)->group(function(){
                 Route::get('get/{product_id}','index');

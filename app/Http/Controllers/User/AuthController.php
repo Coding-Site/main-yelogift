@@ -49,7 +49,7 @@ class AuthController extends Controller
                 ];
 
                 // Set the response data
-                $this->setData(['token' => $tokenData, 'user' => $user]);
+                $this->setData(['token' => $tokenData, 'user' => $user, 'role'=>'user']);
                 $this->setMessage(__('translate.login_success_message'));
 
                 // Return the response

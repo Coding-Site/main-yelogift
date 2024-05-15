@@ -29,6 +29,7 @@ class ProductPartController extends Controller
         $validator = Validator::make($request->all(), [
             'product_id'=>'required|exists:products,id',
             'title'=>'required',
+            'selling_type'=>'required',
             'price'=>'required|numeric|min:0|not_in:0',
             'discount'=>'required|numeric|min:0|not_in:0|lt:price',
         ]);
@@ -41,6 +42,7 @@ class ProductPartController extends Controller
         $productPart = new ProductPart();
         $productPart->product_id = $request->product_id;
         $productPart->title = $request->title;
+        $productPart->selling_type = $request->selling_type;
         $productPart->price = $request->price;
         $productPart->discount = $request->discount;
         $productPart->save();
@@ -58,6 +60,7 @@ class ProductPartController extends Controller
             'part_id'=>'required|exists:product_parts,id',
             'product_id'=>'required|exists:products,id',
             'title'=>'required',
+            'selling_type'=>'required',
             'price'=>'required|numeric|min:0|not_in:0',
         ]);
         if($validator->fails()){
@@ -69,6 +72,7 @@ class ProductPartController extends Controller
         $productPart = ProductPart::find($request->part_id);
         $productPart->product_id = $request->product_id;
         $productPart->title = $request->title;
+        $productPart->selling_type = $request->selling_type;
         $productPart->price = $request->price;
         $productPart->discount = $request->discount;
 

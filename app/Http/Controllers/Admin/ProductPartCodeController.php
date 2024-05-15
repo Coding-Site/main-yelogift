@@ -37,7 +37,7 @@ class ProductPartCodeController extends Controller
             return $this->returnResponse();
         }
         $this->setMessage(__('translate.Unauthorized'));
-        $this->setStatusCode(401);
+        $this->setStatusCode(200);
         $this->setStatusMessage(false);
         return $this->returnResponse();
     }
