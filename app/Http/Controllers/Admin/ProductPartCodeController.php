@@ -57,12 +57,21 @@ class ProductPartCodeController extends Controller
             $this->setStatusMessage(false);
             return $this->returnResponse();
         }
-        if($this->checkCodeIsFound($request->code)){
-            $this->setMessage(__('translate.code_is_founded'));
+        $all_code = ProductPartCode::all();
+        foreach($all_code as $code){
+            if(decrypt($code->code) == $request->code){
+                $this->setMessage(__('translate.code_is_founded'));
             $this->setStatusCode(400);
             $this->setStatusMessage(false);
             return $this->returnResponse();
+            }
         }
+        // if($this->checkCodeIsFound($request->code)){
+        //     $this->setMessage(__('translate.code_is_founded'));
+        //     $this->setStatusCode(400);
+        //     $this->setStatusMessage(false);
+        //     return $this->returnResponse();
+        // }
         $code = new ProductPartCode;
         $code->part_id = $request->part_id;
         $code->product_id = ProductPart::find($request->part_id)->product_id;

@@ -185,6 +185,37 @@ class OrderController extends Controller
         return $this->checkOrderStatus($request);
     }
 
+    // public function testPay(Request $request)
+    // {
+    //       $order = Order::with(['OrderProduct', 'OrderProduct.product','OrderProduct.product_part'])
+    //     ->find(38);
+    //     // return($order);
+    //         $order->payment_status = 1;
+    //         $order->save();
+            
+    //         DB::beginTransaction();
+    //         foreach($order->OrderProduct as $order_product){
+    //         if($order_product->product_part->selling_type == 'auto'){
+    //             $count = $order_product->quantity;
+    //             for ($i = 1; $i <= $count; $i++) {
+    //             $part_code = ProductPartCode::where('part_id',$order_product->product_part->id)
+    //             ->where('status', 0)->first();
+    //             if($part_code){
+    //             $order_code = new OrderCode;
+    //             $order_code->order_product_id = $order_product->id;
+    //             $order_code->product_part_id = $part_code->part_id;
+    //             $order_code->code = $part_code->code;
+    //             $order_code->save();
+    //             $part_code->status = 1;
+    //             $part_code->save();}
+    //             }
+    //         }
+                
+    //         }
+    //         DB::commit();
+    //     }
+    
+
     private function checkOrderStatus(Request $request)
     {
         // $transaction = order::findOr($request->get('trx-id'), function () {

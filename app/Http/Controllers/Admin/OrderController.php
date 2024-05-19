@@ -114,6 +114,7 @@ class OrderController extends Controller
             // Create a new order code and save it
             $order = new OrderCode;
             $order->order_product_id = $order_code->order_product_id;
+            $order->product_part_id = $order_code->product_part_id;
             $order->code = encrypt($order_code->code);
             $order->save();
         }
@@ -129,13 +130,6 @@ class OrderController extends Controller
         Mail::to($client->email)->send(new SendCodesEmail($client->name,$sending_codes));
         // Set the success response
         $this->setMessage(__(['translate.order_code_store_success','message' => 'Email sent successfully']));
-        return $this->returnResponse();
-    }
-    public function email(){
-        $msg = new SendCodesEmail('osamahamdy','codes')  ;
-        Mail::to('osamahamdyfraag@gmail.com')->send($msg);
-        // Set the success response
-        $this->setMessage(__('translate.order_code_store_success'));
         return $this->returnResponse();
     }
 }
