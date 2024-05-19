@@ -79,6 +79,7 @@ class OrderController extends Controller
             'order_id'=>'required|exists:orders,id',
             'order_codes'=>'required|array',
             'order_codes.*.order_product_id' => 'required|exists:order_products,id',
+            'order_codes.*.product_part_id' => 'required|exists:product_parts,id',
             'order_codes.*.code' => 'required',
         ]);
 
@@ -89,13 +90,14 @@ class OrderController extends Controller
             $this->setStatusMessage(false);
             return $this->returnResponse();
         }
-        $confirmed_order = Order::with('orderProduct')->find($request->order_id);
+        $confirmed_order = Order::with('OrderProduct')->find($request->order_id);
         if($confirmed_order->payment_status == 1){
         DB::beginTransaction();
+        
         foreach($request->order_codes as $order_code){
             // Get the order product and the count of order codes
-            $order_product = OrderProduct::find($order_code->order_product_id);
-            $order_code_count = OrderCode::where('order_product_id', $order_code->order_product_id)->count();
+            $order_product = OrderProduct::find($order_code['order_product_id']);
+            $order_code_count = OrderCode::where('order_product_id', $order_code['order_product_id'])->count();
 
             // If the order code count is greater than or equal to the quantity, return an error response
             if ($order_code_count >= $order_product->quantity) {
@@ -104,7 +106,7 @@ class OrderController extends Controller
                 $this->setStatusMessage(false);
                 return $this->returnResponse();
             }
-            $order_code_unique = OrderCode::where('code', encrypt($order_code->code))->first();
+            $order_code_unique = OrderCode::where('code', encrypt($order_code['code']))->first();
             if ($order_code_unique) {
                 $this->setMessage(__('translate.order_code_found_later'));
                 $this->setStatusCode('400');
@@ -113,16 +115,17 @@ class OrderController extends Controller
             }
             // Create a new order code and save it
             $order = new OrderCode;
-            $order->order_product_id = $order_code->order_product_id;
-            $order->product_part_id = $order_code->product_part_id;
-            $order->code = encrypt($order_code->code);
+            $order->order_product_id = $order_code['order_product_id'];
+            $order->product_part_id = $order_code['product_part_id'];
+            $order->code = encrypt($order_code['code']);
             $order->save();
         }
         DB::commit();
     }
     $confirmed_order->status = 1;
+    $confirmed_order->save();
     $sending_codes = array();
-    foreach($confirmed_order->order_product as $order_product){
+    foreach($confirmed_order->OrderProduct as $order_product){
         $codes = OrderCode::where('order_product_id',$order_product->id);
         array_push($sending_codes, $codes);
     }

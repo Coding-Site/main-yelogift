@@ -12,9 +12,12 @@
         "laravel/sanctum": "^4.0",
         "laravel/socialite": "^5.14",
         "laravel/tinker": "^2.9",
+        "laravel/ui": "^4.5",
         "maatwebsite/excel": "^3.1",
         "socialiteproviders/apple": "^5.0",
         "socialiteproviders/binance": "^4.1",
+        "socialiteproviders/facebook": "^4.1",
+        "socialiteproviders/google": "^4.1",
         "tymon/jwt-auth": "^2.1"
     },
     "require-dev": {
