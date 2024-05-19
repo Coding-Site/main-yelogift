@@ -7,7 +7,8 @@ use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\PaymentSetting;
-use App\Models\User;
+use App\Models\ProductPartCode;
+use App\Models\OrderCode;
 use App\Traits\APIHandleClass;
 use App\Traits\PaymentHandleTrait;
 use CryptoPay\Binancepay\BinancePay;
@@ -27,7 +28,7 @@ class OrderController extends Controller
     public function index()
     {
         // Retrieve the orders with their related products for the authenticated user
-        $order = Order::with(['OrderProduct', 'OrderProduct.product'])
+        $order = Order::with(['OrderProduct', 'OrderProduct.product','OrderProduct.product_part'])
             ->where('user_id', auth()->user()->id)
             ->get();
 
@@ -75,13 +76,8 @@ class OrderController extends Controller
             $carts = Cart::where('user_id', auth()->user()->id)->with('product','product_part')->get();
             
             // Calculate the total price of the carts
-            $totalPrice = $carts->sum('product.price');
+            // $totalPrice = $carts->sum('product.price');
             $price = 0;
-            foreach($carts as $cart){
-                $price = $price + $cart->product_part->price * $cart->quantity;
-                $cart->delete();
-            }
-            // Create a new order
             $order = new Order();
             $order->user_id = auth()->user()->id;
             $order->name = $request->name?$request->name:"none";
@@ -95,25 +91,27 @@ class OrderController extends Controller
             $order->payment_method = "pay";
             $order->currency = "usd";
             $order->save();
-
-
-
-            // Create order products for each cart
-            $products = new OrderProduct;
-            foreach ($carts as $cart) {
-                $products->order_id = $order->id;
-                $products->product_id = $cart->product_id;
-                $products->product_part_id = $cart->product_part_id;
-                $products->quantity = $cart->quantity;
-                $products->price = $cart->product->price;
-                $products->save();
+            $product = new OrderProduct;
+            foreach($carts as $cart){
+                $price = $price + $cart->product_part->price * $cart->quantity;
+                $product->order_id = $order->id;
+                $product->product_id = $cart->product_id;
+                $product->product_part_id = $cart->product_part_id;
+                $product->quantity = $cart->quantity;
+                $product->price = $cart->product_part->price;
+                $product->save();
+                $cart->delete();
             }
+            $order->price = $price;
+            $order->save();
+            
+               
 
             // Commit the database transaction
             DB::commit();
-
+            $orderp = Order::with(['OrderProduct', 'OrderProduct.product','OrderProduct.product_part'])->find($order->id);
             // Set the response data and message
-            $this->setData($order);
+            $this->setData($orderp);
             $this->setMessage(__('translate.order_success'));
 
         } catch (Exception $e) {
@@ -159,16 +157,15 @@ class OrderController extends Controller
         $binancePay = new BinancePay("binancepay/openapi/v2/order");
         $res = $binancePay->createOrder($data);
 
-        if ($res['status'] === 'SUCCESS') {
+        if ($res['status'] and $res['status'] === 'SUCCESS') {
             $this->setData([
                 'order'=>$order,
-                'pay_data'=>
-        $res
+                'pay_data'=>$res
         ]);
             return $this->returnResponse();
         }
 
-        $this->setMessage($res['errorMessage']);
+        $this->setMessage($res);
         $this->setStatusCode(400);
         $this->setStatusMessage(false);
         return $this->returnResponse();
@@ -188,17 +185,40 @@ class OrderController extends Controller
 
     private function checkOrderStatus(Request $request)
     {
-        $transaction = order::findOr($request->get('trx-id'), function () {
+        // $transaction = order::findOr($request->get('trx-id'), function () {
 
-        });
+        // });
+
+        $order = Order::with(['OrderProduct', 'OrderProduct.product','OrderProduct.product_part'])
+        ->find($request->get('trx-id'));
 
         $order_status = (new BinancePay("binancepay/openapi/v2/order/query"))
-                            ->query(['merchantTradeNo' => $transaction->merchant_trade_no]);
+                            ->query(['merchantTradeNo' => $order->merchant_trade_no]);
 
         // Save transaction status or whatever you like according to the order status
         if($order_status['status'] == 'SUCCESS'){
-            $transaction->payment_status = 1;
-            $transaction->save();
+            $order->payment_status = 1;
+            $order->save();
+            DB::beginTransaction();
+            foreach($order->order_product as $order_product){
+            if($order_product->product_part->selling_type == 'auto'){
+                $count = $order_product->quantity;
+                for ($i = 1; $i <= $count; $i++) {
+                $part_code = ProductPartCode::where('part_id',$order_product->product_part->id)
+                ->where('status', 0)->first();
+                if($part_code){
+                $order_code = new OrderCode;
+                $order_code->order_product_id = $order_product->id;
+                $order_code->product_part_id = $part_code->part_id;
+                $order_code->code = $part_code->code;
+                $order_code->save();
+                $part_code->status = 1;
+                $part_code->save();}
+                }
+            }
+                
+            }
+            DB::commit();
         }
         return redirect()->url('https://yelogift-front.coding-site.com/');
 

@@ -20,7 +20,7 @@ Route::controller(\App\Http\Controllers\Admin\AuthController::class)->group(func
 });
 // admin/*  routes for admin panel
 Route::prefix('admin')->group(function(){
-    Route::prefix('admin')->group(function(){
+    Route::middleware('auth:admin')->group(function(){
         Route::prefix('category')->controller(\App\Http\Controllers\Admin\CategoryController::class)->group(function(){
             Route::get('/','index');
             Route::get('/get/{id}','get');

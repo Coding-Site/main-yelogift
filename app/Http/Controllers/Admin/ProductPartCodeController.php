@@ -28,7 +28,7 @@ class ProductPartCodeController extends Controller
                 'value' => encrypt($request->password)
             ]);
         }
-        if( decrypt($password->value) == $request->password){
+        if( decrypt($password->value) == $request->input('password')){
             $codes = ProductPartCode::where('part_id', $request->part_id)->get();
             foreach($codes as $code){
                 $code->code = decrypt($code->code);

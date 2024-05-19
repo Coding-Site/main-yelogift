@@ -5,12 +5,14 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderCode;
+use App\Models\User;
 use App\Models\OrderProduct;
 use App\Traits\APIHandleClass;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
-
+use App\Mail\SendCodesEmail;
+use Illuminate\Support\Facades\Mail;
 class OrderController extends Controller
 {
     use APIHandleClass;
@@ -87,14 +89,16 @@ class OrderController extends Controller
             $this->setStatusMessage(false);
             return $this->returnResponse();
         }
+        $confirmed_order = Order::with('orderProduct')->find($request->order_id);
+        if($confirmed_order->payment_status == 1){
         DB::beginTransaction();
         foreach($request->order_codes as $order_code){
             // Get the order product and the count of order codes
             $order_product = OrderProduct::find($order_code->order_product_id);
-            $order_code = OrderCode::where('order_product_id', $order_code->order_product_id)->count();
+            $order_code_count = OrderCode::where('order_product_id', $order_code->order_product_id)->count();
 
             // If the order code count is greater than or equal to the quantity, return an error response
-            if ($order_code >= $order_product->quantity) {
+            if ($order_code_count >= $order_product->quantity) {
                 $this->setMessage(__('translate.order_code_limitation'));
                 $this->setStatusCode('400');
                 $this->setStatusMessage(false);
@@ -109,11 +113,27 @@ class OrderController extends Controller
             }
             // Create a new order code and save it
             $order = new OrderCode;
-            $order->order_product_id = $request->order_product_id;
+            $order->order_product_id = $order_code->order_product_id;
             $order->code = encrypt($order_code->code);
             $order->save();
         }
         DB::commit();
+    }
+    $confirmed_order->status = 1;
+    $sending_codes = array();
+    foreach($confirmed_order->order_product as $order_product){
+        $codes = OrderCode::where('order_product_id',$order_product->id);
+        array_push($sending_codes, $codes);
+    }
+        $client = User::find($confirmed_order->user_id);
+        Mail::to($client->email)->send(new SendCodesEmail($client->name,$sending_codes));
+        // Set the success response
+        $this->setMessage(__(['translate.order_code_store_success','message' => 'Email sent successfully']));
+        return $this->returnResponse();
+    }
+    public function email(){
+        $msg = new SendCodesEmail('osamahamdy','codes')  ;
+        Mail::to('osamahamdyfraag@gmail.com')->send($msg);
         // Set the success response
         $this->setMessage(__('translate.order_code_store_success'));
         return $this->returnResponse();
