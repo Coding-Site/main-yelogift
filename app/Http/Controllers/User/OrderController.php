@@ -91,8 +91,9 @@ class OrderController extends Controller
             $order->payment_method = "pay";
             $order->currency = "usd";
             $order->save();
-            $product = new OrderProduct;
+            
             foreach($carts as $cart){
+                $product = new OrderProduct;
                 $price = $price + $cart->product_part->price * $cart->quantity;
                 $product->order_id = $order->id;
                 $product->product_id = $cart->product_id;
@@ -100,10 +101,10 @@ class OrderController extends Controller
                 $product->quantity = $cart->quantity;
                 $product->price = $cart->product_part->price;
                 $product->save();
-                $cart->delete();
             }
             $order->price = $price;
             $order->save();
+            Cart::where('user_id', auth()->user()->id)->delete();
             
                
 
@@ -160,7 +161,8 @@ class OrderController extends Controller
         if ($res['status'] and $res['status'] === 'SUCCESS') {
             $this->setData([
                 'order'=>$order,
-                'pay_data'=>$res
+                'pay_data'=>$res,
+                'data'=>$data
         ]);
             return $this->returnResponse();
         }
