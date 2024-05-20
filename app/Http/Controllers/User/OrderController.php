@@ -40,10 +40,15 @@ class OrderController extends Controller
         $order = Order::with(['OrderProduct', 'OrderProduct.product','OrderProduct.product_part'])
         ->where('user_id', auth()->user()->id)
         ->find($id);
+        $total_price = 0;
+        foreach($order->OrderProduct as $order_product){
+            $total_price = $total_price + $order_product->product_part->price * $order_product->quantity;
+        }
 
+        $dicount = ($total_price - $order->price ) / $total_price * 100;
 
         // Set the order data and return the response
-        $this->setData($order);
+        $this->setData(['order'=>$order,'total_price'=>$total_price,'discount'=>$dicount]);
         return $this->returnResponse();
     }
     /**
@@ -94,7 +99,7 @@ class OrderController extends Controller
             
             foreach($carts as $cart){
                 $product = new OrderProduct;
-                $price = $price + $cart->product_part->price * $cart->quantity;
+                $price = $price + ($cart->product_part->price - $cart->product_part->price*$cart->product_part->discount/100) * $cart->quantity;
                 $product->order_id = $order->id;
                 $product->product_id = $cart->product_id;
                 $product->product_part_id = $cart->product_part_id;

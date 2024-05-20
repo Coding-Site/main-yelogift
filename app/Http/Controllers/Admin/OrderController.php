@@ -55,8 +55,14 @@ class OrderController extends Controller
                 });
             });
         });
+        $total_price = 0;
+        foreach($orders->OrderProduct as $order_product){
+            $total_price = $total_price + $order_product->product_part->price * $order_product->quantity;
+        }
+
+        $dicount = ($total_price - $orders->price ) / $total_price * 100;
         // Set the data to be returned and return the response
-        $this->setData($orders);
+        $this->setData(['order'=>$orders,'total_price'=>$total_price,'discount'=>$dicount]);
         return $this->returnResponse();
     }
 
