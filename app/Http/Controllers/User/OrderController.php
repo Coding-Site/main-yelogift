@@ -140,7 +140,6 @@ class OrderController extends Controller
 
 
         $user = auth()->user();
-
         $data['order_amount'] =  $order->price;
         $data['package_id'] = $order->id; // referenceGoodsId: id from the DB Table that user choose to purchase
         $data['goods_name'] = 'Order From Website';

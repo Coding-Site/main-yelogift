@@ -31,7 +31,7 @@ Route::prefix('admin')->group(function(){
         Route::prefix('product')->group(function(){
             Route::controller(\App\Http\Controllers\Admin\ProductController::class)->group(function(){
                 Route::get('/','index');
-                Route::get('/get/{id}','get');
+                Route::get('/{id}','get');
                 Route::post('/store','store');
                 Route::post('/update','update');
                 Route::get('/delete/{id}','destroy');
@@ -39,6 +39,7 @@ Route::prefix('admin')->group(function(){
             
             Route::prefix('parts')->controller(\App\Http\Controllers\Admin\ProductPartController::class)->group(function(){
                 Route::get('get/{product_id}','index');
+                Route::get('/{part_id}','get');
                 Route::post('/store','store');
                 Route::post('/update','update');
                 Route::get('/delete/{id}','destroy');

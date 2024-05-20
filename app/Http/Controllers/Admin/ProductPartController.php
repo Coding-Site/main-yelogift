@@ -21,6 +21,13 @@ class ProductPartController extends Controller
         return $this->returnResponse();
 
     }
+    public function get($part_id)
+    {
+        $productPart = ProductPart::find($part_id);
+        $this->setData($productPart);
+        return $this->returnResponse();
+
+    }
     /**
      * Store a newly created resource in storage.
      */
