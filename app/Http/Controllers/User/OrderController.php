@@ -16,6 +16,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Coinremitter\Coinremitter;
 
 class OrderController extends Controller
 {
@@ -292,6 +293,35 @@ class OrderController extends Controller
         $this->setMessage('payment Success !');
         return $this->returnResponse();
 
+    }
+
+    public function pay()
+    {
+        $busd_wallet = new Coinremitter('BUSD');
+
+        // Set the payment amount and currency
+        $amount = 10.88;
+        $currency = 'BUSD';
+
+        // Create a new payment order
+        $order = [
+            'bizType' => 'PAY',
+            'data' => [
+                'merchantTradeNo' => '9825382937292',
+                'totalFee' => $amount,
+                'transactTime' => time(),
+            ],
+        ];
+
+        // Send the payment request to BinancePay
+        $response = $busd_wallet->create_invoice($order);
+
+        // Handle the payment response
+        // if ($response['status'] == 'SUCCESS') {
+            return response(['success',$response]);
+        // } else {
+            return response(['fail',$response]);
+        // }
     }
 
 }

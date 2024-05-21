@@ -160,6 +160,8 @@ Route::controller(\App\Http\Controllers\User\OrderController::class)->group(func
     Route::post('/binancepay/cancel','cancelCallback');
 });
 
-
+Route::controller(\App\Http\Controllers\User\OrderController::class)->group(function(){
+    Route::post('/pay', 'pay');
+});
 
 

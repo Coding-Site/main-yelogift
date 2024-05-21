@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers\User;
-
+use Facebook\Facebook;
+use Facebook\Exceptions\FacebookResponseException;
+use Facebook\Exceptions\FacebookSDKException;
 use App\Http\Controllers\Controller;
 use App\Mail\SendResetPassword;
 use App\Models\User;
@@ -216,7 +218,38 @@ class AuthController extends Controller
         return Socialite::driver('google')->redirect();
     }
 
+    public function getFacebookUserData($accessToken)
+    {
+           $fb = new Facebook([
+              'app_id' => '507151123510318',
+              'app_secret' => '53ea3ad82cc6832f8a6690edc4f014ae',
+              'default_graph_version' => 'v10.0',
+            ]);
+          
+            try {
+              $response = $fb->get('/me?fields=id,name,email,picture.type(large)', $accessToken);
+              $userNode = $response->getGraphUser();
+          
+              // Process the user data
+              $userId = $userNode->getId();
+              $userName = $userNode->getName();
+              $userEmail = $userNode->getEmail();
+              $userPicture = $userNode->getPicture()->getUrl();
 
+              return response([$userName,$userEmail]);
+          
+              // ...
+          
+            } catch (FacebookResponseException $e) {
+              // Handle errors
+              echo 'Graph returned an error: ' . $e->getMessage();
+              exit;
+            } catch (FacebookSDKException $e) {
+              // Handle errors
+              echo 'Facebook SDK returned an error: ' . $e->getMessage();
+              exit;
+            }
+        }
     public function facebookCallback()
     {
         $facebookUser = Socialite::driver('facebook')->user();
