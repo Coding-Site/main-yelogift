@@ -190,36 +190,7 @@ class OrderController extends Controller
         return $this->checkOrderStatus($request);
     }
 
-    // public function testPay(Request $request)
-    // {
-    //       $order = Order::with(['OrderProduct', 'OrderProduct.product','OrderProduct.product_part'])
-    //     ->find(38);
-    //     // return($order);
-    //         $order->payment_status = 1;
-    //         $order->save();
-            
-    //         DB::beginTransaction();
-    //         foreach($order->OrderProduct as $order_product){
-    //         if($order_product->product_part->selling_type == 'auto'){
-    //             $count = $order_product->quantity;
-    //             for ($i = 1; $i <= $count; $i++) {
-    //             $part_code = ProductPartCode::where('part_id',$order_product->product_part->id)
-    //             ->where('status', 0)->first();
-    //             if($part_code){
-    //             $order_code = new OrderCode;
-    //             $order_code->order_product_id = $order_product->id;
-    //             $order_code->product_part_id = $part_code->part_id;
-    //             $order_code->code = $part_code->code;
-    //             $order_code->save();
-    //             $part_code->status = 1;
-    //             $part_code->save();}
-    //             }
-    //         }
-                
-    //         }
-    //         DB::commit();
-    //     }
-    
+
 
     private function checkOrderStatus(Request $request)
     {
@@ -271,6 +242,7 @@ class OrderController extends Controller
         $this->setData($payment);
         return $this->returnResponse();
     }
+    
     public function pay_by_currancy(Request $request){
 
         $validator = Validator::make($request->all(), [
@@ -294,34 +266,6 @@ class OrderController extends Controller
         return $this->returnResponse();
 
     }
-
-    public function pay()
-    {
-        $busd_wallet = new Coinremitter('BUSD');
-
-        // Set the payment amount and currency
-        $amount = 10.88;
-        $currency = 'BUSD';
-
-        // Create a new payment order
-        $order = [
-            'bizType' => 'PAY',
-            'data' => [
-                'merchantTradeNo' => '9825382937292',
-                'totalFee' => $amount,
-                'transactTime' => time(),
-            ],
-        ];
-
-        // Send the payment request to BinancePay
-        $response = $busd_wallet->create_invoice($order);
-
-        // Handle the payment response
-        // if ($response['status'] == 'SUCCESS') {
-            return response(['success',$response]);
-        // } else {
-            return response(['fail',$response]);
-        // }
-    }
-
 }
+
+
