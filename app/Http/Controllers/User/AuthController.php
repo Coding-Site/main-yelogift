@@ -18,7 +18,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Laravel\Socialite\Facades\Socialite;
-
+use Google_Client;
+use Google_Service_Oauth2;
 class AuthController extends Controller
 {
     use APIHandleClass,AuthHandleTrait;
@@ -218,38 +219,6 @@ class AuthController extends Controller
         return Socialite::driver('google')->redirect();
     }
 
-    public function getFacebookUserData($accessToken)
-    {
-           $fb = new Facebook([
-              'app_id' => '507151123510318',
-              'app_secret' => '53ea3ad82cc6832f8a6690edc4f014ae',
-              'default_graph_version' => 'v10.0',
-            ]);
-          
-            try {
-              $response = $fb->get('/me?fields=id,name,email,picture.type(large)', $accessToken);
-              $userNode = $response->getGraphUser();
-          
-              // Process the user data
-              $userId = $userNode->getId();
-              $userName = $userNode->getName();
-              $userEmail = $userNode->getEmail();
-              $userPicture = $userNode->getPicture()->getUrl();
-
-              return response([$userName,$userEmail]);
-          
-              // ...
-          
-            } catch (FacebookResponseException $e) {
-              // Handle errors
-              echo 'Graph returned an error: ' . $e->getMessage();
-              exit;
-            } catch (FacebookSDKException $e) {
-              // Handle errors
-              echo 'Facebook SDK returned an error: ' . $e->getMessage();
-              exit;
-            }
-        }
     public function facebookCallback()
     {
         $facebookUser = Socialite::driver('facebook')->user();
@@ -331,6 +300,64 @@ class AuthController extends Controller
         return $this->returnResponse();
     }
 
+//     public function getFacebookUserData($accessToken)
+//     {
+//            $fb = new Facebook([
+//               'app_id' => '507151123510318',
+//               'app_secret' => '53ea3ad82cc6832f8a6690edc4f014ae',
+//               'default_graph_version' => 'v10.0',
+//             ]);
+          
+//             try {
+//               $response = $fb->get('/me?fields=id,name,email,picture.type(large)', $accessToken);
+//               $userNode = $response->getGraphUser();
+          
+//               // Process the user data
+//               $userId = $userNode->getId();
+//               $userName = $userNode->getName();
+//               $userEmail = $userNode->getEmail();
+//               $userPicture = $userNode->getPicture()->getUrl();
+
+//               return response([$userName,$userEmail]);
+          
+//               // ...
+          
+//             } catch (FacebookResponseException $e) {
+//               // Handle errors
+//               echo 'Graph returned an error: ' . $e->getMessage();
+//               exit;
+//             } catch (FacebookSDKException $e) {
+//               // Handle errors
+//               echo 'Facebook SDK returned an error: ' . $e->getMessage();
+//               exit;
+//             }
+//         }
+
+//     public function getGoogleUserData($accessToken)
+//     {
+//         $client = new Google_Client();
+//         $client->setAccessType('offline');
+//         $client->setApplicationName('Your Application Name');
+//         $client->setScopes(Google_Service_Oauth2::USERINFO_PROFILE);
+//         $client->setAccessToken($accessToken);
+
+//         $oauth2 = new Google_Service_Oauth2($client);
+//         $userInfo = $oauth2->userinfo->get();
+
+//         $data = [
+//             'id' => $userInfo->getId(),
+//             'email' => $userInfo->getEmail(),
+//             'given_name' => $userInfo->getGivenName(),
+//             'family_name' => $userInfo->getFamilyName(),
+//             'name' => $userInfo->getName(),
+//             'picture' => $userInfo->getPicture(),
+//             'locale' => $userInfo->getLocale(),
+//             'hd' => $userInfo->getHd(),
+//         ];
+
+//         return response()->json($data);
+//     } 
+
     
     /**
      * Social Login
@@ -398,7 +425,7 @@ class AuthController extends Controller
     //     $this->setMessage(__('translate.login_success_message'));
     //     return $this->returnResponse();
     // }
-}
 
+    }
 
     

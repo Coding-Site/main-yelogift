@@ -86,7 +86,7 @@ class ProductPartCodeController extends Controller
     {
         $validator = Validator::make($request->all(), [
            'part_id'=>'required|exists:product_parts,id',
-           'codesFile'=>'required|file',
+           'codes'=>'required|file',
         ]);
         if ($validator->fails()) {
             $this->setMessage($validator->errors()->first());
@@ -95,7 +95,7 @@ class ProductPartCodeController extends Controller
             return $this->returnResponse();
         }
         $product_id = ProductPart::find($request->part_id)->product_id;
-        $file = $request->file('codesFile');
+        $file = $request->file('codes');
         $extension = $file->getClientOriginalExtension();
         if ($extension === 'csv') {
             $codes = fopen($file, 'r');

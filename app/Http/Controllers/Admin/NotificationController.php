@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Notification;
+use App\Models\NotificationUser;
 use App\Traits\APIHandleClass;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -55,6 +56,10 @@ class NotificationController extends Controller
             $this->setStatusCode(404);
             $this->setStatusMessage(false);
             return $this->returnResponse();
+        }
+        $notifyUser = NotificationUser::where('notification_id',$notification->id)->get();
+        foreach($notifyUser as $notify){
+            $notify->delete();
         }
         $notification->delete();
         $this->setMessage(__('translate.delete_notification_success'));

@@ -96,7 +96,7 @@ Route::prefix('admin')->group(function(){
             Route::get('/','index');
             Route::post('store','store');
             Route::post('update','update');
-            Route::get('delete/{id}','destroy');
+            Route::delete('delete/{id}','destroy');
         });
     });
 });
@@ -147,8 +147,10 @@ Route::prefix('user')->group(function(){
         Route::get('/','get_all_setting');
         Route::get('/payment','get_payment_setting');
     });
-    Route::get('/notification',[\App\Http\Controllers\User\NotificationUserController::class,'index'])->middleware('auth:web');
-
+    Route::prefix('notification')->middleware('auth:web')->controller(\App\Http\Controllers\User\NotificationUserController::class)->group(function(){
+        Route::get('/','index');
+        Route::post('/read','markAsRead');
+    });
 });
 
 Route::controller(\App\Http\Controllers\User\CheckoutController::class)->group(function(){

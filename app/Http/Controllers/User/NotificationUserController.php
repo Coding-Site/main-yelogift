@@ -14,66 +14,108 @@ class NotificationUserController extends Controller
     function index()
     {
         $notifications = Notification::with('notificationUsers')->get();
-        $data = [];
+        $readNotifications = [];
+        $unreadNotifications = [];
         $unreadCount = 0;
-
+        $flag = 0;
         foreach ($notifications as $notification) {
-            $readStatus = $this->getReadStatus($notification);
-            $notification['read'] = $readStatus;
-            $data[] = $notification;
-            $unreadCount += $this->incrementUnreadCount($notification, $readStatus);
+            foreach ($notification->notificationUsers as $notificationUser){
+                $flag = 1;
+                if($notificationUser->user_id == Auth()->user()->id){
+                    $readNotifications[] = $notification;
+                }else{
+                    $unreadNotifications[] = $notification;
+                    $unreadCount++;
+                }
+            }
+            if($flag == 0){
+                $unreadNotifications[] = $notification;
+                $unreadCount++;
+            }else{
+                $flag = 0;
+            }
         }
 
         $this->setData([
-            'notifications' => $data,
-            'unreadCount' => $unreadCount,
+            'readNotifications' => $readNotifications,
+            'unreadNotifications' => $unreadNotifications,
+            'unreadCount'=> $unreadCount
         ]);
 
         return $this->returnResponse();
     }
 
-    private function getReadStatus($notification)
-    {
-        return $notification->type == 1
-            ? $this->getGlobalReadStatus($notification)
-            : $this->getUserSpecificReadStatus($notification);
-    }
+    public function markAsRead(Request $request){
+        $notifyUser = new NotificationUser();
+        $notifyUser->notification_id = $request->notification_id;
+        $notifyUser->user_id = auth()->user()->id;
+        $notifyUser->read = 1;
+        $notifyUser->save();
 
-    private function getGlobalReadStatus($notification)
-    {
-        if($notification->notificationUsers->contains('user_id', auth()->id())){
-            return 1;
-        }
-        $userNotify = new NotificationUser();
-        $userNotify->user_id = auth()->user()->id;
-        $userNotify->notification_id = $notification->id;
-        $userNotify->read = 1;
-        $userNotify->save();
-        return 0;
-    }
-
-    private function getUserSpecificReadStatus($notification)
-    {
-        $userSpecificReadStatus = 0;
-
-        foreach ($notification->notificationUsers as $user) {
-            if ($user->user_id == auth()->id()) {
-                $userSpecificReadStatus = $user->read;
-                break;
-            }
-        }
-
-        if ($userSpecificReadStatus == 0) {
-            $userNotify =  NotificationUser::where('user_id', auth()->id())->where('notification_id', $notification->id)->first();
-            $userNotify->read = 1;
-            $userNotify->save();
-        }
-
-        return $userSpecificReadStatus;
-    }
-
-    private function incrementUnreadCount($notification, $readStatus)
-    {
-        return $readStatus == 0 ? 1 : 0;
     }
 }
+
+// function index()
+//     {
+//         $notifications = Notification::with('notificationUsers')->get();
+//         $data = [];
+//         $unreadCount = 0;
+
+//         foreach ($notifications as $notification) {
+//             $readStatus = $this->getReadStatus($notification);
+//             $notification['read'] = $readStatus;
+//             $data[] = $notification;
+//             $unreadCount += $this->incrementUnreadCount($notification, $readStatus);
+//         }
+
+//         $this->setData([
+//             'notifications' => $data,
+//             'unreadCount' => $unreadCount,
+//         ]);
+
+//         return $this->returnResponse();
+//     }
+// private function getReadStatus($notification)
+//     {
+//         return $notification->type == 1
+//             ? $this->getGlobalReadStatus($notification)
+//             : $this->getUserSpecificReadStatus($notification);
+//     }
+
+//     private function getGlobalReadStatus($notification)
+//     {
+//         if($notification->notificationUsers->contains('user_id', auth()->id())){
+//             return 1;
+//         }
+//         $userNotify = new NotificationUser();
+//         $userNotify->user_id = auth()->user()->id;
+//         $userNotify->notification_id = $notification->id;
+//         $userNotify->read = 1;
+//         $userNotify->save();
+//         return 0;
+//     }
+
+//     private function getUserSpecificReadStatus($notification)
+//     {
+//         $userSpecificReadStatus = 0;
+
+//         foreach ($notification->notificationUsers as $user) {
+//             if ($user->user_id == auth()->id()) {
+//                 $userSpecificReadStatus = $user->read;
+//                 break;
+//             }
+//         }
+
+//         if ($userSpecificReadStatus == 0) {
+//             $userNotify =  NotificationUser::where('user_id', auth()->id())->where('notification_id', $notification->id)->first();
+//             $userNotify->read = 1;
+//             $userNotify->save();
+//         }
+
+//         return $userSpecificReadStatus;
+//     }
+
+//     private function incrementUnreadCount($notification, $readStatus)
+//     {
+//         return $readStatus == 0 ? 1 : 0;
+//     }
