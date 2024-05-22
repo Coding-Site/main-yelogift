@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 use App\Models\Page;
 use App\Traits\APIHandleClass;
@@ -49,7 +50,6 @@ class PageController extends Controller
             // Validate the request data
             $validator = Validator::make($request->all(), [
                 'title' => 'required', // The title field is required
-                'slug' => 'required', // The slug field is required
                 'content'=>'required' // The content field is required
             ]);
 
@@ -65,7 +65,7 @@ class PageController extends Controller
             // Create a new page object and save it to the database
             $page = new Page;
             $page->title = $request->title; // Set the title of the page
-            $page->slug = $request->slug; // Set the slug of the page
+            $page->slug = Str::slug($request->title); // Set the slug of the page
             $page->content = $request->content; // Set the content of the page
             $page->save(); // Save the page to the database
 
@@ -118,7 +118,6 @@ class PageController extends Controller
             $validator = Validator::make($request->all(), [
                 'page_id'=>'required|exists:pages,id', // The page_id field is required and must exist in the pages table
                 'title' => 'required', // The title field is required
-                'slug' => 'required', // The slug field is required
                 'content'=>'required' // The content field is required
             ]);
 
@@ -136,7 +135,7 @@ class PageController extends Controller
 
             // Update the page attributes
             $page->title = $request->title;
-            $page->slug = $request->slug;
+            $page->slug = Str::slug($request->title);
             $page->content = $request->content;
 
             // Save the updated page to the database
