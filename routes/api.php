@@ -117,12 +117,7 @@ Route::prefix('user')->group(function(){
         Route::post('/login', 'login');
         Route::post('register','register');
         Route::post('/reset/password','resetpassword');
-        Route::middleware(['web'])->group(function () {
-            Route::get('/facebook', 'redirectToFacebook');
-            Route::get('/facebook/callback', 'facebookCallback');
-            Route::get('/google', 'redirectToGoogle');
-            Route::get('/google/callback', 'googleCallback');
-        });
+        Route::post('/social', 'socialLogin');
     });
     Route::prefix('carts')->middleware('auth:web')->controller(\App\Http\Controllers\User\CartController::class)->group(function(){
         Route::get('/','index');

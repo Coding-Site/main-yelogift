@@ -23,68 +23,7 @@ use Google_Service_Oauth2;
 class AuthController extends Controller
 {
     use APIHandleClass,AuthHandleTrait;
-    /**
-     * Authenticates a user and generates a token for them
-     *
-     * @param Request $request The HTTP request object containing the user's login credentials
-     * @return \Illuminate\Http\JsonResponse The JSON response with the generated token and user data
-     * @throws Exception When there's an error with the server
-     */
-    // function login(Request $request)
-    // {
-    //     try {
-    //         // Attempt to authenticate the user
-
-    //         // Type the user's login credentials based on the request data
-    //         $credentials = $this->type_credential($request->login,$request->password);
-
-    //         // Attempt to authenticate the user with the provided credentials
-    //         if ($token = Auth::guard('web')->attempt($credentials)) {
-
-    //             // Find the authenticated user
-    //             $user = User::find(Auth::guard('web')->user()->getAuthIdentifier());
-
-    //             // Generate the token data
-    //             $tokenData = [
-    //                 'token' => $token,
-    //                 'token_type' => 'bearer',
-    //                 'expires_in' => auth('web')->factory()->getTTL() * 60
-    //             ];
-
-    //             // Set the response data
-    //             $this->setData(['token' => $tokenData, 'user' => $user, 'role'=>'user']);
-    //             $this->setMessage(__('translate.login_success_message'));
-
-    //             // Return the response
-    //             return $this->returnResponse();
-    //         }
-
-    //         // User authentication failed
-    //         $this->setMessage(__('translate.error_login'));
-    //         $this->setStatusCode(401);
-    //         $this->setStatusMessage(false);
-    //         return $this->returnResponse();
-
-    //     } catch (Exception $e) {
-    //         // Error with the server
-    //         $this->setStatusCode(500);
-    //         $this->setMessage(__('translate.error_server'));
-    //         $this->setData([
-    //             'error'=>$e->getMessage()
-    //         ]);
-    //         $this->setStatusMessage(false);
-    //         return $this->returnResponse();
-    //     }
-    // }
-    /**
-     * Registers a new user.
-     *
-     * This function validates the request data and creates a new user in the database.
-     *
-     * @param Request $request The HTTP request object containing the user's data.
-     * @return \Illuminate\Http\JsonResponse The JSON response with the result of the registration.
-     * @throws Exception When there's an error with the server.
-     */
+   
     function register(Request $request)
     {
         // Validate the request data
@@ -127,303 +66,106 @@ class AuthController extends Controller
             return $this->returnResponse();
         }
     }
-    /**
-     * Reset the user's password.
-     *
-     * This function resets the user's password and sends a new password to their registered email.
-     *
-     * @param Request $request The HTTP request object containing the user's email or phone.
-     * @return \Illuminate\Http\JsonResponse The JSON response with the result of the password reset.
-     * @throws Exception When there's an error with the server.
-     */
-    function resetpassword(Request $request){
-        try{
-            // Validate the request data
-            $validator = Validator::make($request->all(), [
-                'email' => 'nullable|email|exists:users,email', // The user's email is optional, valid and exists in the users table.
-                'phone'=>'nullable|exists:users,phone', // The user's phone is optional and exists in the users table.
-            ]);
+  
 
-            // If the validation fails, return the errors
-            if ($validator->fails()) {
-                $this->setMessage($validator->errors()->first());
-                $this->setStatusCode(400);
-                $this->setStatusMessage(false);
-                return $this->returnResponse();
-            }
-
-            // Generate a new random password.
-            $password = Str::random(11);
-
-            // Check if the request contains an email.
-            if(isset($request->email)){
-                // Find the user with the provided email.
-                $user = User::where('email', $request->email)->first();
-                // Update the user's password.
-                $user->password = Hash::make($password);
-                $user->save();
-
-                // Send a new password to the user's email.
-                Mail::to($request->email)->send(new SendResetPassword($user->name, $password));
-            }
-            // Check if the request contains a phone.
-            elseif(isset($request->phone)){
-                // Find the user with the provided phone.
-                $user = User::where('phone', $request->phone)->first();
-                // Update the user's password.
-                $user->password = Hash::make($password);
-                $user->save();
-            }
-            // If neither email nor phone is provided.
-            else{
-                $this->setMessage('email or phone is required');
-                $this->setStatusCode(400);
-                $this->setStatusMessage(false);
-                return $this->returnResponse();
-            }
-
-            // Return a success message.
-            $this->setMessage('password reset successfully');
-            return $this->returnResponse();
-        }
-        // Return an error message in case of server error.
-        catch(Exception $e){
-            $this->setStatusCode(500);
-            $this->setMessage(__('translate.error_server'));
-            $this->setStatusMessage(false);
-            return $this->returnResponse();
-        }
-    }
-
-
-    protected function validateProvider($provider)
+    public function socialLogin(Request $request)
     {
-        if (!in_array($provider, ['facebook', 'google'])) {
-            return response()->json(['error' => 'Please login using facebook, or google'], 422);
-        }
-    }
-
-    /**
-     * Redirects the user to the Provider authentication page.
-     *
-     * @param string $provider The name of the provider.
-     * @return JsonResponse A JSON response containing the redirect URL or an error message.
-     */
-    public function redirectToFacebook()
-    {
-        return Socialite::driver('facebook')->redirect();
-    }
-
-    public function redirectToGoogle()
-    {
-        return Socialite::driver('google')->redirect();
-    }
-
-    public function facebookCallback()
-    {
-        $facebookUser = Socialite::driver('facebook')->user();
-        $user = User::where('email', $facebookUser->getEmail())->first();
+        $user = User::where('email',$request->email)->first();
         if ($user) {
             // Check if there is a social login record for the user and the specified provider.
             $social = UserSocial::where('user_id', $user->id)
-                ->where('provider', 'facebook')
-                ->where('provider_id', $facebookUser->getId())
+                ->where('provider', $request->provider)
+                ->where('provider_id', $request->client_id)
                 ->first();
 
             // If there is no social login record, create a new one.
             if (!$social) {
                 $socialCreate = new UserSocial();
                 $socialCreate->user_id = $user->id;
-                $socialCreate->provider = 'facebook';
-                $socialCreate->provider_id = $facebookUser->getId();
+                $socialCreate->provider = $request->provider;
+                $socialCreate->provider_id = $request->client_id;
                 $socialCreate->save();
             }
         }
         // If the user does not exist in our server, create a new user.
         else {
             $user = new User;
-            $user->name = $facebookUser->getName();
-            $user->email = $facebookUser->getEmail();
-            $user->photo = $facebookUser->getAvatar();
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->phone = null;
+            $user->password = Hash::make($request->client_id);
             $user->save();
 
             $socialCreate = new UserSocial();
             $socialCreate->user_id = $user->id;
-            $socialCreate->provider = 'facebook';
-            $socialCreate->provider_id = $facebookUser->getId();
+            $socialCreate->provider = $request->provider;
+            $socialCreate->provider_id = $request->client_id;
             $socialCreate->save();
         }
-        $token = $user->createToken('social-login-web')->accessToken;
+        $credentials=['email'=>$user->email,'password'=>$request->client_id];
+        $token = Auth::guard('web')->attempt($credentials);
         $this->setData(['token' => $token, 'user' => $user]);
         $this->setMessage(__('translate.login_success_message'));
         return $this->returnResponse();
     }
+ 
+    // function resetpassword(Request $request){
+    //     try{
+    //         // Validate the request data
+    //         $validator = Validator::make($request->all(), [
+    //             'email' => 'nullable|email|exists:users,email', // The user's email is optional, valid and exists in the users table.
+    //             'phone'=>'nullable|exists:users,phone', // The user's phone is optional and exists in the users table.
+    //         ]);
 
-
-    public function googleCallback()
-    {
-        $googleUser = Socialite::driver('google')->user();
-        $user = User::where('email', $googleUser->getEmail())->first();
-        if ($user) {
-            // Check if there is a social login record for the user and the specified provider.
-            $social = UserSocial::where('user_id', $user->id)
-                ->where('provider', 'google')
-                ->where('provider_id', $googleUser->getId())
-                ->first();
-
-            // If there is no social login record, create a new one.
-            if (!$social) {
-                $socialCreate = new UserSocial();
-                $socialCreate->user_id = $user->id;
-                $socialCreate->provider = 'google';
-                $socialCreate->provider_id = $googleUser->getId();
-                $socialCreate->save();
-            }
-        }
-        // If the user does not exist in our server, create a new user.
-        else {
-            $user = new User;
-            $user->name = $googleUser->getName();
-            $user->email = $googleUser->getEmail();
-            $user->photo = $googleUser->getAvatar();
-            $user->save();
-
-            $socialCreate = new UserSocial();
-            $socialCreate->user_id = $user->id;
-            $socialCreate->provider = 'google';
-            $socialCreate->provider_id = $googleUser->getId();
-            $socialCreate->save();
-        }
-        $token = $user->createToken('social-login-web')->accessToken;
-        $this->setData(['token' => $token, 'user' => $user]);
-        $this->setMessage(__('translate.login_success_message'));
-        return $this->returnResponse();
-    }
-
-//     public function getFacebookUserData($accessToken)
-//     {
-//            $fb = new Facebook([
-//               'app_id' => '507151123510318',
-//               'app_secret' => '53ea3ad82cc6832f8a6690edc4f014ae',
-//               'default_graph_version' => 'v10.0',
-//             ]);
-          
-//             try {
-//               $response = $fb->get('/me?fields=id,name,email,picture.type(large)', $accessToken);
-//               $userNode = $response->getGraphUser();
-          
-//               // Process the user data
-//               $userId = $userNode->getId();
-//               $userName = $userNode->getName();
-//               $userEmail = $userNode->getEmail();
-//               $userPicture = $userNode->getPicture()->getUrl();
-
-//               return response([$userName,$userEmail]);
-          
-//               // ...
-          
-//             } catch (FacebookResponseException $e) {
-//               // Handle errors
-//               echo 'Graph returned an error: ' . $e->getMessage();
-//               exit;
-//             } catch (FacebookSDKException $e) {
-//               // Handle errors
-//               echo 'Facebook SDK returned an error: ' . $e->getMessage();
-//               exit;
-//             }
-//         }
-
-//     public function getGoogleUserData($accessToken)
-//     {
-//         $client = new Google_Client();
-//         $client->setAccessType('offline');
-//         $client->setApplicationName('Your Application Name');
-//         $client->setScopes(Google_Service_Oauth2::USERINFO_PROFILE);
-//         $client->setAccessToken($accessToken);
-
-//         $oauth2 = new Google_Service_Oauth2($client);
-//         $userInfo = $oauth2->userinfo->get();
-
-//         $data = [
-//             'id' => $userInfo->getId(),
-//             'email' => $userInfo->getEmail(),
-//             'given_name' => $userInfo->getGivenName(),
-//             'family_name' => $userInfo->getFamilyName(),
-//             'name' => $userInfo->getName(),
-//             'picture' => $userInfo->getPicture(),
-//             'locale' => $userInfo->getLocale(),
-//             'hd' => $userInfo->getHd(),
-//         ];
-
-//         return response()->json($data);
-//     } 
-
-    
-    /**
-     * Social Login
-     *
-     * This method handles the social login process. It receives the provider name
-     * and the access token from the request. It then uses the Socialite library
-     * to get the user information from the provider's server. If the user exists
-     * in our server, it checks if there is a social login record for the user and
-     * the specified provider. If not, it creates a new record. It then creates
-     * a new token for the user to be able to login. Finally, it returns the
-     * token and the user data in the response.
-     *
-     * @param Request $request The HTTP request object.
-     * @return JsonResponse The JSON response containing the token and user data.
-     */
-    // public function socialLogin(Request $request)
-    // {
-    //     // Get the provider name and access token from the request.
-    //     $provider = $request->input('provider_name');
-    //     $token = $request->input('access_token');
-
-    //     // Get the provider's user information (In the provider server).
-    //     $providerUser = Socialite::driver($provider)->user();
-
-    //     // Search for a user in our server with the specified provider id and provider name.
-    //     $user = User::where('email', $providerUser->getEmail())->first();
-
-    //     // If the user exists in our server.
-    //     if ($user) {
-    //         // Check if there is a social login record for the user and the specified provider.
-    //         $social = UserSocial::where('user_id', $user->id)
-    //             ->where('provider', $provider)
-    //             ->where('provider_id', $providerUser->getId())
-    //             ->first();
-
-    //         // If there is no social login record, create a new one.
-    //         if (!$social) {
-    //             $socialCreate = new UserSocial();
-    //             $socialCreate->user_id = $user->id;
-    //             $socialCreate->provider = $provider;
-    //             $socialCreate->provider_id = $providerUser->getId();
-    //             $socialCreate->save();
+    //         // If the validation fails, return the errors
+    //         if ($validator->fails()) {
+    //             $this->setMessage($validator->errors()->first());
+    //             $this->setStatusCode(400);
+    //             $this->setStatusMessage(false);
+    //             return $this->returnResponse();
     //         }
+
+    //         // Generate a new random password.
+    //         $password = Str::random(11);
+
+    //         // Check if the request contains an email.
+    //         if(isset($request->email)){
+    //             // Find the user with the provided email.
+    //             $user = User::where('email', $request->email)->first();
+    //             // Update the user's password.
+    //             $user->password = Hash::make($password);
+    //             $user->save();
+
+    //             // Send a new password to the user's email.
+    //             Mail::to($request->email)->send(new SendResetPassword($user->name, $password));
+    //         }
+    //         // Check if the request contains a phone.
+    //         elseif(isset($request->phone)){
+    //             // Find the user with the provided phone.
+    //             $user = User::where('phone', $request->phone)->first();
+    //             // Update the user's password.
+    //             $user->password = Hash::make($password);
+    //             $user->save();
+    //         }
+    //         // If neither email nor phone is provided.
+    //         else{
+    //             $this->setMessage('email or phone is required');
+    //             $this->setStatusCode(400);
+    //             $this->setStatusMessage(false);
+    //             return $this->returnResponse();
+    //         }
+
+    //         // Return a success message.
+    //         $this->setMessage('password reset successfully');
+    //         return $this->returnResponse();
     //     }
-    //     // If the user does not exist in our server, create a new user.
-    //     else {
-    //         $user = new User;
-    //         $user->name = $providerUser->getName();
-    //         $user->email = $providerUser->getEmail();
-    //         $user->photo = $providerUser->getAvatar();
-    //         $user->save();
-
-    //         $socialCreate = new UserSocial();
-    //         $socialCreate->user_id = $user->id;
-    //         $socialCreate->provider = $provider;
-    //         $socialCreate->provider_id = $providerUser->getId();
-    //         $socialCreate->save();
+    //     // Return an error message in case of server error.
+    //     catch(Exception $e){
+    //         $this->setStatusCode(500);
+    //         $this->setMessage(__('translate.error_server'));
+    //         $this->setStatusMessage(false);
+    //         return $this->returnResponse();
     //     }
-
-    //     // Create a new token for the user to be able to login.
-    //     $token = $user->createToken('social-login-web')->accessToken;
-
-    //     // Return the token and user data in the response.
-    //     $this->setData(['token' => $token, 'user' => $user]);
-    //     $this->setMessage(__('translate.login_success_message'));
-    //     return $this->returnResponse();
     // }
 
     }
