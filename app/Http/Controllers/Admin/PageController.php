@@ -91,13 +91,12 @@ class PageController extends Controller
      * @param  \App\Models\Page  $page The Page model instance representing the page to be displayed.
      * @return \Illuminate\Http\Response
      */
-    public function show(Page $page)
+    public function get($id)
     {
-        // Retrieve the specified page from the database
-        // Parameters:
-        // - $page: The Page model instance representing the page to be displayed.
-        // Return:
-        // - \Illuminate\Http\Response: The HTTP response containing the page data.
+        $page = Page::find($id);
+        $this->setData($page);
+        return $this->returnResponse();
+
     }
 
     /**

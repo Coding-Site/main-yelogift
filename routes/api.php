@@ -54,6 +54,7 @@ Route::prefix('admin')->group(function(){
         });
         Route::prefix('page')->controller(\App\Http\Controllers\Admin\PageController::class)->group(function(){
            Route::get('/','index');
+           Route::get('/{id}','get');
            Route::post('/store','store');
            Route::post('/update','update');
            Route::get('/delete/{id}','destroy');
