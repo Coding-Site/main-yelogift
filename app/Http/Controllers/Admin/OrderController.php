@@ -2,17 +2,20 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Models\Order;
-use App\Models\OrderCode;
 use App\Models\User;
-use App\Models\OrderProduct;
-use App\Traits\APIHandleClass;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Validator;
+use App\Models\Order;
+use App\Models\Product;
+use App\Models\OrderCode;
 use App\Mail\SendCodesEmail;
+use App\Models\OrderProduct;
+use Illuminate\Http\Request;
+use App\Traits\APIHandleClass;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use App\Models\ProductPart;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
+
 class OrderController extends Controller
 {
     use APIHandleClass;
@@ -121,9 +124,11 @@ class OrderController extends Controller
     }
     $confirmed_order->status = 1;
     $sending_codes = array();
-    foreach($confirmed_order->order_product as $order_product){
-        $codes = OrderCode::where('order_product_id',$order_product->id);
-        array_push($sending_codes, $codes);
+    foreach($confirmed_order->orderProduct as $order_product){
+        $codes = OrderCode::where('order_product_id',$order_product->id)->first();
+        $product = Product::find($order_product->product_id);
+        $product_part = ProductPart::find($order_product->product_part_id);
+        array_push($sending_codes, [$codes, $product, $product_part]);
     }
         $client = User::find($confirmed_order->user_id);
         Mail::to($client->email)->send(new SendCodesEmail($client->name,$sending_codes));
