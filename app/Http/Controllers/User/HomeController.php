@@ -41,6 +41,16 @@ class HomeController extends Controller
      * @return \Illuminate\Http\JsonResponse The API response containing the list of
      *                                       categories with their associated products.
      */
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+
+        $products = Product::where('name', 'LIKE', "%{$query}%")
+            ->orWhere('description', 'LIKE', "%{$query}%")
+            ->get();
+
+        return response()->json($products);
+    }
     public function category()
     {
         // Retrieve all categories from the database, using eager loading to reduce the number of queries

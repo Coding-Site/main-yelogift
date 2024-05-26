@@ -20,12 +20,10 @@ class NotificationUserController extends Controller
         $flag = 0;
         foreach ($notifications as $notification) {
             foreach ($notification->notificationUsers as $notificationUser){
-                $flag = 1;
                 if($notificationUser->user_id == Auth()->user()->id){
+                    $flag = 1;
                     $readNotifications[] = $notification;
-                }else{
-                    $unreadNotifications[] = $notification;
-                    $unreadCount++;
+                    break;
                 }
             }
             if($flag == 0){
