@@ -18,6 +18,12 @@ Route::get('unauth', function () {
 Route::controller(\App\Http\Controllers\Admin\AuthController::class)->group(function(){
     Route::post('/login', 'login');
 });
+Route::middleware('auth:web')->controller(\App\Http\Controllers\User\AuthController::class)->group(function(){
+    Route::get('/logout', 'logout');
+});
+Route::middleware('auth:admin')->controller(\App\Http\Controllers\Admin\AuthController::class)->group(function(){
+    Route::get('/admin/logout', 'logout');
+});
 // admin/*  routes for admin panel
 Route::prefix('admin')->group(function(){
     Route::middleware('auth:admin')->group(function(){

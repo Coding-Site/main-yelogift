@@ -11,6 +11,7 @@ use App\Models\UserSocial;
 use App\Traits\APIHandleClass;
 use App\Traits\AuthHandleTrait;
 use Exception;
+use Google\Service\Docs\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -18,12 +19,32 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Laravel\Socialite\Facades\Socialite;
-use Google_Client;
-use Google_Service_Oauth2;
+use Tymon\JWAuth\Facades\JWAuth;
+
 class AuthController extends Controller
 {
     use APIHandleClass,AuthHandleTrait;
    
+    public function logout(Request $request)
+    {
+        // $token = JWAuth::getToken();
+        // JWAuth::invalidate($token);
+        Auth::guard('web')->logout();
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Logged out successfully'
+        ], 200);
+    }
+    // public function logout()
+    // {
+    //     Auth::guard('web')->logout();
+
+    //     return response()->json([
+    //         'status' => 'success',
+    //         'message' => 'Logged out successfully'
+    //     ], 200);
+    // }
+
     function register(Request $request)
     {
         // Validate the request data

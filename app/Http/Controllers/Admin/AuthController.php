@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Traits\AuthHandleTrait;
 use Exception;
-use Google\Service\Docs\Response;
 
 class AuthController extends Controller
 {
@@ -21,6 +20,18 @@ class AuthController extends Controller
      * @param Request $request The HTTP request object containing the admin's email and password
      * @return \Illuminate\Http\JsonResponse The JSON response containing the token and admin data
      */
+    public function logout()
+    {
+        // $token = JWTAuth::parseToken();
+        // $token->revoke();
+        Auth::guard('admin')->logout();
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Logged out successfully'
+        ], 200);
+    }
+    
     public function login(Request $request)
     {
         

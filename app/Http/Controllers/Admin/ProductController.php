@@ -51,6 +51,7 @@ class ProductController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required', // The name of the product is required
             'description' => 'required', // The description of the product is required
+            'how_to_redeem' => 'nullable',
             "category_id"=>'required|exists:categories,id', // The category ID of the product is required and must exist in the categories table
             "price"=>'required|min:0.00|not_in:0', // The price of the product is required, must be a positive number, and cannot be 0
             "image"=>'required|image', // The image of the product is required and must be an image file
@@ -72,6 +73,7 @@ class ProductController extends Controller
         // Set the properties of the product
         $product->name = $request->name;
         $product->description =  $request->description;
+        $product->how_to_redeem =  $request->how_to_redeem;
         $product->category_id = $request->category_id;
         $product->price = $request->price;
 
@@ -100,7 +102,8 @@ class ProductController extends Controller
         $validator = Validator::make($request->all(), [
             'product_id'=>'required|exists:products,id',  // The product ID of the product is optional and must exist in the products table
             'name' => 'nullable',                           // The name of the product is optional
-            'description' => 'nullable',                    // The description of the product is optional
+            'description' => 'nullable', 
+            'how_to_redeem' => 'nullable',                   // The description of the product is optional
             "category_id"=>'nullable|exists:categories,id', // The category ID of the product is optional and must exist in the categories table
             "image"=>'nullable',                      // The image of the product is optional and must be an image file
             'price'=>'nullable|numeric',
@@ -122,6 +125,7 @@ class ProductController extends Controller
         // Update the properties of the product
         if($request->name){$product->name = $request->name;}
         if($request->description){$product->description = $request->description;}
+        if($request->how_to_redeem){$product->how_to_redeem =  $request->how_to_redeem;}
         if($request->price){$product->price = $request->price;}
         if($request->discount){$product->discount = $request->discount;}
         if($request->category_id){$product->category_id = $request->category_id;}
