@@ -137,6 +137,7 @@ Route::prefix('user')->group(function(){
        Route::get('/','index');
        Route::get('/get/{id}','get');
        Route::post('/checkout','store');
+       Route::post('/direct','order_product');
        Route::post('/binance/pay','binance_pay');
        Route::get('/currancy','currancy');
        Route::post('/pay/currancy','pay_by_currancy');
