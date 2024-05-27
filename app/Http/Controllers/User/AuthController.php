@@ -129,6 +129,22 @@ class AuthController extends Controller
         $this->setMessage(__('translate.login_success_message'));
         return $this->returnResponse();
     }
+
+    public function update(Request $request, $id)
+    {
+
+    $user = User::findOrFail($id);
+    $user->name = $request->name;
+    $user->email = $request->email;
+    $user->phone = $request->phone;
+
+    $user->save();
+
+    return response()->json([
+        'message' => 'User updated successfully',
+        'user' => $user
+    ]);
+    }
  
     // function resetpassword(Request $request){
     //     try{

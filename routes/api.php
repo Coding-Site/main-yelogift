@@ -123,6 +123,7 @@ Route::prefix('home')->controller(\App\Http\Controllers\User\HomeController::cla
 Route::prefix('user')->group(function(){
     Route::prefix('auth')->controller(\App\Http\Controllers\User\AuthController::class)->group(function(){
         Route::post('/login', 'login');
+        Route::put('/update/{id}', 'update');
         Route::post('register','register');
         Route::post('/reset/password','resetpassword');
         Route::post('/social', 'socialLogin');
