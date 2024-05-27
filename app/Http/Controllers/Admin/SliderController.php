@@ -31,6 +31,7 @@ class SliderController extends Controller
                 'title' => 'required',
                 'image' => 'required|image',
                 'description' => 'required',
+                'link' => 'required',
             ]);
 
             if($validator->fails()){
@@ -42,6 +43,7 @@ class SliderController extends Controller
             $slider = new Slider();
             $slider->title = $request->title;
             $slider->description = $request->description;
+            $slider->link = $request->link;
             $slider->image = $request->image->store('sliders', 'public');
             $slider->save();
             $this->setData($slider);
@@ -78,6 +80,7 @@ class SliderController extends Controller
                 'title' => 'nullable',
                 'image' => 'nullable',
                 'description' => 'nullable',
+                'link' => 'nullable',
             ]);
 
             if($validator->fails()){
@@ -89,6 +92,7 @@ class SliderController extends Controller
             $slider = Slider::find($request->id);
             if($request->title){$slider->title = $request->title;}
             if($request->description){$slider->description = $request->description;}
+            if($request->link){$slider->link = $request->link;}
             if($request->file('image')){
                 $image=$slider->image;
                 $slider->image = $request->image->store('sliders', 'public');
