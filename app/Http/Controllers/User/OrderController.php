@@ -9,6 +9,7 @@ use App\Models\OrderProduct;
 use App\Models\PaymentSetting;
 use App\Models\ProductPartCode;
 use App\Models\OrderCode;
+use App\Models\ProductPart;
 use App\Traits\APIHandleClass;
 use App\Traits\PaymentHandleTrait;
 use CryptoPay\Binancepay\BinancePay;
@@ -59,6 +60,63 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse The JSON response.
      */
+
+    public function order_product(Request $request)
+    {
+        try {
+            // Validate the request
+            $validator = Validator::make($request->all(), [
+                'part_id' => 'required',
+            ]);
+            if ($validator->fails()) {
+                $this->setMessage($validator->errors()->first());
+                $this->setStatusCode(400);
+                $this->setStatusMessage(false);
+                return $this->returnResponse();
+            }
+            $part = ProductPart::find($request->part_id);
+
+            
+            $order = new Order();
+            $order->user_id = auth()->user()->id;
+            $order->name = $request->name?$request->name:"none";
+            $order->email = $request->email?$request->email:"none";
+            $order->phone = $request->phone?$request->phone:"none";
+            $order->country = $request->country?$request->country:"none";
+            $order->price = $part->price;
+            $order->status = 0;
+            $order->payment_status = 0;
+            $order->payment_id = 0;
+            $order->payment_method = "pay";
+            $order->currency = "usd";
+            $order->save();
+
+            $product = new OrderProduct;
+            $product->order_id = $order->id;
+            $product->product_id = $part->product_id;
+            $product->product_part_id = $request->part_id;
+            $product->quantity = 1;
+            $product->price = $part->price;
+            $product->save();
+
+            $this->setData(['order'=>$order,'order_product'=>$product,'part'=>$part]);
+            $this->setMessage(__('translate.order_success'));
+
+        } catch (Exception $e) {
+            // Rollback the database transaction and set the error response
+            DB::rollBack();
+            $this->setMessage(__('translate.error_server'));
+            $this->setData([
+                'error' => $e->getMessage()
+            ]);
+            $this->setStatusCode(500);
+            $this->setStatusMessage(false);
+        }
+
+        //Return the JSON response
+        return $this->returnResponse();
+
+    }
     public function store(Request $request)
     {
         try {
