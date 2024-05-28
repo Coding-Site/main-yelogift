@@ -145,6 +145,15 @@ class AuthController extends Controller
         'user' => $user
     ]);
     }
+
+    public function index()
+    {
+
+    $user = auth()->user();
+    return response()->json([
+        'user' => $user
+    ]);
+    }
  
     // function resetpassword(Request $request){
     //     try{
