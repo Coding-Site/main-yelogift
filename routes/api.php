@@ -133,7 +133,7 @@ Route::prefix('user')->group(function(){
     Route::prefix('auth')->controller(\App\Http\Controllers\User\AuthController::class)->group(function(){
         Route::post('/login', 'login');
         Route::post('register','register');
-        Route::post('/reset/password','resetpassword');
+        Route::middleware('auth:web')->post('/reset/password','resetpassword');
         Route::post('/social', 'socialLogin');
         Route::middleware('auth:web')->get('/', 'index');
         Route::middleware('auth:web')->post('/update', 'update');

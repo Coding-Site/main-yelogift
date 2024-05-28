@@ -155,64 +155,42 @@ class AuthController extends Controller
     ]);
     }
  
-    // function resetpassword(Request $request){
-    //     try{
-    //         // Validate the request data
-    //         $validator = Validator::make($request->all(), [
-    //             'email' => 'nullable|email|exists:users,email', // The user's email is optional, valid and exists in the users table.
-    //             'phone'=>'nullable|exists:users,phone', // The user's phone is optional and exists in the users table.
-    //         ]);
+    function resetpassword(Request $request){
+        try{
+            // Validate the request data
+            $validator = Validator::make($request->all(), [
+                'new_password' => 'required', // The user's email is optional, valid and exists in the users table.
+                'old_password'=>'required', // The user's phone is optional and exists in the users table.
+            ]);
 
-    //         // If the validation fails, return the errors
-    //         if ($validator->fails()) {
-    //             $this->setMessage($validator->errors()->first());
-    //             $this->setStatusCode(400);
-    //             $this->setStatusMessage(false);
-    //             return $this->returnResponse();
-    //         }
-
-    //         // Generate a new random password.
-    //         $password = Str::random(11);
-
-    //         // Check if the request contains an email.
-    //         if(isset($request->email)){
-    //             // Find the user with the provided email.
-    //             $user = User::where('email', $request->email)->first();
-    //             // Update the user's password.
-    //             $user->password = Hash::make($password);
-    //             $user->save();
-
-    //             // Send a new password to the user's email.
-    //             Mail::to($request->email)->send(new SendResetPassword($user->name, $password));
-    //         }
-    //         // Check if the request contains a phone.
-    //         elseif(isset($request->phone)){
-    //             // Find the user with the provided phone.
-    //             $user = User::where('phone', $request->phone)->first();
-    //             // Update the user's password.
-    //             $user->password = Hash::make($password);
-    //             $user->save();
-    //         }
-    //         // If neither email nor phone is provided.
-    //         else{
-    //             $this->setMessage('email or phone is required');
-    //             $this->setStatusCode(400);
-    //             $this->setStatusMessage(false);
-    //             return $this->returnResponse();
-    //         }
-
-    //         // Return a success message.
-    //         $this->setMessage('password reset successfully');
-    //         return $this->returnResponse();
-    //     }
-    //     // Return an error message in case of server error.
-    //     catch(Exception $e){
-    //         $this->setStatusCode(500);
-    //         $this->setMessage(__('translate.error_server'));
-    //         $this->setStatusMessage(false);
-    //         return $this->returnResponse();
-    //     }
-    // }
+            // If the validation fails, return the errors
+            if ($validator->fails()) {
+                $this->setMessage($validator->errors()->first());
+                $this->setStatusCode(400);
+                $this->setStatusMessage(false);
+                return $this->returnResponse();
+            }
+            $user = User::where('id',auth()->user()->id)->first();
+            if (Hash::check($request->old_password, $user->password)){
+                $user->password = Hash::make($request->new_password);
+                $user->save();
+            }else{
+                $this->setStatusCode(422);
+                $this->setMessage('Old password is incorrect');
+            }
+            // Return a success message.
+            $this->setStatusCode(200);
+            $this->setMessage('password reset successfully');
+            return $this->returnResponse();
+        }
+        // Return an error message in case of server error.
+        catch(Exception $e){
+            $this->setStatusCode(500);
+            $this->setMessage(__('translate.error_server'));
+            $this->setStatusMessage(false);
+            return $this->returnResponse();
+        }
+    }
 
     }
 
