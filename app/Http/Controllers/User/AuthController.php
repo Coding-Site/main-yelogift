@@ -174,13 +174,14 @@ class AuthController extends Controller
             if (Hash::check($request->old_password, $user->password)){
                 $user->password = Hash::make($request->new_password);
                 $user->save();
+                $this->setStatusCode(200);
+                $this->setMessage('password reset successfully');
             }else{
                 $this->setStatusCode(422);
                 $this->setMessage('Old password is incorrect');
             }
             // Return a success message.
-            $this->setStatusCode(200);
-            $this->setMessage('password reset successfully');
+            
             return $this->returnResponse();
         }
         // Return an error message in case of server error.
