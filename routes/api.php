@@ -132,11 +132,11 @@ Route::prefix('footer')->controller(\App\Http\Controllers\Admin\TableFooterContr
 Route::prefix('user')->group(function(){
     Route::prefix('auth')->controller(\App\Http\Controllers\User\AuthController::class)->group(function(){
         Route::post('/login', 'login');
-        Route::post('/update/{id}', 'update');
         Route::post('register','register');
         Route::post('/reset/password','resetpassword');
         Route::post('/social', 'socialLogin');
         Route::middleware('auth:web')->get('/', 'index');
+        Route::middleware('auth:web')->post('/update', 'update');
     });
     Route::prefix('carts')->middleware('auth:web')->controller(\App\Http\Controllers\User\CartController::class)->group(function(){
         Route::get('/','index');

@@ -130,10 +130,10 @@ class AuthController extends Controller
         return $this->returnResponse();
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
 
-    $user = User::findOrFail($id);
+    $user = User::findOrFail(auth()->user()->id);
     $user->name = $request->name;
     $user->email = $request->email;
     $user->phone = $request->phone;
