@@ -119,6 +119,9 @@ Route::prefix('home')->controller(\App\Http\Controllers\User\HomeController::cla
     Route::post('subscribe','subscribe');
 });
 
+Route::prefix('social')->controller(\App\Http\Controllers\Admin\SocialController::class)->group(function(){
+    Route::get('/','index');
+});
 
 Route::prefix('user')->group(function(){
     Route::prefix('auth')->controller(\App\Http\Controllers\User\AuthController::class)->group(function(){
