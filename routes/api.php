@@ -105,9 +105,12 @@ Route::prefix('admin')->group(function(){
             Route::post('update','update');
             Route::delete('delete/{id}','destroy');
         });
+        Route::prefix('footer')->controller(\App\Http\Controllers\Admin\TableFooterController::class)->group(function(){
+            Route::get('/','index');
+            Route::post('/update','update');
+        });
     });
 });
-
 Route::prefix('home')->controller(\App\Http\Controllers\User\HomeController::class)->group(function(){
     Route::get('products/popular','popular');
     Route::get('products/search','search');
@@ -122,11 +125,14 @@ Route::prefix('home')->controller(\App\Http\Controllers\User\HomeController::cla
 Route::prefix('social')->controller(\App\Http\Controllers\Admin\SocialController::class)->group(function(){
     Route::get('/','index');
 });
+Route::prefix('footer')->controller(\App\Http\Controllers\Admin\TableFooterController::class)->group(function(){
+    Route::get('/','index');
+});
 
 Route::prefix('user')->group(function(){
     Route::prefix('auth')->controller(\App\Http\Controllers\User\AuthController::class)->group(function(){
         Route::post('/login', 'login');
-        Route::put('/update/{id}', 'update');
+        Route::post('/update/{id}', 'update');
         Route::post('register','register');
         Route::post('/reset/password','resetpassword');
         Route::post('/social', 'socialLogin');
