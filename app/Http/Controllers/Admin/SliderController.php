@@ -6,9 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Models\Slider;
 use App\Traits\APIHandleClass;
 use Exception;
+use Google\Service\Docs\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
+use LDAP\Result;
+
 class SliderController extends Controller
 {
     use APIHandleClass;
@@ -31,7 +34,7 @@ class SliderController extends Controller
                 'title' => 'required',
                 'image' => 'required|image',
                 'description' => 'required',
-                'link' => 'required',
+                'url' => 'required',
             ]);
 
             if($validator->fails()){
@@ -43,7 +46,7 @@ class SliderController extends Controller
             $slider = new Slider();
             $slider->title = $request->title;
             $slider->description = $request->description;
-            $slider->link = $request->link;
+            $slider->link = $request->url;
             $slider->image = $request->image->store('sliders', 'public');
             $slider->save();
             $this->setData($slider);
@@ -80,9 +83,8 @@ class SliderController extends Controller
                 'title' => 'nullable',
                 'image' => 'nullable',
                 'description' => 'nullable',
-                'link' => 'nullable',
+                'url' => 'nullable',
             ]);
-
             if($validator->fails()){
                 $this->setMessage($validator->errors()->first());
                 $this->setStatusCode(400);
@@ -90,9 +92,10 @@ class SliderController extends Controller
                 return $this->returnResponse();
             }
             $slider = Slider::find($request->id);
+
             if($request->title){$slider->title = $request->title;}
             if($request->description){$slider->description = $request->description;}
-            if($request->link){$slider->link = $request->link;}
+            if($request->url){$slider->link = $request->url;}
             if($request->file('image')){
                 $image=$slider->image;
                 $slider->image = $request->image->store('sliders', 'public');
