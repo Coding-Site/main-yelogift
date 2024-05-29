@@ -194,7 +194,7 @@ class AuthController extends Controller
         }
     }
 
-    function forgitPassword(Request $request){
+    function forgetPassword(Request $request){
         try{
             // Validate the request data
             $validator = Validator::make($request->all(), [
