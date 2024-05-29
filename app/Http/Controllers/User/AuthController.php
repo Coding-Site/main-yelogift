@@ -6,6 +6,7 @@ use Facebook\Exceptions\FacebookResponseException;
 use Facebook\Exceptions\FacebookSDKException;
 use App\Http\Controllers\Controller;
 use App\Mail\SendResetPassword;
+use App\Mail\SendForgetPassword;
 use App\Models\User;
 use App\Models\UserSocial;
 use App\Traits\APIHandleClass;
@@ -24,7 +25,7 @@ use Tymon\JWAuth\Facades\JWAuth;
 class AuthController extends Controller
 {
     use APIHandleClass,AuthHandleTrait;
-   
+
     public function logout(Request $request)
     {
         // $token = JWAuth::getToken();
@@ -87,7 +88,7 @@ class AuthController extends Controller
             return $this->returnResponse();
         }
     }
-  
+
 
     public function socialLogin(Request $request)
     {
@@ -154,7 +155,7 @@ class AuthController extends Controller
         'user' => $user
     ]);
     }
- 
+
     function resetpassword(Request $request){
         try{
             // Validate the request data
@@ -181,7 +182,51 @@ class AuthController extends Controller
                 $this->setMessage('Old password is incorrect');
             }
             // Return a success message.
-            
+
+            return $this->returnResponse();
+        }
+        // Return an error message in case of server error.
+        catch(Exception $e){
+            $this->setStatusCode(500);
+            $this->setMessage(__('translate.error_server'));
+            $this->setStatusMessage(false);
+            return $this->returnResponse();
+        }
+    }
+
+    function forgitPassword(Request $request){
+        try{
+            // Validate the request data
+            $validator = Validator::make($request->all(), [
+                'email' => 'required|email|exists:users,email', // The user's email is required
+            ]);
+
+            // If the validation fails, return the errors
+            if ($validator->fails()) {
+                $this->setMessage($validator->errors()->first());
+                $this->setStatusCode(400);
+                $this->setStatusMessage(false);
+                return $this->returnResponse();
+            }
+
+            $user = User::where('email',$request->email)->first();
+            if ($user){
+                $charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()_+';
+                $new_password = substr(str_shuffle($charset), 0, 12);
+                $user->password = Hash::make($new_password);
+                $user->save();
+
+                //send email with nwe password
+                Mail::to($request->email)->send(new SendForgetPassword($user->name,$new_password));
+
+                $this->setStatusCode(200);
+                $this->setMessage('password change successfully');
+            }else{
+                $this->setStatusCode(422);
+                $this->setMessage('Sorry, an error occurred, please try again');
+            }
+            // Return a success message.
+
             return $this->returnResponse();
         }
         // Return an error message in case of server error.
@@ -195,4 +240,3 @@ class AuthController extends Controller
 
     }
 
-    

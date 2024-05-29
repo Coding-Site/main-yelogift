@@ -42,7 +42,7 @@ Route::prefix('admin')->group(function(){
                 Route::post('/update','update');
                 Route::get('/delete/{id}','destroy');
             });
-            
+
             Route::prefix('parts')->controller(\App\Http\Controllers\Admin\ProductPartController::class)->group(function(){
                 Route::get('get/{product_id}','index');
                 Route::get('/{part_id}','get');
@@ -133,6 +133,7 @@ Route::prefix('user')->group(function(){
     Route::prefix('auth')->controller(\App\Http\Controllers\User\AuthController::class)->group(function(){
         Route::post('/login', 'login');
         Route::post('register','register');
+        Route::post('/forgit/password', 'forgitPassword');
         Route::middleware('auth:web')->post('/reset/password','resetpassword');
         Route::post('/social', 'socialLogin');
         Route::middleware('auth:web')->get('/', 'index');
