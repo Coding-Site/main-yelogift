@@ -44,7 +44,12 @@ class AuthController extends Controller
         if(!$user){$user = User::where('phone',$request->login)->first();}
         if($user){
             $userSocial = UserSocial::where('user_id',$user->id)->first();
-            if($userSocial){return Response('invalid login for social user , please login using'.$userSocial->provider);}
+            if($userSocial){
+                $this->setMessage('invalid login for social user , please login using'.$userSocial->provider);
+                $this->setStatusCode(401);
+                $this->setStatusMessage(false);
+                return $this->returnResponse();
+            }
         }
         $credentials = $this->type_credential($request->login,$request->password);
         // Attempt to authenticate the admin
