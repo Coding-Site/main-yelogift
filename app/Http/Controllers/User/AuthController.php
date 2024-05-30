@@ -115,7 +115,7 @@ class AuthController extends Controller
             $user->name = $request->name;
             $user->email = $request->email;
             $user->phone = null;
-            $user->password = Hash::make($request->client_id);
+            $user->password = Hash::make('social_login');
             $user->save();
 
             $socialCreate = new UserSocial();
@@ -124,7 +124,7 @@ class AuthController extends Controller
             $socialCreate->provider_id = $request->client_id;
             $socialCreate->save();
         }
-        $credentials=['email'=>$user->email,'password'=>$request->client_id];
+        $credentials=['email'=>$user->email,'password'=>'social_login'];
         $token = Auth::guard('web')->attempt($credentials);
         $this->setData(['token' => $token, 'user' => $user]);
         $this->setMessage(__('translate.login_success_message'));

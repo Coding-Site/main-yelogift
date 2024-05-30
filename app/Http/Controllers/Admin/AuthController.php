@@ -6,10 +6,12 @@ use App\Traits\APIHandleClass;
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\User;
+use App\Models\UserSocial;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Traits\AuthHandleTrait;
 use Exception;
+use Google\Service\Docs\Response;
 
 class AuthController extends Controller
 {
@@ -38,6 +40,12 @@ class AuthController extends Controller
         try {
             // Extract the admin's email and password from the request
         // $credentials = $request->only('login', 'password');
+        $user = User::where('email',$request->login)->first();
+        if(!$user){$user = User::where('phone',$request->login)->first();}
+        if($user){
+            $userSocial = UserSocial::where('user_id',$user->id)->first();
+            if($userSocial){return Response('invalid login for social user , please login using'.$userSocial->provider);}
+        }
         $credentials = $this->type_credential($request->login,$request->password);
         // Attempt to authenticate the admin
         if ($token = Auth::guard('admin')->attempt($credentials)) {
