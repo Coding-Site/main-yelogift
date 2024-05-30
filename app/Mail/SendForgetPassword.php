@@ -12,16 +12,13 @@ use Illuminate\Queue\SerializesModels;
 class SendForgetPassword extends Mailable
 {
     use Queueable, SerializesModels;
-    protected $name;
-    protected $password;
+
 
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct(protected $name, protected $new_password)
     {
-        $name = $this->name;
-        $password = $this->password;
     }
 
     /**
@@ -43,7 +40,7 @@ class SendForgetPassword extends Mailable
             view: 'email.forget_password',
             with: [
                 'name' => $this->name,
-                'password' => $this->password
+                'password' => $this->new_password
             ]
         );
     }

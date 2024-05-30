@@ -210,17 +210,17 @@ class AuthController extends Controller
             }
 
             $user = User::where('email',$request->email)->first();
+            
             if ($user){
                 $charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()_+';
                 $new_password = substr(str_shuffle($charset), 0, 12);
                 $user->password = Hash::make($new_password);
                 $user->save();
-
                 //send email with nwe password
-                Mail::to($request->email)->send(new SendForgetPassword($user->name,$new_password));
+                Mail::to($user->email)->send(new SendForgetPassword($user->name,$new_password));
 
                 $this->setStatusCode(200);
-                $this->setMessage('password change successfully');
+                $this->setMessage('password reset successfully');
             }else{
                 $this->setStatusCode(422);
                 $this->setMessage('Sorry, an error occurred, please try again');
