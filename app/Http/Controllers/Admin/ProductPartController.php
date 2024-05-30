@@ -4,6 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\ProductPart;
+use App\Models\Cart;
+use App\Models\OrderCode;
+use App\Models\OrderProduct;
+use App\Models\ProductPartCode;
+use App\Models\Order;
 use App\Traits\APIHandleClass;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -102,6 +107,30 @@ class ProductPartController extends Controller
             $this->setStatusMessage(false);
             return $this->returnResponse();
         }
+        $order_products = OrderProduct::where('product_part_id',$part->id)->get();
+        foreach($order_products as $order_product){
+            $order = Order::find($order_product->order_id);
+            if($order->payment_status == 1 and $order->status == 0){
+                $this->setMessage('this part has unconfirmed orders, please confirm orders related first');
+                $this->setStatusCode(400);
+                $this->setStatusMessage(false);
+                return $this->returnResponse();
+            }
+        }
+        $orders = [];
+        foreach($order_products as $order_product){
+            $order = Order::find($order_product->order_id);
+            $order_codes = OrderCode::where('order_product_id',$order_product->id)->get();
+            $order_product->delete();
+            if (!in_array($order, $orders)) {
+                $orders[] = $order;
+            } 
+        }
+        foreach($orders as $order){
+            $order->delete();
+        }
+        $carts = Cart::where('product_part_id',$part->id)->delete();
+        $codes = ProductPartCode::where('part_id',$part->id)->delete();
         $part->delete();
         $this->setMessage(__('translate.delete_product_part_success'));
         return $this->returnResponse();
