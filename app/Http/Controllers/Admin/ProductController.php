@@ -180,13 +180,17 @@ class ProductController extends Controller
                 return $this->returnResponse();
             }
         }
+        $orders = [];
         foreach($order_products as $order_product){
             $order = Order::find($order_product->order_id);
-            $order_codes = OrderCode::where('order_product_id',$order_product->id)->delete();
+            $order_codes = OrderCode::where('order_product_id',$order_product->id)->get();
             $order_product->delete();
-            if($order){
-                $order->delete();
-            }
+            if (!in_array($order, $orders)) {
+                $orders[] = $order;
+            } 
+        }
+        foreach($orders as $order){
+            $order->delete();
         }
         $carts = Cart::where('product_id',$product->id)->delete();
         $parts = ProductPart::where('product_id',$product->id)->get();
