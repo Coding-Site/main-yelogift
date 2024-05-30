@@ -11,6 +11,7 @@ use App\Models\Product;
 use App\Models\ProductPart;
 use App\Models\ProductPartCode;
 use App\Traits\APIHandleClass;
+use Google\Service\Docs\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
@@ -173,8 +174,9 @@ class ProductController extends Controller
         foreach($order_products as $order_product){
             $order = Order::find($order_product->order_id);
             if($order->payment_status == 1 and $order->status == 0){
+                return Response($order);
                 $this->setMessage('this product has unconfirmed orders, please confirm orders related first');
-                $this->setStatusCode(404);
+                $this->setStatusCode(400);
                 $this->setStatusMessage(false);
                 return $this->returnResponse();
             }
