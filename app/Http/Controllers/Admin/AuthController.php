@@ -45,7 +45,7 @@ class AuthController extends Controller
         if($user){
             $userSocial = UserSocial::where('user_id',$user->id)->first();
             if($userSocial){
-                $this->setMessage('invalid login for social user , please login using'.$userSocial->provider);
+                $this->setMessage('invalid login for social user , please login using '.$userSocial->provider);
                 $this->setStatusCode(401);
                 $this->setStatusMessage(false);
                 return $this->returnResponse();

@@ -130,6 +130,11 @@ class OrderController extends Controller
             $order->save();
         }
         DB::commit();
+    }else{
+        $this->setMessage('The order has not been paid yet');
+        $this->setStatusCode('400');
+        $this->setStatusMessage(false);
+        return $this->returnResponse();
     }
     $confirmed_order->status = 1;
     $confirmed_order->save();

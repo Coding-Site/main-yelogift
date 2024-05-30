@@ -3,7 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cart;
+use App\Models\Order;
+use App\Models\OrderProduct;
 use App\Models\Product;
+use App\Models\ProductPart;
+use App\Models\ProductPartCode;
 use App\Traits\APIHandleClass;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -163,7 +168,24 @@ class ProductController extends Controller
             $this->setStatusMessage(false);
             return $this->returnResponse();
         }
-
+        $order_products = OrderProduct::where('product_id',$product->id)->get();
+        foreach($order_products as $order_product){
+            $order = Order::find($order_product->order_id);
+            if($order->payment_status == 1 and $order->status == 0){
+                $this->setMessage('this product has unconfirmed orders, please confirm orders related first');
+                $this->setStatusCode(404);
+                $this->setStatusMessage(false);
+                return $this->returnResponse();
+            }
+        }
+        $orders = Order::where('payment_status',0)->where('')->get();
+        $carts = Cart::where('product_id',$product->id)->delete();
+        $parts = ProductPart::where('product_id',$product->id)->get();
+        foreach($parts as $part){
+            $codes = ProductPartCode::where('part_id',$part->id)->delete();
+            $part->delete();
+        }
+        
         // Delete the product from the database
         $product->delete();
 
