@@ -174,7 +174,6 @@ class ProductController extends Controller
         foreach($order_products as $order_product){
             $order = Order::find($order_product->order_id);
             if($order->payment_status == 1 and $order->status == 0){
-                return Response($order_products);
                 $this->setMessage('this product has unconfirmed orders, please confirm orders related first');
                 $this->setStatusCode(400);
                 $this->setStatusMessage(false);
