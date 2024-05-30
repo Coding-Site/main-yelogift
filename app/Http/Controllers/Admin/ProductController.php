@@ -183,11 +183,11 @@ class ProductController extends Controller
         foreach($order_products as $order_product){
             $order = Order::find($order_product->order_id);
             $order_codes = OrderCode::where('order_product_id',$order_product->id)->delete();
+            $order_product->delete();
             if($order){
                 $order->delete();
             }
         }
-        $order_products->each->delete();
         $carts = Cart::where('product_id',$product->id)->delete();
         $parts = ProductPart::where('product_id',$product->id)->get();
         foreach($parts as $part){
