@@ -60,9 +60,9 @@ class ProductController extends Controller
             'description' => 'required', // The description of the product is required
             'how_to_redeem' => 'nullable',
             "category_id"=>'required|exists:categories,id', // The category ID of the product is required and must exist in the categories table
-            "price"=>'required|min:0.00|not_in:0', // The price of the product is required, must be a positive number, and cannot be 0
+            "price"=>'nullable|min:0.00|not_in:0', // The price of the product is required, must be a positive number, and cannot be 0
             "image"=>'required|image', // The image of the product is required and must be an image file
-            "discount"=>'required|min:0.00|not_in:0', // The discount of the product is required, must be a positive number, and cannot be 0
+            "discount"=>'nullable|min:0.00|not_in:0', // The discount of the product is required, must be a positive number, and cannot be 0
         ]);
 
         // If the validation fails, return the errors
@@ -82,13 +82,19 @@ class ProductController extends Controller
         $product->description =  $request->description;
         $product->how_to_redeem =  $request->how_to_redeem;
         $product->category_id = $request->category_id;
-        $product->price = $request->price;
+        if($request->price){
+            $product->price = $request->price;
+        }else{
+            $product->price = 0;
+        }
+        if($request->discount){
+            $product->discount = $request->discount;
+        }else{
+            $product->discount = 0;
+        }
 
         // Store the image file and set the image path
         $product->image = $request->image->store('products','public');
-
-        // Set the discount of the product
-        $product->discount = $request->discount;
 
         // Save the product to the database
         $product->save();
