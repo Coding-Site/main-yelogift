@@ -29,7 +29,7 @@ class ProductPartCodeController extends Controller
             ]);
         }
         if( decrypt($password->value) == $request->password){
-            $codes = ProductPartCode::where('part_id', $request->part_id)->get();
+            $codes = ProductPartCode::where('part_id', $request->part_id)->with('product','part')->get();
             foreach($codes as $code){
                 $code->code = decrypt($code->code);
             }
