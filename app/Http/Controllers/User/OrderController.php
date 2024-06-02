@@ -4,7 +4,9 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
+use App\Models\Product;
 use App\Models\Order;
+use App\Models\User;
 use App\Models\OrderProduct;
 use App\Models\PaymentSetting;
 use App\Models\ProductPartCode;
@@ -17,7 +19,8 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
-use Coinremitter\Coinremitter;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendCodesEmail;
 
 class OrderController extends Controller
 {
@@ -258,6 +261,7 @@ class OrderController extends Controller
 
         $order = Order::with(['OrderProduct', 'OrderProduct.product','OrderProduct.product_part'])
         ->find($request->get('trx-id'));
+        $client = User::find($order->user_id);
 
         $order_status = (new BinancePay("binancepay/openapi/v2/order/query"))
                             ->query(['merchantTradeNo' => $order->merchant_trade_no]);
@@ -270,6 +274,7 @@ class OrderController extends Controller
             foreach($order->order_product as $order_product){
             if($order_product->product_part->selling_type == 'auto'){
                 $count = $order_product->quantity;
+                $sending_codes = array();
                 for ($i = 1; $i <= $count; $i++) {
                 $part_code = ProductPartCode::where('part_id',$order_product->product_part->id)
                 ->where('status', 0)->first();
@@ -282,6 +287,13 @@ class OrderController extends Controller
                 $part_code->status = 1;
                 $part_code->save();}
                 }
+                foreach($order->orderProduct as $order_product){
+                    $codes = OrderCode::where('order_product_id',$order_product->id)->get();
+                    $product = Product::find($order_product->product_id);
+                    $product_part = ProductPart::find($order_product->product_part_id);
+                    array_push($sending_codes, [$codes, $product, $product_part]);
+                }
+                Mail::to($client->email)->send(new SendCodesEmail($client->name,$sending_codes));
             }
                 
             }

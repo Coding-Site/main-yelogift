@@ -43,7 +43,8 @@ class ProductPartController extends Controller
             'title'=>'required',
             'selling_type'=>'required',
             'price'=>'required|numeric|min:0|not_in:0',
-            'discount'=>'required|numeric|min:0|not_in:0|lt:price',
+            'discount'=>'nullable|numeric|min:0|not_in:0|lt:price',
+            'codes'=>'nullable|array',
         ]);
         if($validator->fails()){
             $this->setMessage($validator->errors()->first());
@@ -56,8 +57,15 @@ class ProductPartController extends Controller
         $productPart->title = $request->title;
         $productPart->selling_type = $request->selling_type;
         $productPart->price = $request->price;
-        $productPart->discount = $request->discount;
+        if($request->discount){$productPart->discount = $request->discount;}
         $productPart->save();
+        foreach($request->codes as $requestCode){
+            $code = new ProductPartCode;
+            $code->part_id = $productPart->id;
+            $code->product_id = $request->product_id;
+            $code->code = encrypt($requestCode);
+            $code->save();
+        }
         $this->setData($productPart);
         $this->setMessage(__('translate.create_product_part_success'));
         return $this->returnResponse();
