@@ -75,7 +75,7 @@ class AuthController extends Controller
                     'token_type' => 'bearer',
                     'expires_in' => auth('web')->factory()->getTTL() * 60
                 ];
-                $this->setData(['token' => $tokenData, 'user' => $user, 'role'=>$role]);
+                $this->setData(['token' => $tokenData, 'user' => $user, 'role'=>$role, 'auth'=>'yelogift']);
                 $this->setMessage(__('translate.login_success_message'));
 
                 // Return the response
