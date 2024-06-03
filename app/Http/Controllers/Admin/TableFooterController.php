@@ -48,16 +48,21 @@ class TableFooterController extends Controller
      */
     public function update(Request $request)
     {
-        $description = $request->description;
-        $tableFooter = TableFooter::firstOrCreate([], [
-            'description' => $description,
-        ]);
-        $tableFooter->description = $description;
-        $tableFooter->save();
+        $tableFooter = TableFooter::first();
+        if($tableFooter){
+            $tableFooter->description = $request->description;
+            $tableFooter->save();
+            
+        }else{
+            $tableFooter = new TableFooter;
+            $tableFooter->description = $request->description;
+            $tableFooter->save();
+        }
         return response()->json([
             'message' => 'footer description updated successfully',
             'data' => $tableFooter,
         ]);
+
     }
 
     /**

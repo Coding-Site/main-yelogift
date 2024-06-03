@@ -55,21 +55,25 @@ class AdvertismentController extends Controller
     }
 
     
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-        $ad = Advertisment::find($id);
+        $ad = Advertisment::first();
         if($ad){
             $ad->description = $request->description;
             $ad->url = $request->url;
             $ad->save();
-            return response()->json([
-                'message' => 'ad updated successfully',
-                'data' => $ad,
-            ],200);
+            
+        }else{
+            $ad = new Advertisment;
+            $ad->description = $request->description;
+            $ad->url = $request->url;
+            $ad->save();
+            
         }
         return response()->json([
-            'message' => 'ad not found',
-        ],404);
+            'message' => 'ad updated successfully',
+            'data' => $ad,
+        ],200);
     }
 
     /**
