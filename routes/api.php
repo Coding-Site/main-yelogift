@@ -109,6 +109,12 @@ Route::prefix('admin')->group(function(){
             Route::get('/','index');
             Route::post('/update','update');
         });
+        Route::prefix('staticPage')->controller(\App\Http\Controllers\Admin\StaticPageController::class)->group(function(){
+            Route::get('/','index');
+            Route::get('/{id}','get');
+            Route::post('/store','store');
+            Route::post('/update','update');
+        });
     });
 });
 Route::prefix('home')->controller(\App\Http\Controllers\User\HomeController::class)->group(function(){
@@ -120,6 +126,9 @@ Route::prefix('home')->controller(\App\Http\Controllers\User\HomeController::cla
     Route::get('products/{id}','getProduct');
     Route::get('sliders','slider');
     Route::post('subscribe','subscribe');
+    Route::get('staticPage','static_page');
+    Route::get('staticPage/details/{id}','static_page_details');
+
 });
 
 Route::prefix('social')->controller(\App\Http\Controllers\Admin\SocialController::class)->group(function(){

@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\Slider;
 use App\Models\Subscription;
+use App\Models\StaticPage;
 use App\Traits\APIHandleClass;
 use Illuminate\Http\Request;
 
@@ -67,7 +68,7 @@ class HomeController extends Controller
         // Retrieve all categories from the database, using eager loading to reduce the number of queries
         // The 'products' relationship is loaded to fetch the products associated with each category
         $category = Category::find($category_id);
-        
+
         $products = Product::where('category_id', $category_id)->paginate(12);
         $category->products=$products;
         // Set the data to be returned in the response
@@ -149,6 +150,22 @@ class HomeController extends Controller
         $subscribe->email = $request->email;
         $subscribe->save();
         $this->setMessage(__('translate.subscribe_success'));
+        return $this->returnResponse();
+    }
+
+    public function static_page(){
+        $products = StaticPage::get();
+        // Set the data to be returned in the response
+        $this->setData($products);
+        // Return the response
+        return $this->returnResponse();
+    }
+
+    public function static_page_details($pageId){
+        $products = StaticPage::find($pageId)->first();
+        // Set the data to be returned in the response
+        $this->setData($products);
+        // Return the response
         return $this->returnResponse();
     }
 
