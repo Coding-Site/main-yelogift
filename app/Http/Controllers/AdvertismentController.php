@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Advertisment;
+use App\Models\Advertisement;
 use Illuminate\Http\Request;
 
 class AdvertismentController extends Controller
@@ -12,7 +12,7 @@ class AdvertismentController extends Controller
      */
     public function index()
     {
-        $ads = Advertisment::all();
+        $ads = Advertisement::all();
         return response()->json([
             'data' => $ads,
         ]);
@@ -26,7 +26,7 @@ class AdvertismentController extends Controller
     {
         $description = $request->description;
         $url = $request->url;
-        $ad = Advertisment::firstOrCreate([], [
+        $ad = Advertisement::firstOrCreate([], [
             'description' => $description,
             'url' => $url,
         ]);
@@ -42,7 +42,7 @@ class AdvertismentController extends Controller
      */
     public function show(string $id)
     {
-        $ad = Advertisment::find($id);
+        $ad = Advertisement::find($id);
         if($ad){
         return response()->json([
             'data' => $ad,
@@ -57,14 +57,14 @@ class AdvertismentController extends Controller
     
     public function update(Request $request)
     {
-        $ad = Advertisment::first();
+        $ad = Advertisement::first();
         if($ad){
             $ad->description = $request->description;
             $ad->url = $request->url;
             $ad->save();
             
         }else{
-            $ad = new Advertisment;
+            $ad = new Advertisement;
             $ad->description = $request->description;
             $ad->url = $request->url;
             $ad->save();
@@ -81,7 +81,7 @@ class AdvertismentController extends Controller
      */
     public function destroy(string $id)
     {
-        $ad = Advertisment::find($id);
+        $ad = Advertisement::find($id);
         if($ad){
             $ad->delete();
             return response()->json([
