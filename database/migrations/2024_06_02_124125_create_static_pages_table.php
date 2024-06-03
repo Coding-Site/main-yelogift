@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('product_parts', function (Blueprint $table) {
-            $table->integer('discount')->unsigned()->default(0)->after('price');
+        Schema::create('static_pages', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
+            $table->text('content');
+            $table->timestamps();
         });
     }
 
@@ -21,8 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('product_parts', function (Blueprint $table) {
-            $table->dropColumn('discount');
-        });
+        Schema::dropIfExists('static_pages');
     }
 };
