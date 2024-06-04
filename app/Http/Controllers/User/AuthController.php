@@ -21,10 +21,11 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Laravel\Socialite\Facades\Socialite;
 use Tymon\JWAuth\Facades\JWAuth;
+use App\Traits\SendMailTrait;
 
 class AuthController extends Controller
 {
-    use APIHandleClass,AuthHandleTrait;
+    use APIHandleClass,AuthHandleTrait,SendMailTrait;
 
     public function logout(Request $request)
     {
@@ -210,14 +211,17 @@ class AuthController extends Controller
             }
 
             $user = User::where('email',$request->email)->first();
-            
+
             if ($user){
                 $charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()_+';
                 $new_password = substr(str_shuffle($charset), 0, 12);
                 $user->password = Hash::make($new_password);
                 $user->save();
+
                 //send email with nwe password
-                Mail::to($user->email)->send(new SendForgetPassword($user->name,$new_password));
+                $content_email = "Your New Password is ".$new_password;
+                send_mail($user->email, $user->name, "YELOGIFT Forget Password", $content_email);
+                //Mail::to($user->email)->send(new SendForgetPassword($user->name,$new_password));
 
                 $this->setStatusCode(200);
                 $this->setMessage('password reset successfully');
