@@ -122,8 +122,8 @@ class ProductController extends Controller
             'how_to_redeem' => 'nullable',                   // The description of the product is optional
             "category_id"=>'nullable|exists:categories,id', // The category ID of the product is optional and must exist in the categories table
             "image"=>'nullable',                      // The image of the product is optional and must be an image file
-            'price'=>'nullable|numeric',
-            'discount'=>'nullable|numeric'
+            'price'=>'nullable',
+            'discount'=>'nullable'
         ]);
 
         // If the validation fails, return the errors

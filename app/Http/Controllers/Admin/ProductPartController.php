@@ -86,7 +86,7 @@ class ProductPartController extends Controller
             'price_text'=>'nullable',
             'selling_type'=>'required',
             'price'=>'required|numeric|min:0|not_in:0',
-            'discount'=>'required|numeric|min:0|not_in:0|lt:price',
+            'discount'=>'nullable|numeric|min:0|not_in:0|lt:price',
         ]);
         if($validator->fails()){
             $this->setMessage($validator->errors()->first());
