@@ -62,7 +62,7 @@ class ProductController extends Controller
             'price_text' => 'nullable',
             "category_id"=>'required|exists:categories,id', // The category ID of the product is required and must exist in the categories table
             "price"=>'nullable|min:0.00|not_in:0', // The price of the product is required, must be a positive number, and cannot be 0
-            "image"=>'required|image', // The image of the product is required and must be an image file
+            "image"=>'required|image:mime_types:image/jpeg,image/png,image/gif,image/bmp', // The image of the product is required and must be an image file
             "discount"=>'nullable|min:0.00', // The discount of the product is required, must be a positive number, and cannot be 0
         ]);
 
@@ -121,7 +121,7 @@ class ProductController extends Controller
             'price_text' => 'nullable',
             'how_to_redeem' => 'nullable',                   // The description of the product is optional
             "category_id"=>'nullable|exists:categories,id', // The category ID of the product is optional and must exist in the categories table
-            "image"=>'nullable',                      // The image of the product is optional and must be an image file
+            "image"=>'nullable|image:mime_types:image/jpeg,image/png,image/gif,image/bmp',                      // The image of the product is optional and must be an image file
             'price'=>'nullable',
             'discount'=>'nullable'
         ]);
