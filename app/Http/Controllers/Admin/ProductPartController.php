@@ -41,6 +41,7 @@ class ProductPartController extends Controller
         $validator = Validator::make($request->all(), [
             'product_id'=>'required|exists:products,id',
             'title'=>'required',
+            'price_text'=>'nullable',
             'selling_type'=>'required',
             'price'=>'required|numeric|min:0|not_in:0',
             'discount'=>'nullable|numeric|min:0|not_in:0|lt:price',
@@ -55,6 +56,7 @@ class ProductPartController extends Controller
         $productPart = new ProductPart();
         $productPart->product_id = $request->product_id;
         $productPart->title = $request->title;
+        $productPart->price_text = $request->price_text;
         $productPart->selling_type = $request->selling_type;
         $productPart->price = $request->price;
         if($request->discount){$productPart->discount = $request->discount;}
@@ -81,6 +83,7 @@ class ProductPartController extends Controller
             'part_id'=>'required|exists:product_parts,id',
             'product_id'=>'required|exists:products,id',
             'title'=>'required',
+            'price_text'=>'nullable',
             'selling_type'=>'required',
             'price'=>'required|numeric|min:0|not_in:0',
             'discount'=>'required|numeric|min:0|not_in:0|lt:price',
@@ -94,6 +97,7 @@ class ProductPartController extends Controller
         $productPart = ProductPart::find($request->part_id);
         $productPart->product_id = $request->product_id;
         $productPart->title = $request->title;
+        $productPart->price_text = $request->price_text;
         $productPart->selling_type = $request->selling_type;
         $productPart->price = $request->price;
         $productPart->discount = $request->discount;
