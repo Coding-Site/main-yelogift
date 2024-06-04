@@ -59,6 +59,7 @@ class ProductController extends Controller
             'name' => 'required', // The name of the product is required
             'description' => 'required', // The description of the product is required
             'how_to_redeem' => 'nullable',
+            'price_text' => 'nullable',
             "category_id"=>'required|exists:categories,id', // The category ID of the product is required and must exist in the categories table
             "price"=>'nullable|min:0.00|not_in:0', // The price of the product is required, must be a positive number, and cannot be 0
             "image"=>'required|image', // The image of the product is required and must be an image file
@@ -81,6 +82,7 @@ class ProductController extends Controller
         $product->name = $request->name;
         $product->description =  $request->description;
         $product->how_to_redeem =  $request->how_to_redeem;
+        $product->price_text =  $request->price_text;
         $product->category_id = $request->category_id;
         if($request->price){
             $product->price = $request->price;
@@ -116,6 +118,7 @@ class ProductController extends Controller
             'product_id'=>'required|exists:products,id',  // The product ID of the product is optional and must exist in the products table
             'name' => 'nullable',                           // The name of the product is optional
             'description' => 'nullable', 
+            'price_text' => 'nullable',
             'how_to_redeem' => 'nullable',                   // The description of the product is optional
             "category_id"=>'nullable|exists:categories,id', // The category ID of the product is optional and must exist in the categories table
             "image"=>'nullable',                      // The image of the product is optional and must be an image file
@@ -139,6 +142,7 @@ class ProductController extends Controller
         if($request->name){$product->name = $request->name;}
         if($request->description){$product->description = $request->description;}
         if($request->how_to_redeem){$product->how_to_redeem =  $request->how_to_redeem;}
+        if($request->price_text){$product->price_text =  $request->price_text;}
         if($request->price){$product->price = $request->price;}
         if($request->discount){$product->discount = $request->discount;}
         if($request->category_id){$product->category_id = $request->category_id;}

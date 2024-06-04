@@ -81,6 +81,10 @@ return [
                 'log',
             ],
         ],
+        'transport' => [
+            // ...
+            'verify_peer' => false,
+        ],
 
     ],
 
