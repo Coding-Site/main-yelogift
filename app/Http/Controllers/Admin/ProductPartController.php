@@ -59,7 +59,7 @@ class ProductPartController extends Controller
         $productPart->price_text = $request->price_text;
         $productPart->selling_type = $request->selling_type;
         $productPart->price = $request->price;
-        if($request->discount){$productPart->discount = $request->discount;}
+        if($request->discount){$productPart->discount = $request->discount;}else{$productPart->discount = 0;}
         $productPart->save();
         if($request->codes){
         foreach($request->codes as $requestCode){
@@ -100,7 +100,7 @@ class ProductPartController extends Controller
         $productPart->price_text = $request->price_text;
         $productPart->selling_type = $request->selling_type;
         $productPart->price = $request->price;
-        $productPart->discount = $request->discount;
+        if($request->discount){$productPart->discount = $request->discount;}else{$productPart->discount = 0;}
 
         $productPart->save();
         $this->setData($productPart);

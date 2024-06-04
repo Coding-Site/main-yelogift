@@ -144,7 +144,7 @@ class ProductController extends Controller
         if($request->how_to_redeem){$product->how_to_redeem =  $request->how_to_redeem;}
         if($request->price_text){$product->price_text =  $request->price_text;}
         if($request->price){$product->price = $request->price;}
-        if($request->discount){$product->discount = $request->discount;}
+        if($request->discount){$product->discount = $request->discount;}else{$product->discount = 0;}
         if($request->category_id){$product->category_id = $request->category_id;}
         // If an image is provided, update the image path
         if($request->file('image')){
