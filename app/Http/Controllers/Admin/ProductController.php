@@ -63,7 +63,7 @@ class ProductController extends Controller
             "category_id"=>'required|exists:categories,id', // The category ID of the product is required and must exist in the categories table
             "price"=>'nullable|min:0.00|not_in:0', // The price of the product is required, must be a positive number, and cannot be 0
             "image"=>'required|image', // The image of the product is required and must be an image file
-            "discount"=>'nullable|min:0.00|not_in:0', // The discount of the product is required, must be a positive number, and cannot be 0
+            "discount"=>'nullable|min:0.00', // The discount of the product is required, must be a positive number, and cannot be 0
         ]);
 
         // If the validation fails, return the errors
