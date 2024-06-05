@@ -95,6 +95,11 @@ class AuthController extends Controller
     {
         $user = User::where('email',$request->email)->first();
         if ($user) {
+            if (!Hash::check('social_login', $user->password)) {
+                $this->setStatusMessage(false);
+                $this->setMessage('this user is a yelogift user , you should login using password');
+                return $this->returnResponse();
+            }
             // Check if there is a social login record for the user and the specified provider.
             $social = UserSocial::where('user_id', $user->id)
                 ->where('provider', $request->provider)
@@ -125,7 +130,7 @@ class AuthController extends Controller
             $socialCreate->provider_id = $request->client_id;
             $socialCreate->save();
         }
-        $credentials=['email'=>$user->email,'password'=>$user->password];
+        $credentials=['email'=>$user->email,'password'=>'social_login'];
         if($token = Auth::guard('web')->attempt($credentials)){
         $this->setData(['token' => $token, 'user' => $user, 'role' => 'user', 'auth'=>'social']);
         $this->setMessage(__('translate.login_success_message'));
