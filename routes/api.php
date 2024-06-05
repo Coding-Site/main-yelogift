@@ -23,6 +23,7 @@ Route::middleware('auth:web')->controller(\App\Http\Controllers\User\AuthControl
 });
 Route::middleware('auth:admin')->controller(\App\Http\Controllers\Admin\AuthController::class)->group(function(){
     Route::get('/admin/logout', 'logout');
+    Route::put('/admin/edit/{id}', 'editAdmin');
 });
 // admin/*  routes for admin panel
 Route::prefix('admin')->group(function(){

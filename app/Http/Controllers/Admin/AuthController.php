@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Traits\AuthHandleTrait;
 use Exception;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use Google\Service\Docs\Response;
 
 class AuthController extends Controller
@@ -31,6 +33,35 @@ class AuthController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => 'Logged out successfully'
+        ], 200);
+    }
+    public function editAdmin(Request $request ,$id)
+    {
+        $validator=Validator::make($request->all(),[
+            'name'=>'required',                
+            'email'=> 'required|email', 
+            'password'=>'required|min:6' 
+        ]);
+        if ($validator->fails()) {
+            $this->setMessage($validator->errors()->first());
+            $this->setStatusCode(400);
+            $this->setStatusMessage(false);
+            return $this->returnResponse();
+        }
+        $admin = Admin::findOrFail($id);
+        if(Hash::check($request->passsword,$admin->password)){
+            $admin->email = $request->email;
+            $admin->name = $request->name;
+            $admin->save();
+        }else{
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'password is not correct'
+            ], 401);
+        }
+        return response()->json([
+            'status' => 'success',
+            'message' => 'data changed successfully'
         ], 200);
     }
     
