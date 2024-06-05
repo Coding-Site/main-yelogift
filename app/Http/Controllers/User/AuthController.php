@@ -126,10 +126,14 @@ class AuthController extends Controller
             $socialCreate->save();
         }
         $credentials=['email'=>$user->email,'password'=>$user->password];
-        $token = Auth::guard('web')->attempt($credentials);
+        if($token = Auth::guard('web')->attempt($credentials)){
         $this->setData(['token' => $token, 'user' => $user, 'role' => 'user', 'auth'=>'social']);
         $this->setMessage(__('translate.login_success_message'));
         return $this->returnResponse();
+    }else{
+        $this->setMessage(__('translate.login_failed_message'));
+        return $this->returnResponse();
+    }
     }
 
     public function update(Request $request)
