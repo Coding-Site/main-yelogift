@@ -95,11 +95,11 @@ class ContactsController extends Controller
             return $this->returnResponse();
         }
 
-        if($request->address){$contact->address = $request->address;}
-        if($request->mail_1){$contact->mail_1 = $request->mail_1;}
-        if($request->mail_2){$contact->mail_2 = $request->mail_2;}
-        if($request->phone_1){$contact->phone_1 = $request->phone_1;}
-        if($request->phone_2){$contact->phone_2 = $request->phone_2;}
+        $contact->address = $request->address;
+        $contact->mail_1 = $request->mail_1;
+        $contact->mail_2 = $request->mail_2;
+        $contact->phone_1 = $request->phone_1;
+        $contact->phone_2 = $request->phone_2;
 
         // Save the category to the database
         $contact->save();
