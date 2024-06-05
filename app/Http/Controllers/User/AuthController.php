@@ -131,7 +131,7 @@ class AuthController extends Controller
         $this->setMessage(__('translate.login_success_message'));
         return $this->returnResponse();
     }else{
-        $this->setStatusCode(false);
+        $this->setStatusMessage(false);
         $this->setMessage(__('translate.login_failed_message'));
         return $this->returnResponse();
     }
