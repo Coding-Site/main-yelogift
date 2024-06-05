@@ -41,6 +41,13 @@ Route::prefix('admin')->group(function(){
             Route::put('/update','update');
             Route::delete('/delete/{id}','destroy');
         });
+        Route::prefix('contact')->controller(\App\Http\Controllers\Admin\ContactsController::class)->group(function(){
+            Route::get('/','index');
+            Route::get('/show/{id}','show');
+            Route::post('/store','store');
+            Route::put('/update/{id}','update');
+            Route::delete('/delete/{id}','destroy');
+        });
         Route::prefix('product')->group(function(){
             Route::controller(\App\Http\Controllers\Admin\ProductController::class)->group(function(){
                 Route::get('/','index');
@@ -142,6 +149,9 @@ Route::prefix('social')->controller(\App\Http\Controllers\Admin\SocialController
     Route::get('/','index');
 });
 Route::prefix('footer')->controller(\App\Http\Controllers\Admin\TableFooterController::class)->group(function(){
+    Route::get('/','index');
+});
+Route::prefix('contact')->controller(\App\Http\Controllers\Admin\ContactsController::class)->group(function(){
     Route::get('/','index');
 });
 Route::prefix('advertismant')->controller(\App\Http\Controllers\AdvertismentController::class)->group(function(){
