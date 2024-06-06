@@ -102,10 +102,9 @@ class OrderController extends Controller
             $product->price = $part->price - $part->price* $part->discount/100;
             $product->save();
 
-            $this->setData(['order'=>$order,'order_product'=>$product,'part'=>$part]);
-            $this->setMessage(__('translate.order_success'));
-            //Return the JSON response
-            return $this->returnResponse();
+            // $this->setData(['order'=>$order,'order_product'=>$product,'part'=>$part]);
+            // $this->setMessage(__('translate.order_success'));
+            return Response(['order'=>$order,'order_product'=>$product,'part'=>$part],200) ;
 
         } catch (Exception $e) {
             $this->setMessage(__('translate.error_server'));
@@ -115,6 +114,7 @@ class OrderController extends Controller
             $this->setStatusCode(500);
             $this->setStatusMessage(false);
         }
+        return $this->returnResponse();
 
     }
     public function store(Request $request)
