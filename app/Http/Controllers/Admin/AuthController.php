@@ -71,7 +71,7 @@ class AuthController extends Controller
             'confirm_password'=>'required|min:6',
             'password'=>'required' 
         ]);
-        if ($request->new_password != $request->confirm_paswword){
+        if ($request->new_password != $request->confirm_password){
             $this->setMessage('new password not match');
             $this->setStatusCode(400);
             $this->setStatusMessage(false);
