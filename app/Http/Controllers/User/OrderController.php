@@ -68,7 +68,6 @@ class OrderController extends Controller
     public function order_product(Request $request)
     {
         try {
-            // Validate the request
             $validator = Validator::make($request->all(), [
                 'part_id' => 'required',
             ]);
@@ -87,7 +86,7 @@ class OrderController extends Controller
             $order->email = auth()->user()->email;
             $order->phone = auth()->user()->phone;
             $order->country = "none";
-            $order->price = $part->price;
+            $order->price = $part->price - $part->price* $part->discount/100;
             $order->status = 0;
             $order->payment_status = 0;
             $order->payment_id = 0;
@@ -100,15 +99,15 @@ class OrderController extends Controller
             $product->product_id = $part->product_id;
             $product->product_part_id = $request->part_id;
             $product->quantity = 1;
-            $product->price = $part->price;
+            $product->price = $part->price - $part->price* $part->discount/100;
             $product->save();
 
             $this->setData(['order'=>$order,'order_product'=>$product,'part'=>$part]);
             $this->setMessage(__('translate.order_success'));
+            //Return the JSON response
+            return $this->returnResponse();
 
         } catch (Exception $e) {
-            // Rollback the database transaction and set the error response
-            DB::rollBack();
             $this->setMessage(__('translate.error_server'));
             $this->setData([
                 'error' => $e->getMessage()
@@ -116,9 +115,6 @@ class OrderController extends Controller
             $this->setStatusCode(500);
             $this->setStatusMessage(false);
         }
-
-        //Return the JSON response
-        return $this->returnResponse();
 
     }
     public function store(Request $request)
