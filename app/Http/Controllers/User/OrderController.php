@@ -42,9 +42,7 @@ class OrderController extends Controller
         return $this->returnResponse();
     }
     public function get($id){
-        $order = Order::with(['OrderProduct' => function ($query) {
-            $query->where('quantity', '>', 0);
-        }, 'OrderProduct.product','OrderProduct.product_part'])
+        $order = Order::with(['OrderProduct' , 'OrderProduct.product','OrderProduct.product_part']) //=> function ($query) { $query->where('quantity', '>', 0);}
         ->where('user_id', auth()->user()->id)
         ->find($id);
         $total_price = 0;
