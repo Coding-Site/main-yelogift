@@ -40,7 +40,7 @@ class AuthController extends Controller
         $validator=Validator::make($request->all(),[
             'name'=>'required',                
             'email'=> 'required|email', 
-            'password'=>'required|min:6' 
+            'password'=>'required' 
         ]);
         if ($validator->fails()) {
             $this->setMessage($validator->errors()->first());
@@ -69,7 +69,7 @@ class AuthController extends Controller
         $validator=Validator::make($request->all(),[
             'new_password'=>'required|min:6',
             'confirm_password'=>'required|min:6',
-            'password'=>'required|min:6' 
+            'password'=>'required' 
         ]);
         if ($request->new_password != $request->confirm_paswword){
             $this->setMessage('new password not match');
