@@ -49,7 +49,7 @@ class AuthController extends Controller
             return $this->returnResponse();
         }
         $admin = Admin::findOrFail($id);
-        if(Hash::check($request->passsword,$admin->password)){
+        if(Hash::check($request->password,$admin->password)){
             $admin->email = $request->email;
             $admin->name = $request->name;
             $admin->save();
@@ -62,6 +62,40 @@ class AuthController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => 'data changed successfully'
+        ], 200);
+    }
+    public function resetPassword(Request $request ,$id)
+    {
+        $validator=Validator::make($request->all(),[
+            'new_password'=>'required|min:6',
+            'confirm_password'=>'required|min:6',
+            'password'=>'required|min:6' 
+        ]);
+        if ($request->new_password != $request->confirm_paswword){
+            $this->setMessage('new password not match');
+            $this->setStatusCode(400);
+            $this->setStatusMessage(false);
+            return $this->returnResponse();
+        };
+        if ($validator->fails()) {
+            $this->setMessage($validator->errors()->first());
+            $this->setStatusCode(400);
+            $this->setStatusMessage(false);
+            return $this->returnResponse();
+        }
+        $admin = Admin::findOrFail($id);
+        if(Hash::check($request->password,$admin->password)){
+            $admin->password = Hash::make($request->new_password);
+            $admin->save();
+        }else{
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'password is not correct'
+            ], 401);
+        }
+        return response()->json([
+            'status' => 'success',
+            'message' => 'password changed successfully'
         ], 200);
     }
     
