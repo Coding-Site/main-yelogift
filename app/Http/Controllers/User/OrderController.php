@@ -102,9 +102,10 @@ class OrderController extends Controller
             $product->price = $part->price - $part->price* $part->discount/100;
             $product->save();
 
-            // $this->setData(['order'=>$order,'order_product'=>$product,'part'=>$part]);
-            // $this->setMessage(__('translate.order_success'));
-            return Response(['order'=>$order,'order_product'=>$product,'part'=>$part],200) ;
+            $this->setData(['order'=>$order,'order_product'=>$product,'part'=>$part]);
+            $this->setMessage(__('translate.order_success'));
+            //Return the JSON response
+            
 
         } catch (Exception $e) {
             $this->setMessage(__('translate.error_server'));
