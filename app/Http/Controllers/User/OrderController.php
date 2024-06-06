@@ -42,11 +42,14 @@ class OrderController extends Controller
         return $this->returnResponse();
     }
     public function get($id){
-        $order = Order::with(['OrderProduct', 'OrderProduct.product','OrderProduct.product_part'])
+        $order = Order::with(['OrderProduct' => function ($query) {
+            $query->where('quantity', '>', 0);
+        }, 'OrderProduct.product','OrderProduct.product_part'])
         ->where('user_id', auth()->user()->id)
         ->find($id);
         $total_price = 0;
         foreach($order->OrderProduct as $order_product){
+            
             $total_price = $total_price + $order_product->product_part->price * $order_product->quantity;
         }
 
