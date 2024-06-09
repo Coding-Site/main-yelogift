@@ -60,6 +60,8 @@ class ProductController extends Controller
             'description' => 'required', // The description of the product is required
             'how_to_redeem' => 'nullable',
             'price_text' => 'nullable',
+            'global_order' => 'nullable', 
+            'category_order' => 'nullable',
             "category_id"=>'required|exists:categories,id', // The category ID of the product is required and must exist in the categories table
             "price"=>'nullable|min:0.00|not_in:0', // The price of the product is required, must be a positive number, and cannot be 0
             "image"=>'required|image:mime_types:image/jpeg,image/png,image/gif,image/bmp', // The image of the product is required and must be an image file
@@ -84,6 +86,8 @@ class ProductController extends Controller
         $product->how_to_redeem =  $request->how_to_redeem;
         $product->price_text =  $request->price_text;
         $product->category_id = $request->category_id;
+        $product->global_order =  $request->global_order;
+        $product->category_order = $request->category_order;
         if($request->price){
             $product->price = $request->price;
         }else{
@@ -119,6 +123,8 @@ class ProductController extends Controller
             'name' => 'nullable',                           // The name of the product is optional
             'description' => 'nullable', 
             'price_text' => 'nullable',
+            'global_order' => 'nullable', 
+            'category_order' => 'nullable',
             'how_to_redeem' => 'nullable',                   // The description of the product is optional
             "category_id"=>'nullable|exists:categories,id', // The category ID of the product is optional and must exist in the categories table
             "image"=>'nullable|image:mime_types:image/jpeg,image/png,image/gif,image/bmp',                      // The image of the product is optional and must be an image file
@@ -146,6 +152,8 @@ class ProductController extends Controller
         if($request->price){$product->price = $request->price;}
         if($request->discount){$product->discount = $request->discount;}else{$product->discount = 0;}
         if($request->category_id){$product->category_id = $request->category_id;}
+        if($request->global_order){$product->global_order =  $request->global_order;}
+        if($request->category_order){$product->category_order = $request->category_order;}
         // If an image is provided, update the image path
         if($request->file('image')){
             $image=$product->image;
@@ -214,6 +222,78 @@ class ProductController extends Controller
 
         // Set a success message and return the response
         $this->setMessage(__('translate.Product_delete_success'));
+        return $this->returnResponse();
+    }
+    public function ordering(Request $request,$id)
+    {
+        $validator = Validator::make($request->all(), [
+            'global_order' => 'required', 
+        ]);
+
+        // If the validation fails, return the errors
+        if ($validator->fails()) {
+            // Set the error message and return the response
+            $this->setMessage($validator->errors()->first());
+            $this->setStatusCode(400);
+            $this->setStatusMessage(false);
+            return $this->returnResponse();
+        }
+        $product = Product::findOrFail($id);
+        if($product->global_order > $request->global_order){
+            $products = Product::whereBetween('global_order', 
+            [$request->global_order, $product->global_order])->get();
+            foreach($products as $p){
+                $p->global_order += 1;
+                $p->save();
+            }
+
+        }else if($product->global_order < $request->global_order){
+            $products = Product::whereBetween('global_order', 
+            [$product->global_order, $request->global_order])->get();
+            foreach($products as $p){
+                $p->global_order -= 1;
+                $p->save();
+            }
+        }
+        $product->global_order = $request->global_order;
+        $product->save();
+        $this->setMessage('reorder success');
+        return $this->returnResponse();
+    }
+    public function categoryOrdering(Request $request,$id)
+    {
+        $validator = Validator::make($request->all(), [
+            'category_order' => 'required', 
+        ]);
+
+        // If the validation fails, return the errors
+        if ($validator->fails()) {
+            // Set the error message and return the response
+            $this->setMessage($validator->errors()->first());
+            $this->setStatusCode(400);
+            $this->setStatusMessage(false);
+            return $this->returnResponse();
+        }
+        $product = Product::findOrFail($id);
+        if($product->category_order > $request->category_order){
+            $products = Product::whereBetween('category_order', 
+            [$request->category_order, $product->category_order])->get();
+            foreach($products as $p){
+                $p->category_order += 1;
+                $p->save();
+            }
+
+        }else if($product->category_order < $request->category_order){
+            $products = Product::whereBetween('category_order', 
+            [$product->category_order, $request->category_order])->get();
+            foreach($products as $p){
+                $p->category_order -= 1;
+                $p->save();
+            }
+        }
+        $product->category_order = $request->category_order;
+        $product->save();
+        $this->setMessage('reorder success');
         return $this->returnResponse();
     }
 }

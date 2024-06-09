@@ -57,6 +57,8 @@ Route::prefix('admin')->group(function(){
                 Route::post('/store','store');
                 Route::post('/update','update');
                 Route::get('/delete/{id}','destroy');
+                Route::put('/reoreder/{id}','ordering');
+                Route::put('/reorder/category/{id}','categoryOrdering');
             });
 
             Route::prefix('parts')->controller(\App\Http\Controllers\Admin\ProductPartController::class)->group(function(){
