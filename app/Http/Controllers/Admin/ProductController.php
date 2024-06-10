@@ -61,6 +61,7 @@ class ProductController extends Controller
             'how_to_redeem' => 'nullable',
             'price_text' => 'nullable',
             'global_order' => 'nullable', 
+            'popular' => 'required|boolean',
             'category_order' => 'nullable',
             "category_id"=>'required|exists:categories,id', // The category ID of the product is required and must exist in the categories table
             "price"=>'nullable|min:0.00|not_in:0', // The price of the product is required, must be a positive number, and cannot be 0
@@ -85,6 +86,7 @@ class ProductController extends Controller
         $product->description =  $request->description;
         $product->how_to_redeem =  $request->how_to_redeem;
         $product->price_text =  $request->price_text;
+        $product->popular =  $request->popular;
         $product->category_id = $request->category_id;
         $product->global_order =  $request->global_order;
         $product->category_order = $request->category_order;
@@ -123,6 +125,7 @@ class ProductController extends Controller
             'name' => 'nullable',                           // The name of the product is optional
             'description' => 'nullable', 
             'price_text' => 'nullable',
+            'popular' => 'nullable|boolean',
             'global_order' => 'nullable', 
             'category_order' => 'nullable',
             'how_to_redeem' => 'nullable',                   // The description of the product is optional
@@ -150,6 +153,7 @@ class ProductController extends Controller
         if($request->how_to_redeem){$product->how_to_redeem =  $request->how_to_redeem;}
         if($request->price_text){$product->price_text =  $request->price_text;}
         if($request->price){$product->price = $request->price;}
+        if($request->popular){$product->popular = $request->popular;}
         if($request->discount){$product->discount = $request->discount;}else{$product->discount = 0;}
         if($request->category_id){$product->category_id = $request->category_id;}
         if($request->global_order){$product->global_order =  $request->global_order;}
