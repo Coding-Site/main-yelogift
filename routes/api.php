@@ -161,6 +161,9 @@ Route::prefix('contact')->controller(\App\Http\Controllers\Admin\ContactsControl
 Route::prefix('advertismant')->controller(\App\Http\Controllers\AdvertismentController::class)->group(function(){
     Route::get('/','index');
 });
+Route::prefix('pages')->controller(\App\Http\Controllers\Admin\PageController::class)->group(function(){
+    Route::get('/{id}','get');
+});
 
 Route::prefix('user')->group(function(){
     Route::prefix('auth')->controller(\App\Http\Controllers\User\AuthController::class)->group(function(){
