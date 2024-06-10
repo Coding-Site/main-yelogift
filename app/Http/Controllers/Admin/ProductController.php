@@ -125,7 +125,7 @@ class ProductController extends Controller
             'name' => 'nullable',                           // The name of the product is optional
             'description' => 'nullable', 
             'price_text' => 'nullable',
-            'popular' => 'nullable|boolean',
+            'popular' => 'nullable',
             'global_order' => 'nullable', 
             'category_order' => 'nullable',
             'how_to_redeem' => 'nullable',                   // The description of the product is optional
