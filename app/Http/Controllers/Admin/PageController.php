@@ -50,6 +50,8 @@ class PageController extends Controller
             // Validate the request data
             $validator = Validator::make($request->all(), [
                 'title' => 'required', // The title field is required
+                'tags' => 'array', // validate that the field is an array
+                'tags.*' => 'string',
                 'content'=>'required' // The content field is required
             ]);
 
@@ -66,6 +68,7 @@ class PageController extends Controller
             $page = new Page;
             $page->title = $request->title; // Set the title of the page
             $page->slug = Str::slug($request->title); // Set the slug of the page
+            $page->tags = $request->tags;
             $page->content = $request->content; // Set the content of the page
             $page->save(); // Save the page to the database
 
@@ -117,6 +120,8 @@ class PageController extends Controller
             $validator = Validator::make($request->all(), [
                 'page_id'=>'required|exists:pages,id', // The page_id field is required and must exist in the pages table
                 'title' => 'required', // The title field is required
+                'tags' => 'array', // validate that the field is an array
+                'tags.*' => 'string',
                 'content'=>'required' // The content field is required
             ]);
 
@@ -136,6 +141,7 @@ class PageController extends Controller
             $page->title = $request->title;
             $page->slug = Str::slug($request->title);
             $page->content = $request->content;
+            $page->tags = $request->tags;
 
             // Save the updated page to the database
             $page->save();
