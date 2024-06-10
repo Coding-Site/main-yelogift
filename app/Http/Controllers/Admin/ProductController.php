@@ -61,7 +61,7 @@ class ProductController extends Controller
             'how_to_redeem' => 'nullable',
             'price_text' => 'nullable',
             'global_order' => 'nullable', 
-            'popular' => 'required|boolean',
+            'popular' => 'nullable',
             'category_order' => 'nullable',
             "category_id"=>'required|exists:categories,id', // The category ID of the product is required and must exist in the categories table
             "price"=>'nullable|min:0.00|not_in:0', // The price of the product is required, must be a positive number, and cannot be 0
