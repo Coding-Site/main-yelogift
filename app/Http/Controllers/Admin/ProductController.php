@@ -88,8 +88,8 @@ class ProductController extends Controller
         $product->price_text =  $request->price_text;
         $product->popular =  $request->popular;
         $product->category_id = $request->category_id;
-        $product->global_order =  $request->global_order;
-        $product->category_order = $request->category_order;
+        if($request->global_order){$product->global_order =  $request->global_order;}
+        if($request->global_order){$product->category_order = $request->category_order;}
         if($request->price){
             $product->price = $request->price;
         }else{
