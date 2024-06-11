@@ -20,7 +20,9 @@ class CategoryController extends Controller
     public function index()
     {
         // Retrieve all categories from the database
-        $categories = Category::get();
+        $categories = Category::with(['products' => function ($query) {
+            $query->orderBy('category_order', 'asc');
+        }])->orderBy('order', 'asc')->get();
 
         // Set the data to be returned in the response
         $this->setData($categories);
@@ -30,7 +32,9 @@ class CategoryController extends Controller
     }
 
     public function get($id){
-        $category = Category::find($id);
+        $category = Category::with(['products' => function ($query) {
+            $query->orderBy('category_order', 'asc');
+        }])->find($id);
         $this->setData($category);
         return $this->returnResponse();
     }
@@ -46,6 +50,7 @@ class CategoryController extends Controller
     {
         // Validate the request data
         $validator = Validator::make($request->all(), [
+            'order' => 'nullable',
             'name' => 'required|unique:categories', // Category name must be unique
             'icon' => 'required|image', // Category icon is required
         ]);
@@ -65,6 +70,11 @@ class CategoryController extends Controller
         // Assign the request data to the category model
         $category->name = $request->name;
         $category->icon = $request->icon->store('categories', 'public');
+        if($request->order){$category->order = $request->order;}
+        else{
+            $category->save();
+            $category->order = $category->id;
+        }
 
         // Save the category to the database
         $category->save();
@@ -93,6 +103,7 @@ class CategoryController extends Controller
             'category_id' => 'required|exists:categories,id', // Category id must exist in the categories table
             'name' => 'nullable|unique:categories', // Category name must be unique
             'icon' => 'nullable', 
+            'order' => 'nullable'
         ]);
 
         // If the validation fails, return the errors
@@ -109,6 +120,7 @@ class CategoryController extends Controller
 
         // Update the category name and icon
         if($request->name){$category->name=$request->name;}
+        if($request->order){$category->order=$request->order;}
         if($request->file('icon')){
             $icon=$category->icon;
             $category->icon = $request->icon->store('categories', 'public');
@@ -146,6 +158,43 @@ class CategoryController extends Controller
 
         // Set the success message and return the response
         $this->setMessage(__('translate.category_delete_success'));
+        return $this->returnResponse();
+    }
+
+    public function ordering(Request $request,$id)
+    {
+        $validator = Validator::make($request->all(), [
+            'order' => 'required', 
+        ]);
+
+        // If the validation fails, return the errors
+        if ($validator->fails()) {
+            // Set the error message and return the response
+            $this->setMessage($validator->errors()->first());
+            $this->setStatusCode(400);
+            $this->setStatusMessage(false);
+            return $this->returnResponse();
+        }
+        $category = Category::findOrFail($id);
+        if($category->order > $request->order){
+            $categories = Category::whereBetween('order', 
+            [$request->order, $category->order])->get();
+            foreach($categories as $c){
+                $c->order += 1;
+                $c->save();
+            }
+
+        }else if($category->order < $request->order){
+            $categories = Category::whereBetween('order', 
+            [$category->order, $request->order])->get();
+            foreach($categories as $c){
+                $c->order -= 1;
+                $c->save();
+            }
+        }
+        $category->order = $request->order;
+        $category->save();
+        $this->setMessage('reorder success');
         return $this->returnResponse();
     }
 }

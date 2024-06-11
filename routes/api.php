@@ -35,6 +35,7 @@ Route::prefix('admin')->group(function(){
             Route::post('/store','store');
             Route::post('/update','update');
             Route::get('/delete/{id}','destroy');
+            Route::put('/reorder/{id}','ordering');
         });
         Route::prefix('advertismant')->controller(\App\Http\Controllers\AdvertismentController::class)->group(function(){
             Route::get('/','index');
