@@ -57,7 +57,7 @@ Route::prefix('admin')->group(function(){
                 Route::post('/store','store');
                 Route::post('/update','update');
                 Route::get('/delete/{id}','destroy');
-                Route::put('/reoreder/{id}','ordering');
+                Route::put('/reorder/{id}','ordering');
                 Route::put('/reorder/category/{id}','categoryOrdering');
             });
 
