@@ -137,6 +137,7 @@ Route::prefix('admin')->group(function(){
 });
 Route::prefix('home')->controller(\App\Http\Controllers\User\HomeController::class)->group(function(){
     Route::get('products/popular','popular');
+    Route::get('products/popular/paginate','popularPaginate');
     Route::get('products/search','search');
     Route::get('categories','category');
     Route::get('categories/{id}','getCategory');
