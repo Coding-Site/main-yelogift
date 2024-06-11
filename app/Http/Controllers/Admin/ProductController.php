@@ -88,8 +88,6 @@ class ProductController extends Controller
         $product->price_text =  $request->price_text;
         $product->popular =  $request->popular;
         $product->category_id = $request->category_id;
-        if($request->global_order){$product->global_order =  $request->global_order;}
-        if($request->global_order){$product->category_order = $request->category_order;}
         if($request->price){
             $product->price = $request->price;
         }else{
@@ -106,7 +104,13 @@ class ProductController extends Controller
 
         // Save the product to the database
         $product->save();
-
+        if($request->global_order){
+            $product->global_order =  $request->global_order;
+        }else{$product->global_order =  $product->id;}
+        if($request->global_order){
+            $product->category_order = $request->category_order;
+        }else{$product->category_order =  $product->id;}
+        $product->save();
         // Set the success message and return the response
         $this->setMessage(__('translate.Product_store_success'));
         return $this->returnResponse();
