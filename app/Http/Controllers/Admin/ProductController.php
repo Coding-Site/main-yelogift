@@ -32,7 +32,7 @@ class ProductController extends Controller
     public function index()
     {
         // Fetch all products from the database
-        $products = Product::with('category','product_parts')->get();
+        $products = Product::with('category','product_parts')->orderBy('global_order', 'asc')->get();
 
         // Set the fetched products as the data for the API response
         $this->setData($products);

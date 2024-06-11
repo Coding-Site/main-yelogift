@@ -23,7 +23,7 @@ class HomeController extends Controller
     {
         // Retrieve popular products from the database, using eager loading to reduce the number of queries
         // $populars = Product::where('popular', 1)->get();
-        $populars = Product::with('category','product_parts')->where('popular', "true")->get();
+        $populars = Product::with('category','product_parts')->where('popular', "true")->orderBy('global_order', 'asc')->get();
 
         // Set the data to be returned in the response
         $this->setData($populars);
@@ -35,7 +35,7 @@ class HomeController extends Controller
     {
         // Retrieve popular products from the database, using eager loading to reduce the number of queries
         // $populars = Product::where('popular', 1)->get();
-        $populars = Product::with('category','product_parts')->where('popular', "true")->paginate(12);
+        $populars = Product::with('category','product_parts')->where('popular', "true")->orderBy('global_order', 'asc')->paginate(12);
 
         // Set the data to be returned in the response
         $this->setData($populars);
@@ -68,7 +68,9 @@ class HomeController extends Controller
     {
         // Retrieve all categories from the database, using eager loading to reduce the number of queries
         // The 'products' relationship is loaded to fetch the products associated with each category
-        $categories = Category::with('products')->get();
+        $categories = Category::with(['products' => function ($query) {
+            $query->orderBy('category_order', 'asc');
+        }])->get();
 
         // Set the data to be returned in the response
         $this->setData($categories);
@@ -81,7 +83,7 @@ class HomeController extends Controller
         // The 'products' relationship is loaded to fetch the products associated with each category
         $category = Category::find($category_id);
 
-        $products = Product::where('category_id', $category_id)->paginate(12);
+        $products = Product::where('category_id', $category_id)->orderBy('category_order', 'asc')->paginate(12);
         $category->products=$products;
         // Set the data to be returned in the response
         $this->setData($category);
@@ -103,7 +105,7 @@ class HomeController extends Controller
     public function product(){
         // Retrieve all products from the database, using eager loading to reduce the number of queries
         // The 'category' relationship is loaded to fetch the categories associated with each product
-        $products = Product::with('category','product_parts')->inRandomOrder()->paginate(12);
+        $products = Product::with('category','product_parts')->orderBy('global_order', 'asc')->paginate(12);
 
         // Set the data to be returned in the response
         $this->setData($products);
