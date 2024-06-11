@@ -284,16 +284,16 @@ class ProductController extends Controller
         }
         $product = Product::findOrFail($id);
         if($product->category_order > $request->category_order){
-            $products = Product::whereBetween('category_order', 
-            [$request->category_order, $product->category_order])->get();
+            $products = Product::where('category_id',$product->category_id)
+            ->whereBetween('category_order',[$request->category_order, $product->category_order])->get();
             foreach($products as $p){
                 $p->category_order += 1;
                 $p->save();
             }
 
         }else if($product->category_order < $request->category_order){
-            $products = Product::whereBetween('category_order', 
-            [$product->category_order, $request->category_order])->get();
+            $products = Product::where('category_id',$product->category_id)
+            ->whereBetween('category_order',[$product->category_order, $request->category_order])->get();
             foreach($products as $p){
                 $p->category_order -= 1;
                 $p->save();
