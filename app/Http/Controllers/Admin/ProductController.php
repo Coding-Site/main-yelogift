@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
+use App\Models\Category;
 use App\Models\Order;
 use App\Models\OrderCode;
 use App\Models\OrderProduct;
@@ -80,7 +81,9 @@ class ProductController extends Controller
 
         // Create a new product instance
         $product = new Product;
-
+        
+        $maxIndex = Product::where('category_id',$request->category_id)->max('category_order');
+        $maxGlobal = Product::max('global_order');
         // Set the properties of the product
         $product->name = $request->name;
         $product->description =  $request->description;
@@ -102,14 +105,8 @@ class ProductController extends Controller
         // Store the image file and set the image path
         $product->image = $request->image->store('products','public');
 
-        // Save the product to the database
-        $product->save();
-        if($request->global_order){
-            $product->global_order =  $request->global_order;
-        }else{$product->global_order =  $product->id;}
-        if($request->global_order){
-            $product->category_order = $request->category_order;
-        }else{$product->category_order =  $product->id;}
+        $product->global_order =  $maxGlobal+1;
+        $product->category_order =  $maxIndex+1;
         $product->save();
         // Set the success message and return the response
         $this->setMessage(__('translate.Product_store_success'));

@@ -63,6 +63,8 @@ class CategoryController extends Controller
             $this->setStatusMessage(false);
             return $this->returnResponse();
         }
+        $maxIndex = Category::max('order');
+
 
         // Create a new category instance
         $category = new Category;
@@ -72,8 +74,9 @@ class CategoryController extends Controller
         $category->icon = $request->icon->store('categories', 'public');
         if($request->order){$category->order = $request->order;}
         else{
+            $category->order = $maxIndex+1;
             $category->save();
-            $category->order = $category->id;
+            
         }
 
         // Save the category to the database
