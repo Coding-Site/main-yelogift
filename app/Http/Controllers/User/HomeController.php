@@ -31,7 +31,7 @@ class HomeController extends Controller
         // Return the response
         return $this->returnResponse();
     }
-    public function popularPaginate()
+    public function popular_paginate()
     {
         // Retrieve popular products from the database, using eager loading to reduce the number of queries
         // $populars = Product::where('popular', 1)->get();
