@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('contactus', function (Blueprint $table) {
-            //
+        Schema::table('contacts', function (Blueprint $table) {
+            $table->string('whatsapp')->nullable();
         });
     }
 
@@ -21,7 +21,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('contactus', function (Blueprint $table) {
+        Schema::table('contacts', function (Blueprint $table) {
             //
         });
     }
