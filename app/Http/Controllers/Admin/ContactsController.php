@@ -30,6 +30,7 @@ class ContactsController extends Controller
             'mail_2' => 'nullable|email',
             'phone_1' => 'nullable|min:10|max:12',
             'phone_2' => 'nullable|min:10|max:12',
+            'whatsapp' => 'nullable|min:10|max:12',
         ]);
 
         // If the validation fails, return the errors
@@ -50,6 +51,7 @@ class ContactsController extends Controller
         $contact->mail_2 = $request->mail_2;
         $contact->phone_1 = $request->phone_1;
         $contact->phone_2 = $request->phone_2;
+        $contact->whatsapp = $request->whatsapp;
 
         // Save the category to the database
         $contact->save();
@@ -81,6 +83,7 @@ class ContactsController extends Controller
             'mail_2' => 'nullable|email',
             'phone_1' => 'nullable|min:10|max:12',
             'phone_2' => 'nullable|min:10|max:12',
+            'whatsapp' => 'nullable|min:10|max:12',
         ]);
         $contact = Contact::find($id);
         if (!$contact){
@@ -100,6 +103,7 @@ class ContactsController extends Controller
         $contact->mail_2 = $request->mail_2;
         $contact->phone_1 = $request->phone_1;
         $contact->phone_2 = $request->phone_2;
+        $contact->whatsapp = $request->whatsapp;
 
         // Save the category to the database
         $contact->save();

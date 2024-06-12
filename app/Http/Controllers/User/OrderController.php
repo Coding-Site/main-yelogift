@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendCodesEmail;
+use Google\Service\Docs\Response;
 
 class OrderController extends Controller
 {
@@ -170,8 +171,7 @@ class OrderController extends Controller
             $order->price = $price;
             $order->save();
             Cart::where('user_id', auth()->user()->id)->delete();
-            
-               
+        
 
             // Commit the database transaction
             DB::commit();
@@ -314,7 +314,7 @@ class OrderController extends Controller
     public function pay_by_currancy(Request $request){
 
         $validator = Validator::make($request->all(), [
-            'currency_id'=>'required|exists:payment_settings,id',
+            // 'currency_id'=>'required|exists:payment_settings,id',
             'order_id'=>'required|exists:orders,id',
             'invoice'=>'required|file'
         ]);
@@ -327,7 +327,7 @@ class OrderController extends Controller
         }
         $order = Order::find($request->order_id);
         $order->payment_method = "currancy";
-        $order->payment_id = $request->currency_id;
+        // $order->payment_id = $request->currency_id;
         $order->invoice = $request->invoice->store('invoice');
         $order->save();
         $this->setMessage('payment Success !');
