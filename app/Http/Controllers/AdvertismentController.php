@@ -24,13 +24,12 @@ class AdvertismentController extends Controller
      */
     public function store(Request $request)
     {
-        $description = $request->description;
-        $url = $request->url;
-        $ad = Advertisement::firstOrCreate([], [
-            'description' => $description,
-            'url' => $url,
-        ]);
-
+        $ad =new Advertisement();
+        $ad->description = $request->description;
+        $ad->url = $request->url;
+        $ad->color1 = $request->color1;
+        $ad->color2 = $request->color2;
+        $ad->save();
         return response()->json([
             'message' => 'ad description created successfully',
             'data' => $ad,
@@ -55,21 +54,15 @@ class AdvertismentController extends Controller
     }
 
     
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-        $ad = Advertisement::first();
-        if($ad){
-            $ad->description = $request->description;
-            $ad->url = $request->url;
-            $ad->save();
-            
-        }else{
-            $ad = new Advertisement;
-            $ad->description = $request->description;
-            $ad->url = $request->url;
-            $ad->save();
-            
-        }
+        $ad = Advertisement::find($id);
+        $ad->description = $request->description;
+        $ad->url = $request->url;
+        $ad->color1 = $request->color1;
+        $ad->color2 = $request->color2;
+        $ad->save();
+       
         return response()->json([
             'message' => 'ad updated successfully',
             'data' => $ad,
