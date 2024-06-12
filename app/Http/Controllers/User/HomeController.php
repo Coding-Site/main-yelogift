@@ -23,10 +23,10 @@ class HomeController extends Controller
     {
         // Retrieve popular products from the database, using eager loading to reduce the number of queries
         // $populars = Product::where('popular', 1)->get();
-        $populars = Product::with('category','product_parts')->where('popular', "true")->orderBy('global_order', 'asc')->get();
+        $popular = Product::with('category','product_parts')->where('popular', "true")->orderBy('global_order', 'asc')->get();
 
         // Set the data to be returned in the response
-        $this->setData($populars);
+        $this->setData($popular);
 
         // Return the response
         return $this->returnResponse();
