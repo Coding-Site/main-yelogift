@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Models\OrderCode;
 use App\Mail\SendCodesEmail;
+use App\Models\Notification;
 use App\Models\OrderProduct;
 use Illuminate\Http\Request;
 use App\Traits\APIHandleClass;
@@ -67,6 +68,29 @@ class OrderController extends Controller
         // Set the data to be returned and return the response
         $this->setData(['order'=>$orders,'total_price'=>$total_price,'discount'=>$dicount]);
         return $this->returnResponse();
+    }
+    public function cancelOrder($order_id){
+        $order = Order::find($order_id);
+        if ($order->payment_status == 1){
+            return Response('this order is has been paid');
+        }
+        $order->status = -1;
+        $order->save();
+        $notification = new Notification;
+        $notification->title = 'cancel order';
+        $notification->message = 'your order has been cancelled';
+        $notification->type = 0; 
+        $notification->user_id = $order->user_id;
+        $notification->save();
+        return $this->returnResponse();
+    }
+    public function deleteOrder($order_id){
+        $order = Order::find($order_id);
+        if ($order->payment_status == 1 and $order->status == 0){
+            return Response('this order not confirmed yet');
+        }
+        $order->delete();
+        return Response('order deleted');
     }
 
 
@@ -147,6 +171,12 @@ class OrderController extends Controller
     }
         $client = User::find($confirmed_order->user_id);
         Mail::to($client->email)->send(new SendCodesEmail($client->name,$sending_codes));
+        $notification = new Notification;
+        $notification->title = 'codes sent';
+        $notification->message = 'your codes sent to your email, check your inbox';
+        $notification->type = 0; 
+        $notification->user_id = $client->id;
+        $notification->save();
         // Set the success response
         $this->setMessage(__(['translate.order_code_store_success','message' => 'Email sent successfully']));
         return $this->returnResponse();

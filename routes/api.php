@@ -104,6 +104,8 @@ Route::prefix('admin')->group(function(){
            Route::get('/','index');
            Route::get('/get/{id}','get');
            Route::post('delivery/code','delivery_code');
+           Route::get('cancel/{id}','cancelOrder');
+           Route::delete('delete/{id}','deleteOrder');
         });
         Route::prefix('slider')->controller(\App\Http\Controllers\Admin\SliderController::class)->group(function(){
            Route::get('/','index');
@@ -191,6 +193,8 @@ Route::prefix('user')->group(function(){
        Route::post('/binance/pay','binance_pay');
        Route::get('/currancy','currancy');
        Route::post('/pay/currancy','pay_by_currancy');
+       Route::get('cancel/{id}','cancelOrder');
+        Route::delete('delete/{id}','deleteOrder');
 
     });
     Route::prefix('reviews')->middleware('auth:web')->controller(\App\Http\Controllers\User\ProductReviewController::class)->group(function(){

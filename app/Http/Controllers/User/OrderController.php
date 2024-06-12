@@ -334,6 +334,23 @@ class OrderController extends Controller
         return $this->returnResponse();
 
     }
+    public function cancelOrder($order_id){
+        $order = Order::find($order_id);
+        if ($order->payment_status == 1){
+            return Response('this order is has been paid');
+        }
+        $order->status = -1;
+        $order->save();
+        return $this->returnResponse();
+    }
+    public function deleteOrder($order_id){
+        $order = Order::find($order_id);
+        if ($order->payment_status == 1 and $order->status == 0){
+            return Response('this order not confirmed yet');
+        }
+        $order->delete();
+        return Response('order deleted');
+    }
 }
 
 
