@@ -269,7 +269,7 @@ class OrderController extends Controller
             $order->payment_status = 1;
             $order->save();
             DB::beginTransaction();
-            foreach($order->order_product as $order_product){
+            foreach($order->OrderProduct as $order_product){
             if($order_product->product_part->selling_type == 'auto'){
                 $count = $order_product->quantity;
                 $sending_codes = array();
@@ -285,7 +285,7 @@ class OrderController extends Controller
                 $part_code->status = 1;
                 $part_code->save();}
                 }
-                foreach($order->orderProduct as $order_product){
+                foreach($order->OrderProduct as $order_product){
                     $codes = OrderCode::where('order_product_id',$order_product->id)->get();
                     $product = Product::find($order_product->product_id);
                     $product_part = ProductPart::find($order_product->product_part_id);
