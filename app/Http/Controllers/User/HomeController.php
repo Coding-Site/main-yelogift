@@ -10,10 +10,11 @@ use App\Models\Subscription;
 use App\Models\StaticPage;
 use App\Traits\APIHandleClass;
 use Illuminate\Http\Request;
+use App\Traits\BinanceTrait;
 
 class HomeController extends Controller
 {
-    use APIHandleClass;
+    use APIHandleClass, BinanceTrait;
     /**
      * Retrieve a random set of popular products.
      *
@@ -23,10 +24,10 @@ class HomeController extends Controller
     {
         // Retrieve popular products from the database, using eager loading to reduce the number of queries
         // $populars = Product::where('popular', 1)->get();
-        $populars = Product::with('category','product_parts')->where('popular', "true")->orderBy('global_order', 'asc')->get();
+        $popular = Product::with('category','product_parts')->where('popular', "true")->orderBy('global_order', 'asc')->get();
 
         // Set the data to be returned in the response
-        $this->setData($populars);
+        $this->setData($popular);
 
         // Return the response
         return $this->returnResponse();
@@ -181,6 +182,10 @@ class HomeController extends Controller
         $this->setData($products);
         // Return the response
         return $this->returnResponse();
+    }
+    
+    public function make_order(){
+        return $this->binance_make_order();
     }
 
 

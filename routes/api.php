@@ -216,3 +216,7 @@ Route::controller(\App\Http\Controllers\User\OrderController::class)->group(func
     Route::post('/binancepay/cancel','cancelCallback');
 });
 
+Route::controller(\App\Http\Controllers\User\HomeController::class)->group(function(){
+    Route::get('/make_order','make_order');
+});
+

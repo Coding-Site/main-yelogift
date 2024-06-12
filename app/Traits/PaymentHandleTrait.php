@@ -44,8 +44,10 @@ trait PaymentHandleTrait
         // exit;
         $json_request = json_encode($request);
         $payload = $timestamp . "\n" . $nonce . "\n" . $json_request . "\n";
-        $binance_pay_key = "vm6kbwcfguzyquwix9lusw4wmtdwclk3bgxullympuanhbdgopamz5ytp5w84bak";
-        $binance_pay_secret = "txllxem1hbbiumbmgz14vwagukqgbgoyeicrgz25f6xikkzhxhh0wb104phluk7z";
+        $binance_pay_key = "ae05edbf6ddff5577099e0daab671aa7b97a307770d54fe65077e1c268e9f274";
+        $binance_pay_secret = "ufyat2wtwnchr18y2npvzlj7uyahcgwtljxolv3yiy2v0yw35yhgnhyquhuxbliz";
+        /*$binance_pay_key = "5cc4e4b6a1dfb1b42634bd453489896769fd94987f2a88a89fc2f91fecfe81b0";
+        $binance_pay_secret = "devlzbreyistxksank32unms6jc2ugshtvrdqaubatifgznfoiovbo0gmnbd676b";*/
         $signature = strtoupper(hash_hmac('SHA512', $payload, $binance_pay_secret));
         $headers = array();
         $headers[] = "Content-Type: application/json";
