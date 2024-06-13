@@ -30,9 +30,9 @@ class BinanceFeeController extends Controller
         ]);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $bf = BinanceFee::find($id);
+        $bf = BinanceFee::first();
         $bf->description = $request->description;
         $bf->save();
        
