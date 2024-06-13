@@ -41,7 +41,7 @@ Route::prefix('admin')->group(function(){
             Route::get('/','index');
             Route::get('/get/{id}','show');
             Route::post('/store','store');
-            Route::put('/update','update');
+            Route::put('/update/{id}','update');
             Route::delete('/delete/{id}','destroy');
         });
         Route::prefix('fee')->controller(\App\Http\Controllers\BinanceFeeController::class)->group(function(){
