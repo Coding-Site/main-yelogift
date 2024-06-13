@@ -71,9 +71,9 @@ class OrderController extends Controller
     }
     public function cancelOrder($order_id){
         $order = Order::find($order_id);
-        if ($order->payment_status == 1){
-            return Response('this order is has been paid');
-        }
+        // if ($order->payment_status == 1){
+        //     return Response('this order is has been paid');
+        // }
         $order->status = -1;
         $order->save();
         $notification = new Notification;
