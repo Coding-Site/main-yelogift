@@ -44,6 +44,12 @@ Route::prefix('admin')->group(function(){
             Route::put('/update','update');
             Route::delete('/delete/{id}','destroy');
         });
+        Route::prefix('fee')->controller(\App\Http\Controllers\BinanceFeeController::class)->group(function(){
+            Route::get('/','index');
+            Route::post('/store','store');
+            Route::put('/update','update');
+            Route::delete('/delete/{id}','destroy');
+        });
         Route::prefix('contact')->controller(\App\Http\Controllers\Admin\ContactsController::class)->group(function(){
             Route::get('/','index');
             Route::get('/show/{id}','show');
@@ -163,6 +169,9 @@ Route::prefix('contact')->controller(\App\Http\Controllers\Admin\ContactsControl
     Route::get('/','index');
 });
 Route::prefix('advertismant')->controller(\App\Http\Controllers\AdvertismentController::class)->group(function(){
+    Route::get('/','index');
+});
+Route::prefix('fee')->controller(\App\Http\Controllers\BinanceFeeController::class)->group(function(){
     Route::get('/','index');
 });
 Route::prefix('pages')->controller(\App\Http\Controllers\Admin\PageController::class)->group(function(){
