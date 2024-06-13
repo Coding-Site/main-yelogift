@@ -360,10 +360,10 @@ class OrderController extends Controller
         }
     
         // Delete order codes
-        OrderCode::whereOrderProductId($order->orderProducts->pluck('id'))->delete();
+        OrderCode::whereOrderProductId($order->orderProduct->pluck('id'))->delete();
     
         // Delete order products
-        $order->orderProducts()->delete();
+        $order->orderProduct()->delete();
     
         // Delete order
         $order->delete();
