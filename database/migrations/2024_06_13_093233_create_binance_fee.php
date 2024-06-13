@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('binanceFees', function (Blueprint $table) {
+        Schema::create('binance_fees', function (Blueprint $table) {
             $table->id();
             $table->string('description')->nullable();
             $table->timestamps();
