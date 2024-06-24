@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('payment_settings', function (Blueprint $table) {
             $table->id();
             $table->text('address');
-            $table->string('currency');
+            $table->unsignedInteger('currency_id');
+            $table->foreign('currency_id')->references('id')->on('currencies')->onDelete('cascade')->onUpdate('cascade');
             $table->string('blockchain_type');
-            $table->text('icon');
             $table->text('payment_qr');
             $table->timestamps();
         });

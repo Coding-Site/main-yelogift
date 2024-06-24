@@ -93,6 +93,7 @@ Route::prefix('admin')->group(function(){
         Route::prefix('currency')->controller(\App\Http\Controllers\Admin\CurrencyController::class)->group(function(){
             Route::get('/','index');
             Route::post('/store','store');
+            Route::post('/{currency}','show');
             Route::post('/update','update');
             Route::get('/delete/{id}','destroy');
         });
@@ -122,6 +123,7 @@ Route::prefix('admin')->group(function(){
         });
         Route::prefix('payment/setting')->controller(\App\Http\Controllers\Admin\PaymentSettingController::class)->group(function(){
             Route::get('/','index');
+            Route::post('/{id}','show');
             Route::post('store','store');
             Route::post('update','update');
             Route::get('delete/{id}','destroy');
@@ -194,7 +196,7 @@ Route::prefix('user')->group(function(){
         Route::post('/update','update');
         Route::get('/delete/{id}','destroy');
     });
-    Route::prefix('order')->middleware('auth:web')->controller(\App\Http\Controllers\User\OrderController::class)->group(function(){
+    Route::prefix('order')->controller(\App\Http\Controllers\User\OrderController::class)->group(function(){
        Route::get('/','index');
        Route::get('/get/{id}','get');
        Route::post('/checkout','store');

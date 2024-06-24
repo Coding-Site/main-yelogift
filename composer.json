@@ -6,12 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
-        "coinremitter/laravel": "^0.2.0",
-        "coinremitterlaravel/coinremitter-laravel": "^0.2.0",
-        "coinremitterphp/coinremitter-php": "^0.1.3",
         "crypto-pay/binancepay": "^1.0",
-        "facebook/graph-sdk": "^5.1",
-        "google/apiclient": "^2.0",
         "kevupton/laravel-coinpayments": "^0.2.9",
         "laravel/framework": "^11.0",
         "laravel/passport": "^12.2",
@@ -20,10 +15,6 @@
         "laravel/tinker": "^2.9",
         "laravel/ui": "^4.5",
         "maatwebsite/excel": "^3.1",
-        "socialiteproviders/apple": "^5.0",
-        "socialiteproviders/binance": "^4.1",
-        "socialiteproviders/facebook": "^4.1",
-        "socialiteproviders/google": "^4.1",
         "tymon/jwt-auth": "^2.1"
     },
     "require-dev": {

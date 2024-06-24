@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Currency;
+use App\Models\PaymentSetting;
 use App\Traits\APIHandleClass;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -51,6 +52,7 @@ class CurrencyController extends Controller
             $validator = Validator::make($request->all(), [
                 'name' => 'required',
                 'symbol' => 'required',
+                'image'=>'required|image',
                 'charge_rate' => 'nullable|numeric',
                 'charge_percent' => 'nullable|numeric',
             ]);
@@ -67,6 +69,7 @@ class CurrencyController extends Controller
             $currency = new Currency();
             $currency->name = $request->name;
             $currency->symbol = $request->symbol;
+            $currency->icon = $request->image->store('currency_icon', 'public');
             $currency->charge_rate = $request->has('charge_rate') ? $request->charge_rate : 0;
             $currency->charge_percent = $request->has('charge_percent') ? $request->charge_percent : 0;
 
@@ -126,6 +129,7 @@ class CurrencyController extends Controller
                 'currancy_id'=>'required|exists:currencies,id', // The currency ID must exist in the currencies table.
                 'name' => 'required', // The name field is required.
                 'symbol' => 'required', // The symbol field is required.
+                'image'=>'required|image',
                 'charge_rate' => 'nullable|numeric', // The charge_rate field can be null or a numeric value.
                 'charge_percent' => 'nullable|numeric', // The charge_percent field can be null or a numeric value.
             ]);
@@ -144,7 +148,9 @@ class CurrencyController extends Controller
             $currency->symbol = $request->symbol;
             $currency->charge_rate = $request->has('charge_rate') ? $request->charge_rate : 0;
             $currency->charge_percent = $request->has('charge_percent') ? $request->charge_percent : 0;
-
+            if($request->hasFile('image')){
+                $currency->icon = $request->icon->store('currency_icon', 'public');
+            }
             // Save the Currency object to the database
             $currency->save();
 
@@ -178,7 +184,7 @@ class CurrencyController extends Controller
         try {
             // Find the Currency object
             $currency = Currency::find($currency_id);
-
+            PaymentSetting::where('currency_id',$currency_id)->delete();
             // If the Currency object is not found, return an error response
             if (!$currency) {
                 $this->setMessage(__('translate.currency_not_found'));

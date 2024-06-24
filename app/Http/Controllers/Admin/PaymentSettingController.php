@@ -21,6 +21,12 @@ class PaymentSettingController extends Controller
         return $this->returnResponse();
     }
 
+    public function show($id)
+    {
+        $paymentSetting = PaymentSetting::find($id);
+        $this->setData($paymentSetting);
+        return $this->returnResponse();
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -29,9 +35,8 @@ class PaymentSettingController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'address'=>'required',
-            'Currency'=>'required',
+            'currency_id'=>'required|exists:currencies,id',
             'blockchain_type'=>'required',
-            'icon'=>'required|image',
             'payment_qr'=>'required|image'
         ]);
         if($validator->fails()){
@@ -43,9 +48,8 @@ class PaymentSettingController extends Controller
 
         $paymentSetting = new PaymentSetting();
         $paymentSetting->address = $request->address;
-        $paymentSetting->currency = $request->Currency;
+        $paymentSetting->currency_id = $request->currency_id;
         $paymentSetting->blockchain_type = $request->blockchain_type;
-        $paymentSetting->icon = $request->icon->store('currency_icon', 'public');
         $paymentSetting->payment_qr = $request->payment_qr->store('payment_qr', 'public');
         $paymentSetting->save();
         $this->setData($paymentSetting);
@@ -61,9 +65,8 @@ class PaymentSettingController extends Controller
         $validator = Validator::make($request->all(), [
             'payment_id'=>'required|exists:payment_settings,id',
             'address'=>'required',
-            'Currency'=>'required',
+            'currency_id'=>'required|exists:currencies,id',
             'blockchain_type'=>'required',
-            'icon'=>'required|image',
             'payment_qr'=>'required|image'
         ]);
         if($validator->failed()){
@@ -75,11 +78,9 @@ class PaymentSettingController extends Controller
 
         $paymentSetting = PaymentSetting::find($request->payment_id);
         $paymentSetting->address = $request->address;
-        $paymentSetting->currency = $request->Currency;
+        $paymentSetting->currency_id = $request->currency_id;
         $paymentSetting->blockchain_type = $request->blockchain_type;
-        if($request->hasFile('icon')){
-            $paymentSetting->icon = $request->icon->store('currency_icon', 'public');
-        }
+        
         if($request->hasFile('payment_qr')){
             $paymentSetting->payment_qr = $request->payment_qr->store('payment_qr', 'public');
         }

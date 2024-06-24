@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Currency extends Model
 {
     use HasFactory;
+    function paymentSettings()
+    {
+        return $this->hasMany(PaymentSetting::class);
+    }
 }

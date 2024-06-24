@@ -1,26 +1,16 @@
 <?php
 
 namespace App\Http\Controllers\User;
-use Facebook\Facebook;
-use Facebook\Exceptions\FacebookResponseException;
-use Facebook\Exceptions\FacebookSDKException;
 use App\Http\Controllers\Controller;
-use App\Mail\SendResetPassword;
-use App\Mail\SendForgetPassword;
 use App\Models\User;
 use App\Models\UserSocial;
 use App\Traits\APIHandleClass;
 use App\Traits\AuthHandleTrait;
 use Exception;
-use Google\Service\Docs\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Str;
-use Laravel\Socialite\Facades\Socialite;
-use Tymon\JWAuth\Facades\JWAuth;
 use App\Traits\SendMailTrait;
 
 class AuthController extends Controller

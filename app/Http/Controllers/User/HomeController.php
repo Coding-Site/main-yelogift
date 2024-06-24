@@ -71,7 +71,7 @@ class HomeController extends Controller
         // The 'products' relationship is loaded to fetch the products associated with each category
         $categories = Category::with(['products' => function ($query) {
             $query->orderBy('category_order', 'asc');
-        }])->get();
+        }])->orderBy('order', 'asc')->get();
 
         // Set the data to be returned in the response
         $this->setData($categories);

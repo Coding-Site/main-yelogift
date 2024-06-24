@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('currencies', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('symbol');
+            $table->string('name')->unique();
+            $table->string('symbol')->unique();
+            $table->string('icon');
             $table->decimal('charge_rate',10,10);
             $table->decimal('charge_percent',10,10);
             $table->timestamps();
