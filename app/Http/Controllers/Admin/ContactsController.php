@@ -28,9 +28,9 @@ class ContactsController extends Controller
             'address' => 'nullable', 
             'mail_1' => 'nullable|email',
             'mail_2' => 'nullable|email',
-            'phone_1' => 'nullable|min:10|max:12',
-            'phone_2' => 'nullable|min:10|max:12',
-            'whatsapp' => 'nullable|min:10|max:12',
+            'phone_1' => 'nullable|min:10|max:50',
+            'phone_2' => 'nullable|min:10|max:50',
+            'whatsapp' => 'nullable|min:10|max:50',
         ]);
 
         // If the validation fails, return the errors
@@ -81,9 +81,9 @@ class ContactsController extends Controller
             'address' => 'nullable', 
             'mail_1' => 'nullable|email',
             'mail_2' => 'nullable|email',
-            'phone_1' => 'nullable|min:10|max:12',
-            'phone_2' => 'nullable|min:10|max:12',
-            'whatsapp' => 'nullable|min:10|max:12',
+            'phone_1' => 'nullable|min:10|max:50',
+            'phone_2' => 'nullable|min:10|max:50',
+            'whatsapp' => 'nullable|min:10|max:50',
         ]);
         $contact = Contact::find($id);
         if (!$contact){

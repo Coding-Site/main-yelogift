@@ -17,7 +17,7 @@ class PaymentSettingController extends Controller
      */
     public function index()
     {
-        $paymentSetting = PaymentSetting::get();
+        $paymentSetting = PaymentSetting::with('currency')->get();
         $this->setData($paymentSetting);
         return $this->returnResponse();
     }
@@ -72,7 +72,7 @@ class PaymentSettingController extends Controller
             'blockchain_type'=>'required',
             'payment_qr'=>'required|image'
         ]);
-        
+
         if($validator->failed()){
             $this->setMessage($validator->errors()->first());
             $this->setStatusCode(400);
