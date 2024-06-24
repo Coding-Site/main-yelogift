@@ -313,7 +313,7 @@ class OrderController extends Controller
         // ITS UPTO YOU 😎
     }
     public function currancy(){
-        $payment = PaymentSetting::with('currency')->all();
+        $payment = PaymentSetting::with('currency')->get();
         $this->setData($payment);
         return $this->returnResponse();
     }
