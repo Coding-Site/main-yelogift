@@ -205,7 +205,9 @@ Route::prefix('user')->group(function(){
        Route::get('/currancy','currancy');
        Route::post('/pay/currancy','pay_by_currancy');
        Route::get('cancel/{id}','cancelOrder');
-        Route::delete('delete/{id}','deleteOrder');
+       Route::delete('delete/{id}','deleteOrder');
+       Route::post('/binancepay/callback','returnCallback');
+       Route::post('/binancepay/cancel','cancelCallback');
 
     });
     Route::prefix('reviews')->middleware('auth:web')->controller(\App\Http\Controllers\User\ProductReviewController::class)->group(function(){
