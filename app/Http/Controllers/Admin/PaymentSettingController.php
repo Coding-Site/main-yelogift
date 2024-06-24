@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\PaymentSetting;
 use App\Traits\APIHandleClass;
+use Google\Service\Slides\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -33,19 +34,20 @@ class PaymentSettingController extends Controller
      */
     public function store(Request $request)
     {
+        
         $validator = Validator::make($request->all(), [
             'address'=>'required',
             'currency_id'=>'required|exists:currencies,id',
             'blockchain_type'=>'required',
             'payment_qr'=>'required|image'
         ]);
+        
         if($validator->fails()){
             $this->setMessage($validator->errors()->first());
             $this->setStatusCode(400);
             $this->setStatusMessage(false);
             return $this->returnResponse();
         }
-
         $paymentSetting = new PaymentSetting();
         $paymentSetting->address = $request->address;
         $paymentSetting->currency_id = $request->currency_id;
@@ -62,6 +64,7 @@ class PaymentSettingController extends Controller
      */
     public function update(Request $request)
     {
+
         $validator = Validator::make($request->all(), [
             'payment_id'=>'required|exists:payment_settings,id',
             'address'=>'required',
@@ -69,6 +72,7 @@ class PaymentSettingController extends Controller
             'blockchain_type'=>'required',
             'payment_qr'=>'required|image'
         ]);
+        
         if($validator->failed()){
             $this->setMessage($validator->errors()->first());
             $this->setStatusCode(400);

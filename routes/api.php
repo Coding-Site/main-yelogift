@@ -123,7 +123,7 @@ Route::prefix('admin')->group(function(){
         });
         Route::prefix('payment/setting')->controller(\App\Http\Controllers\Admin\PaymentSettingController::class)->group(function(){
             Route::get('/','index');
-            Route::post('/{id}','show');
+            Route::get('/{id}','show');
             Route::post('store','store');
             Route::post('update','update');
             Route::get('delete/{id}','destroy');
