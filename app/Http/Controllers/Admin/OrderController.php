@@ -173,7 +173,7 @@ class OrderController extends Controller
         Mail::to($client->email)->send(new SendCodesEmail($client->name,$sending_codes));
         $notification = new Notification;
         $notification->title = 'codes sent';
-        $notification->message = 'your codes sent to your email, check your inbox';
+        $notification->message = 'order confirmed and your codes sent to your email, check your inbox';
         $notification->type = 0; 
         $notification->user_id = $client->id;
         $notification->save();

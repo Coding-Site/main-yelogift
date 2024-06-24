@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\Product;
+use App\Models\Notification;
 use App\Models\Order;
 use App\Models\User;
 use App\Models\OrderProduct;
@@ -268,6 +269,12 @@ class OrderController extends Controller
         if($order_status['status'] == 'SUCCESS'){
             $order->payment_status = 1;
             $order->save();
+            $notification = new Notification;
+            $notification->title = 'payment success';
+            $notification->message = 'your order has been paied successfully, wait for confirmation';
+            $notification->type = 0; 
+            $notification->user_id = $order->user_id;
+            $notification->save();
             DB::beginTransaction();
             foreach($order->OrderProduct as $order_product){
             if($order_product->product_part->selling_type == 'auto'){
