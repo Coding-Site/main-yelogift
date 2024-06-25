@@ -37,6 +37,7 @@ class OrderController extends Controller
         // Retrieve the orders with their related products for the authenticated user
         $order = Order::with(['OrderProduct', 'OrderProduct.product','OrderProduct.product_part'])
             ->where('user_id', auth()->user()->id)
+            ->orderBy('created_at', 'desc')
             ->get();
 
         // Set the order data and return the response
