@@ -334,6 +334,12 @@ class OrderController extends Controller
         $order->invoice = $request->invoice->store('invoices','public');
         $order->payment_status = 1;
         $order->save();
+        $notification = new Notification;
+        $notification->title = 'invoice sent';
+        $notification->message = 'invoice sent successfully, wait for confirmation !';
+        $notification->type = 0; 
+        $notification->user_id = $order->user_id;
+        $notification->save();
         $this->setMessage('invoice sent successfully, wait for confirmation !');
         return $this->returnResponse();
 

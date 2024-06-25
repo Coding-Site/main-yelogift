@@ -227,7 +227,6 @@ class AuthController extends Controller
                 $user_email = "noda_102@yahoo.com";
                 Mail::to($user_email)->send(new SendForgetPassword($user->name,$new_password));
                 //Mail::to($user->email)->send(new SendForgetPassword($user->name,$new_password));
-
                 $this->setStatusCode(200);
                 $this->setMessage('password reset successfully');
             }else{
