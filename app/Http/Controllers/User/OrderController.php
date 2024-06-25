@@ -317,11 +317,9 @@ class OrderController extends Controller
         $this->setData($payment);
         return $this->returnResponse();
     }
-    
     public function pay_by_currancy(Request $request){
 
         $validator = Validator::make($request->all(), [
-            // 'currency_id'=>'required|exists:payment_settings,id',
             'order_id'=>'required|exists:orders,id',
             'invoice'=>'required|file'
         ]);
@@ -333,9 +331,29 @@ class OrderController extends Controller
             return $this->returnResponse();
         }
         $order = Order::find($request->order_id);
-        $order->payment_method = "currancy";
-        // $order->payment_id = $request->currency_id;
         $order->invoice = $request->invoice->store('invoice');
+        $order->save();
+        $this->setMessage('payment Success !');
+        return $this->returnResponse();
+
+    }
+    
+    public function attach_payment_id(Request $request){
+
+        $validator = Validator::make($request->all(), [
+            'payment_id'=>'required|exists:payment_settings,id',
+            'order_id'=>'required|exists:orders,id',
+        ]);
+
+        if ($validator->fails()) {
+            $this->setMessage($validator->errors()->first());
+            $this->setStatusCode(400);
+            $this->setStatusMessage(false);
+            return $this->returnResponse();
+        }
+        $order = Order::find($request->order_id);
+        $order->payment_method = "cryptocurrancy";
+        $order->payment_id = $request->payment_id;
         $order->save();
         $this->setMessage('payment Success !');
         return $this->returnResponse();

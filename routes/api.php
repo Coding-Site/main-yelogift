@@ -204,6 +204,7 @@ Route::prefix('user')->group(function(){
        Route::post('/binance/pay','binance_pay');
        Route::get('/currancy','currancy');
        Route::post('/pay/currancy','pay_by_currancy');
+       Route::post('/crypto','attach_payment_id');
        Route::get('cancel/{id}','cancelOrder');
        Route::delete('delete/{id}','deleteOrder');
        Route::post('/binancepay/callback','returnCallback');
