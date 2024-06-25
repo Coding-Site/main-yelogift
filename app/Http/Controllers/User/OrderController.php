@@ -331,7 +331,7 @@ class OrderController extends Controller
             return $this->returnResponse();
         }
         $order = Order::find($request->order_id);
-        $order->invoice = $request->invoice->store('invoice');
+        $order->invoice = $request->invoice->store('invoices','public');
         $order->payment_status = 1;
         $order->save();
         $this->setMessage('invoice sent successfully, wait for confirmation !');
