@@ -355,6 +355,8 @@ class OrderController extends Controller
         $order->payment_method = "cryptocurrancy";
         $order->payment_id = $request->payment_id;
         $order->save();
+        $paymentSetting = PaymentSetting::with('currency')->find($request->payment_id);
+        $this->setData([$paymentSetting,$order]);
         $this->setMessage('payment Success !');
         return $this->returnResponse();
 
