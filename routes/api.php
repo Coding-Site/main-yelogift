@@ -196,7 +196,7 @@ Route::prefix('user')->group(function(){
         Route::post('/update','update');
         Route::get('/delete/{id}','destroy');
     });
-    Route::prefix('order')->controller(\App\Http\Controllers\User\OrderController::class)->group(function(){
+    Route::prefix('order')->middleware('auth:web')->controller(\App\Http\Controllers\User\OrderController::class)->group(function(){
        Route::get('/','index');
        Route::get('/get/{id}','get');
        Route::post('/checkout','store');

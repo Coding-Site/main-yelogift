@@ -379,7 +379,7 @@ class OrderController extends Controller
             return response()->json(['error' => 'Order not found'], 404);
         }
     
-        if ($order->user_id !== 1) {
+        if ($order->user_id !== auth()->user()->id) {
             return response()->json(['error' => 'This is not your order'], 403);
         }
     
