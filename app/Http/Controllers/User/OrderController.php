@@ -23,6 +23,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendCodesEmail;
 use Google\Service\Docs\Response;
+use GuzzleHttp\Psr7\Response as Psr7Response;
+use Illuminate\Auth\Access\Response as AccessResponse;
 
 class OrderController extends Controller
 {
@@ -200,7 +202,7 @@ class OrderController extends Controller
         $order = Order::with(['OrderProduct', 'OrderProduct.product'])->find($request->order_id);
         // $pay = $this->initiateBinancePay($order->id,'Order From Website','order from '.$order->name.' from email '.$order->email.' by id '.$order->id ,$order->price);
 
-
+        return Response($order);
         $user = auth()->user();
         $data['order_amount'] =  $order->price;
         $data['package_id'] = $order->id; // referenceGoodsId: id from the DB Table that user choose to purchase
