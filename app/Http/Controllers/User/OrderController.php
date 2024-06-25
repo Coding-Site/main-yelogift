@@ -50,7 +50,7 @@ class OrderController extends Controller
         ->find($id);
         $total_price = 0;
         foreach($order->OrderProduct as $order_product){
-            
+
             $total_price = $total_price + $order_product->product_part->price * $order_product->quantity;
         }
 
@@ -82,7 +82,7 @@ class OrderController extends Controller
             }
             $part = ProductPart::find($request->part_id);
 
-            
+
             $order = new Order();
             $order->user_id = auth()->user()->id;
             $order->name = auth()->user()->name;
@@ -108,7 +108,7 @@ class OrderController extends Controller
             $this->setData(['order'=>$order,'order_product'=>$product,'part'=>$part]);
             $this->setMessage(__('translate.order_success'));
             //Return the JSON response
-            
+
 
         } catch (Exception $e) {
             $this->setMessage(__('translate.error_server'));
@@ -142,7 +142,7 @@ class OrderController extends Controller
 
             // Retrieve the carts of the authenticated user
             $carts = Cart::where('user_id', auth()->user()->id)->with('product','product_part')->get();
-            
+
             // Calculate the total price of the carts
             // $totalPrice = $carts->sum('product.price');
             $price = 0;
@@ -159,7 +159,7 @@ class OrderController extends Controller
             $order->payment_method = "pay";
             $order->currency = "usd";
             $order->save();
-            
+
             foreach($carts as $cart){
                 $product = new OrderProduct;
                 $price = $price + ($cart->product_part->price - $cart->product_part->price*$cart->product_part->discount/100) * $cart->quantity;
@@ -173,7 +173,7 @@ class OrderController extends Controller
             $order->price = $price;
             $order->save();
             Cart::where('user_id', auth()->user()->id)->delete();
-        
+
 
             // Commit the database transaction
             DB::commit();
@@ -208,8 +208,8 @@ class OrderController extends Controller
             $this->setStatusMessage(false);
             return $this->returnResponse();
         }
-        
-        
+
+
         $order = Order::with(['OrderProduct', 'OrderProduct.product'])->find($request->order_id);
         // return Response($order);
         // $pay = $this->initiateBinancePay($order->id,'Order From Website','order from '.$order->name.' from email '.$order->email.' by id '.$order->id ,$order->price);
@@ -253,7 +253,7 @@ class OrderController extends Controller
         return $this->returnResponse();
 
     }
-    
+
     public function returnCallback(Request $request)
     {
         return $this->checkOrderStatus($request);
@@ -287,7 +287,7 @@ class OrderController extends Controller
             $notification = new Notification;
             $notification->title = 'payment success';
             $notification->message = 'your order has been paied successfully, wait for confirmation';
-            $notification->type = 0; 
+            $notification->type = 0;
             $notification->user_id = $order->user_id;
             $notification->save();
             DB::beginTransaction();
@@ -315,11 +315,12 @@ class OrderController extends Controller
                 }
                 Mail::to($client->email)->send(new SendCodesEmail($client->name,$sending_codes));
             }
-                
+
             }
             DB::commit();
         }
-        return redirect()->url('https://yelogift-front.coding-site.com/');
+        //return redirect()->url('https://yelogift-front.coding-site.com/');
+        return redirect()->to('https://yelogift.net/');
 
 
         // $transaction->update(['status' => $order_status['data']['status']];
@@ -357,14 +358,14 @@ class OrderController extends Controller
         $notification = new Notification;
         $notification->title = 'invoice sent';
         $notification->message = 'invoice sent successfully, wait for confirmation !';
-        $notification->type = 0; 
+        $notification->type = 0;
         $notification->user_id = $order->user_id;
         $notification->save();
         $this->setMessage('invoice sent successfully, wait for confirmation !');
         return $this->returnResponse();
 
     }
-    
+
     public function attach_payment_id(Request $request){
 
         $validator = Validator::make($request->all(), [
@@ -400,15 +401,15 @@ class OrderController extends Controller
     public function deleteOrder($orderId)
     {
         $order = Order::find($orderId);
-    
+
         if (!$order) {
             return response()->json(['error' => 'Order not found'], 404);
         }
-    
+
         if ($order->user_id !== auth()->user()->id) {
             return response()->json(['error' => 'This is not your order'], 403);
         }
-    
+
         if ($order->payment_status === 1 && $order->status === 0) {
             return response()->json(['error' => 'This order is not confirmed yet'], 422);
         }
@@ -418,7 +419,7 @@ class OrderController extends Controller
         }
         $order->orderProduct()->delete();
         $order->delete();
-    
+
         return response()->json(['message' => 'Order deleted successfully']);
     }
 }
