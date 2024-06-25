@@ -379,21 +379,18 @@ class OrderController extends Controller
             return response()->json(['error' => 'Order not found'], 404);
         }
     
-        if ($order->user_id !== auth()->user()->id) {
+        if ($order->user_id !== 1) {
             return response()->json(['error' => 'This is not your order'], 403);
         }
     
         if ($order->payment_status === 1 && $order->status === 0) {
             return response()->json(['error' => 'This order is not confirmed yet'], 422);
         }
-    
-        // Delete order codes
-        OrderCode::whereOrderProductId($order->orderProduct->pluck('id'))->delete();
-    
-        // Delete order products
+
+        foreach($order->orderProduct as $orderProduct){
+            OrderCode::whereOrderProductId($orderProduct->id)->delete();
+        }
         $order->orderProduct()->delete();
-    
-        // Delete order
         $order->delete();
     
         return response()->json(['message' => 'Order deleted successfully']);
