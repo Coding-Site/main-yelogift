@@ -203,6 +203,7 @@ Route::prefix('user')->group(function(){
        Route::post('/direct','order_product');
        Route::post('/binance/pay','binance_pay');
        Route::get('/currancy','currancy');
+       Route::get('/currancy/{id}','getCurrancy');
        Route::post('/pay/currancy','pay_by_currancy');
        Route::post('/crypto','attach_payment_id');
        Route::get('cancel/{id}','cancelOrder');

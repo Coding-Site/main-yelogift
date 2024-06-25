@@ -318,6 +318,11 @@ class OrderController extends Controller
         $this->setData($payment);
         return $this->returnResponse();
     }
+    public function getCurrancy($id){
+        $payment = PaymentSetting::with('currency')->find($id);
+        $this->setData($payment);
+        return $this->returnResponse();
+    }
     public function pay_by_currancy(Request $request){
 
         $validator = Validator::make($request->all(), [
