@@ -223,22 +223,9 @@ class AuthController extends Controller
 
                 //send email with nwe password
                 $content_email = "Your New Password is ".$new_password;
-                
-                function sendMail($to_email=null, $name=null, $subject_email=null, $content=null)
-                {
-                    $to = $to_email;
-                    $subject = $subject_email;
-                    $message = "Dear ".$name."<br>";
-                    $message .= $content;
-            
-                    $headers = "MIME-Version: 1.0" . "\r\n";
-                    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-                    $headers .= 'From: <info@yelogift.net>' . "\r\n";
-                    mail($to,$subject,$message,$headers);
-                }
-                sendMail($user->email, $user->name, "YELOGIFT Forget Password", $content_email);
+                $this->send_mail($user->email, $user->name, "YELOGIFT Forget Password", $content_email);
                 $this->setStatusCode(200);
-                $this->setMessage($new_password);
+                $this->setMessage('password reset successfully');
             }else{
                 $this->setStatusCode(422);
                 $this->setMessage('Sorry, an error occurred, please try again');
