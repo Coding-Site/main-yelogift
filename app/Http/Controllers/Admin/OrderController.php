@@ -178,7 +178,7 @@ class OrderController extends Controller
         $notification->user_id = $client->id;
         $notification->save();
         // Set the success response
-        $this->setMessage(__(['translate.order_code_store_success','message' => 'Email sent successfully']));
+        $this->setMessage('Email sent successfully');
         return $this->returnResponse();
     }
 }
