@@ -6,15 +6,14 @@ use App\Models\User;
 use App\Models\UserSocial;
 use App\Traits\APIHandleClass;
 use App\Traits\AuthHandleTrait;
-use App\Mail\SendResetPassword;
-use App\Mail\SendForgetPassword;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
-use App\Traits\SendMailTrait;
+use App\Mail\SendForgetPassword;
 use Illuminate\Support\Facades\Mail;
+use App\Traits\SendMailTrait;
 
 class AuthController extends Controller
 {
@@ -223,7 +222,11 @@ class AuthController extends Controller
 
                 //send email with nwe password
                 $content_email = "Your New Password is ".$new_password;
-                $this->send_mail($user->email, $user->name, "YELOGIFT Forget Password", $content_email);
+                //$this->send_mail($user->email, $user->name, "YELOGIFT Forget Password", $content_email);
+
+                $user_email = "noda_102@yahoo.com";
+                Mail::to($user_email)->send(new SendForgetPassword($user->name,$new_password));
+                //Mail::to($user->email)->send(new SendForgetPassword($user->name,$new_password));
                 $this->setStatusCode(200);
                 $this->setMessage('password reset successfully');
             }else{
