@@ -197,6 +197,18 @@ class OrderController extends Controller
         return $this->returnResponse();
     }
     public function binance_pay(Request $request){
+        $validator = Validator::make($request->all(), [
+            'order_id' => 'required|exists:orders, id',
+        ]);
+
+        // If the validation fails, return the error response
+        if ($validator->fails()) {
+            $this->setMessage($validator->errors()->first());
+            $this->setStatusCode(400);
+            $this->setStatusMessage(false);
+            return $this->returnResponse();
+        }
+        
         $order = Order::with(['OrderProduct', 'OrderProduct.product'])->find($request->order_id);
         // $pay = $this->initiateBinancePay($order->id,'Order From Website','order from '.$order->name.' from email '.$order->email.' by id '.$order->id ,$order->price);
 
