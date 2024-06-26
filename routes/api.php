@@ -6,8 +6,12 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 Route::get('send', function () {
+    Mail::to('a.mansour.code@gmail.com')->send(new TestSendHostMail);
+    return 'send';
+});
+
+Route::get('mailer', function () {
     Mail::mailer('smtp')->to('a.mansour.code@gmail.com')->send(new TestSendHostMail);
-    // Mail::to('noda_102@yahoo.com')->send(new TestSendHostMail);
     return 'send';
 });
 
