@@ -196,19 +196,20 @@ Route::prefix('user')->group(function(){
         Route::post('/update','update');
         Route::get('/delete/{id}','destroy');
     });
-    Route::prefix('order')->controller(\App\Http\Controllers\User\OrderController::class)->group(function(){
+    Route::prefix('order')->middleware('auth:web')->controller(\App\Http\Controllers\User\OrderController::class)->group(function(){
        Route::get('/','index');
        Route::get('/get/{id}','get');
        Route::post('/checkout','store');
        Route::post('/direct','order_product');
        Route::post('/binance/pay','binance_pay');
        Route::get('/currancy','currancy');
+       Route::get('/currancy/{id}','getCurrancy');
        Route::post('/pay/currancy','pay_by_currancy');
        Route::post('/crypto','attach_payment_id');
        Route::get('cancel/{id}','cancelOrder');
        Route::delete('delete/{id}','deleteOrder');
-       Route::post('/binancepay/callback','returnCallback');
-       Route::post('/binancepay/cancel','cancelCallback');
+       /*Route::get('/binancepay/callback','returnCallback');
+       Route::get('/binancepay/cancel','cancelCallback');*/
 
     });
     Route::prefix('reviews')->middleware('auth:web')->controller(\App\Http\Controllers\User\ProductReviewController::class)->group(function(){
@@ -230,8 +231,8 @@ Route::controller(\App\Http\Controllers\User\CheckoutController::class)->group(f
 });
 
 Route::controller(\App\Http\Controllers\User\OrderController::class)->group(function(){
-    Route::post('/binancepay/callback','returnCallback');
-    Route::post('/binancepay/cancel','cancelCallback');
+    Route::get('/user/order/binancepay/callback','returnCallback');
+    Route::get('/user/order/binancepay/cancel','cancelCallback');
 });
 
 Route::controller(\App\Http\Controllers\User\HomeController::class)->group(function(){
