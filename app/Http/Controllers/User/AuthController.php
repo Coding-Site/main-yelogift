@@ -1,23 +1,25 @@
 <?php
 
 namespace App\Http\Controllers\User;
-use App\Http\Controllers\Controller;
+
+use Exception;
 use App\Models\User;
 use App\Models\UserSocial;
+use Illuminate\Http\Request;
+use App\Traits\SendMailTrait;
+use App\Mail\TestSendHostMail;
 use App\Traits\APIHandleClass;
 use App\Traits\AuthHandleTrait;
-use Exception;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Hash;
 use App\Mail\SendForgetPassword;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
-use App\Traits\SendMailTrait;
+use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
-    use APIHandleClass,AuthHandleTrait,SendMailTrait;
+    use APIHandleClass, AuthHandleTrait, SendMailTrait;
 
     public function logout(Request $request)
     {
@@ -44,11 +46,11 @@ class AuthController extends Controller
         // Validate the request data
         try {
             // Define the validation rules and custom messages
-            $validator=Validator::make($request->all(),[
-                'name'=>'required',                 // The user's name is required
-                'phone'=>'required|unique:users|min:10|max:12', // The user's phone is required, unique and has a valid length
-                'email'=> 'required|email|unique:users', // The user's email is required, valid and unique
-                'password'=>'required|min:6' // The user's password is required, has a valid length and matches the specified format
+            $validator = Validator::make($request->all(), [
+                'name' => 'required',                 // The user's name is required
+                'phone' => 'required|unique:users|min:10|max:12', // The user's phone is required, unique and has a valid length
+                'email' => 'required|email|unique:users', // The user's email is required, valid and unique
+                'password' => 'required|min:6' // The user's password is required, has a valid length and matches the specified format
             ]);
 
             // If the validation fails, return the errors
@@ -71,7 +73,6 @@ class AuthController extends Controller
             $this->setMessage(__('translate.register_success'));
 
             return $this->returnResponse();
-
         } catch (Exception $e) {
             // Return an error message in case of server error
             $this->setStatusCode(500);
@@ -85,7 +86,7 @@ class AuthController extends Controller
 
     public function socialLogin(Request $request)
     {
-        $user = User::where('email',$request->email)->first();
+        $user = User::where('email', $request->email)->first();
         if ($user) {
             if (!Hash::check('social_login', $user->password)) {
                 $this->setStatusMessage(false);
@@ -122,49 +123,50 @@ class AuthController extends Controller
             $socialCreate->provider_id = $request->client_id;
             $socialCreate->save();
         }
-        $credentials=['email'=>$user->email,'password'=>'social_login'];
-        if($token = Auth::guard('web')->attempt($credentials)){
-        $this->setData(['token' => $token, 'user' => $user, 'role' => 'user', 'auth'=>'social']);
-        $this->setMessage(__('translate.login_success_message'));
-        return $this->returnResponse();
-    }else{
-        $this->setStatusMessage(false);
-        $this->setMessage(__('translate.login_failed_message'));
-        return $this->returnResponse();
-    }
+        $credentials = ['email' => $user->email, 'password' => 'social_login'];
+        if ($token = Auth::guard('web')->attempt($credentials)) {
+            $this->setData(['token' => $token, 'user' => $user, 'role' => 'user', 'auth' => 'social']);
+            $this->setMessage(__('translate.login_success_message'));
+            return $this->returnResponse();
+        } else {
+            $this->setStatusMessage(false);
+            $this->setMessage(__('translate.login_failed_message'));
+            return $this->returnResponse();
+        }
     }
 
     public function update(Request $request)
     {
 
-    $user = User::findOrFail(auth()->user()->id);
-    $user->name = $request->name;
-    $user->email = $request->email;
-    $user->phone = $request->phone;
+        $user = User::findOrFail(auth()->user()->id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
 
-    $user->save();
+        $user->save();
 
-    return response()->json([
-        'message' => 'User updated successfully',
-        'user' => $user
-    ]);
+        return response()->json([
+            'message' => 'User updated successfully',
+            'user' => $user
+        ]);
     }
 
     public function index()
     {
 
-    $user = auth()->user();
-    return response()->json([
-        'user' => $user
-    ]);
+        $user = auth()->user();
+        return response()->json([
+            'user' => $user
+        ]);
     }
 
-    function resetpassword(Request $request){
-        try{
+    function resetpassword(Request $request)
+    {
+        try {
             // Validate the request data
             $validator = Validator::make($request->all(), [
                 'new_password' => 'required', // The user's email is optional, valid and exists in the users table.
-                'old_password'=>'required', // The user's phone is optional and exists in the users table.
+                'old_password' => 'required', // The user's phone is optional and exists in the users table.
             ]);
 
             // If the validation fails, return the errors
@@ -174,13 +176,13 @@ class AuthController extends Controller
                 $this->setStatusMessage(false);
                 return $this->returnResponse();
             }
-            $user = User::where('id',auth()->user()->id)->first();
-            if (Hash::check($request->old_password, $user->password)){
+            $user = User::where('id', auth()->user()->id)->first();
+            if (Hash::check($request->old_password, $user->password)) {
                 $user->password = Hash::make($request->new_password);
                 $user->save();
                 $this->setStatusCode(200);
                 $this->setMessage('password reset successfully');
-            }else{
+            } else {
                 $this->setStatusCode(422);
                 $this->setMessage('Old password is incorrect');
             }
@@ -189,7 +191,7 @@ class AuthController extends Controller
             return $this->returnResponse();
         }
         // Return an error message in case of server error.
-        catch(Exception $e){
+        catch (Exception $e) {
             $this->setStatusCode(500);
             $this->setMessage(__('translate.error_server'));
             $this->setStatusMessage(false);
@@ -197,8 +199,9 @@ class AuthController extends Controller
         }
     }
 
-    function forgetPassword(Request $request){
-        try{
+    function forgetPassword(Request $request)
+    {
+        try {
             // Validate the request data
             $validator = Validator::make($request->all(), [
                 'email' => 'required|email|exists:users,email', // The user's email is required
@@ -212,24 +215,26 @@ class AuthController extends Controller
                 return $this->returnResponse();
             }
 
-            $user = User::where('email',$request->email)->first();
+            $user = User::where('email', $request->email)->first();
 
-            if ($user){
+            if ($user) {
                 $charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()_+';
                 $new_password = substr(str_shuffle($charset), 0, 12);
                 $user->password = Hash::make($new_password);
                 $user->save();
 
                 //send email with nwe password
-                $content_email = "Your New Password is ".$new_password;
+                $content_email = "Your New Password is " . $new_password;
                 //$this->send_mail($user->email, $user->name, "YELOGIFT Forget Password", $content_email);
 
-                $user_email = "noda_102@yahoo.com";
+                $user_email = 'a.mansour.code@gmail.com';
                 Mail::to($user_email)->send(new SendForgetPassword($user->name,$new_password));
+                // Mail::to()->send(new SendForgetPassword($user->name,$new_password));
+                // return 'send';
                 //Mail::to($user->email)->send(new SendForgetPassword($user->name,$new_password));
                 $this->setStatusCode(200);
                 $this->setMessage('password reset successfully');
-            }else{
+            } else {
                 $this->setStatusCode(422);
                 $this->setMessage('Sorry, an error occurred, please try again');
             }
@@ -238,13 +243,11 @@ class AuthController extends Controller
             return $this->returnResponse();
         }
         // Return an error message in case of server error.
-        catch(Exception $e){
+        catch (Exception $e) {
             $this->setStatusCode(500);
             $this->setMessage(__('translate.error_server'));
             $this->setStatusMessage(false);
             return $this->returnResponse();
         }
     }
-
-    }
-
+}
