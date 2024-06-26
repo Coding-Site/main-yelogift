@@ -45,9 +45,9 @@ return [
             'username' => env('MAIL_USERNAME'),
             'password' => env('MAIL_PASSWORD'),
             'timeout' => null,
-            'local_domain' => env('MAIL_EHLO_DOMAIN'),
-            'auth_mode'  => 'login',
-            'verify_peer' => false
+            'local_domain' => env('MAIL_EHLO_DOMAIN', parse_url(env('APP_URL', 'http://localhost'), PHP_URL_HOST)),
+            // 'auth_mode'  => 'login',
+            // 'verify_peer' => false
         ],
 
         'ses' => [
