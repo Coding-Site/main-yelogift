@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Exception;
 use App\Traits\APIHandleClass;
-use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
@@ -189,7 +188,6 @@ class CategoryController extends Controller
         if($category->order > $request->order){
             $categories = Category::whereBetween('order', 
             [$request->order, $category->order-1])->get();
-            return Response($categories);
             foreach($categories as $c){
                 $c->order =$c->order + 1;
             }
@@ -197,16 +195,15 @@ class CategoryController extends Controller
         }else if($category->order < $request->order){
             $categories = Category::whereBetween('order', 
             [$category->order+1, $request->order])->get();
-            return Response($categories);
             foreach($categories as $c){
                 $c->order =$c->order - 1;
             }
         }
         $category->order = $request->order;
         $category->save();
-        // foreach ($categories as $c) {
-        //     $c->save();
-        // }
+        foreach ($categories as $c) {
+            $c->save();
+        }
         DB::commit();
         $this->setMessage('reorder success');
         return $this->returnResponse();
