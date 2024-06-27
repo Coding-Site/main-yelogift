@@ -278,7 +278,7 @@ class OrderController extends Controller
         $client = User::find($order->user_id);
 
         $order_status = (new BinancePay("binancepay/openapi/v2/order/query"))
-                            ->query(['merchantTradeNo' => $order->merchant_trade_no]);
+                            ->query(['merchantTradeNo' => $order->payment_id]);
 
         // Save transaction status or whatever you like according to the order status
         if($order_status['status'] == 'SUCCESS'){
