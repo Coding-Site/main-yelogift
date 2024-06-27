@@ -1,0 +1,625 @@
+[07-Apr-2024 07:58:39 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/public/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/public/index.php on line 13
+[07-Apr-2024 07:58:39 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/public/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/public/index.php on line 13
+[07-Apr-2024 08:01:04 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/public/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/public/index.php on line 13
+[07-Apr-2024 08:01:04 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/public/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/public/index.php on line 13
+[21-May-2024 11:14:42 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/public/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/public/index.php on line 13
+[21-May-2024 11:15:17 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/public/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/public/index.php on line 13
+[21-May-2024 11:15:19 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/public/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/public/index.php on line 13
+[21-May-2024 11:15:25 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/public/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/public/index.php on line 13
+[21-May-2024 11:22:22 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/public/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/public/index.php on line 13
+[21-May-2024 11:22:25 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/public/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/public/index.php on line 13
+[21-May-2024 11:22:30 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/public/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/public/index.php on line 13
+[21-May-2024 11:23:34 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/public/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/public/index.php on line 13
+[21-May-2024 11:23:36 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/public/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/public/index.php on line 13
+[21-May-2024 11:35:00 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/public/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/public/index.php on line 13
+[21-May-2024 11:36:05 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/public/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/public/index.php on line 13
+[21-May-2024 11:36:08 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/public/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/public/index.php on line 13
+[21-May-2024 11:44:09 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[21-May-2024 11:44:18 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[21-May-2024 11:59:44 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/../project_files/vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/index.php on line 13
+[21-May-2024 11:59:44 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/../project_files/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[21-May-2024 11:59:48 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/../project_files/vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/index.php on line 13
+[21-May-2024 11:59:48 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/../project_files/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[21-May-2024 12:04:42 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[21-May-2024 12:04:47 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[21-May-2024 12:04:48 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[21-May-2024 12:06:04 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[21-May-2024 12:09:14 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[21-May-2024 12:09:30 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[21-May-2024 12:09:31 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[21-May-2024 12:09:31 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[21-May-2024 12:10:02 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[21-May-2024 12:12:08 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[21-May-2024 12:15:33 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[21-May-2024 12:17:08 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[21-May-2024 12:19:19 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[21-May-2024 12:19:20 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[21-May-2024 12:19:21 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[21-May-2024 12:22:03 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[21-May-2024 12:24:09 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[21-May-2024 12:37:30 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/public/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/public/index.php on line 13
+[21-May-2024 12:37:31 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/public/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/public/index.php on line 13
+[21-May-2024 12:38:08 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/public/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/public/index.php on line 13
+[21-May-2024 12:38:09 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/public/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/public/index.php on line 13
+[21-May-2024 12:39:06 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/public/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/public/index.php on line 13
+[21-May-2024 12:39:09 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/public/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/public/index.php on line 13
+[21-May-2024 12:39:11 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/public/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/public/index.php on line 13
+[21-May-2024 12:55:58 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/public/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/public/index.php on line 13
+[21-May-2024 12:55:59 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/public/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/public/index.php on line 13
+[21-May-2024 14:00:00 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/public/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/public/index.php on line 13
+[21-May-2024 14:00:01 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/public/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/public/index.php on line 13
+[21-May-2024 14:00:02 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/public/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/public/index.php on line 13
+[22-May-2024 11:50:48 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/public/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/public/index.php on line 13
+[22-May-2024 11:50:48 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/public/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/public/index.php on line 13
+[22-May-2024 11:50:48 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/public/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/public/index.php on line 13
+[22-May-2024 11:50:48 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/public/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/public/index.php on line 13
+[22-May-2024 14:43:22 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/public/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/public/index.php on line 13
+[22-May-2024 14:43:22 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/public/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/public/index.php on line 13
+[23-May-2024 06:04:48 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/public/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/public/index.php on line 13
+[23-May-2024 11:24:19 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/public/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/public/index.php on line 13
+[23-May-2024 11:25:43 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/public/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/public/index.php on line 13
+[23-May-2024 11:25:54 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/public/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/public/index.php on line 13
+[23-May-2024 11:25:56 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/public/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/public/index.php on line 13
+[23-May-2024 11:25:57 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/public/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/public/index.php on line 13
+[23-May-2024 11:25:58 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/public/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/public/index.php on line 13
+[23-May-2024 11:25:59 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/public/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/public/index.php on line 13
+[23-May-2024 11:26:01 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/public/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/public/index.php on line 13
+[23-May-2024 11:26:02 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/public/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/public/index.php on line 13
+[23-May-2024 11:26:04 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/public/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/public/index.php on line 13
+[23-May-2024 11:29:54 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/public/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/public/index.php on line 13
+[23-May-2024 11:32:15 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:32:17 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:33:16 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:33:16 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php80/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:33:33 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:33:33 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php80/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:34:30 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:34:30 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php83/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:34:30 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:34:30 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:34:32 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:34:32 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:34:32 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:34:32 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:34:32 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:34:32 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:36:01 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:36:01 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:36:05 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:36:05 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:39:43 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:39:43 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:39:55 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:39:55 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:40:21 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:40:21 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:41:37 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:41:37 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:41:39 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:41:39 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:41:39 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:41:39 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:41:40 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:41:40 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:41:40 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:41:40 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:42:52 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:42:52 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:42:53 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:42:53 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:42:54 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:42:54 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:44:44 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:44:44 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:44:46 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:44:46 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:44:46 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:44:46 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:44:46 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:44:46 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:44:46 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:44:46 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:44:46 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:44:46 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:44:46 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:44:46 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:46:20 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:46:20 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:46:23 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:46:23 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:46:23 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:46:23 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:46:23 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:46:23 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:46:24 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:46:24 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:46:24 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:46:24 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:46:26 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:46:26 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:46:26 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:46:26 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:46:26 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:46:26 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:46:26 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:46:26 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:46:27 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:46:27 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:46:27 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:46:27 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:46:27 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:46:27 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:46:27 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:46:27 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:46:27 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:46:27 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:46:27 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:46:27 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:46:28 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:46:28 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:46:28 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:46:28 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:47:12 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:47:12 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:47:12 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:47:12 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:47:13 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:47:13 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:47:13 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:47:13 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:47:13 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:47:13 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:47:13 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:47:13 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:47:13 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:47:13 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:48:02 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:48:02 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:48:03 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:48:03 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:48:03 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:48:03 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:48:03 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:48:03 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:49:29 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/../vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:49:29 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:50:10 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:50:10 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:50:13 UTC] PHP Warning:  require(/home/yelogiftcodingsi/public_html/vendor/autoload.php): Failed to open stream: No such file or directory in /home/yelogiftcodingsi/public_html/index.php on line 13
+[23-May-2024 11:50:13 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/yelogiftcodingsi/public_html/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home/yelogiftcodingsi/public_html/index.php:13
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/index.php on line 13
+[07-Jun-2024 16:14:22 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/yelogiftcodingsi/public_html/config/database.php:19
+Stack trace:
+#0 {main}
+  thrown in /home/yelogiftcodingsi/public_html/config/database.php on line 19
+[12-Jun-2024 08:50:03 UTC] PHP Deprecated:  Using ${var} in strings is deprecated, use {$var} instead in /home/yelogiftcodingsi/public_html/app/Traits/BinanceTrait.php on line 22
+[12-Jun-2024 08:50:03 UTC] PHP Deprecated:  Using ${var} in strings is deprecated, use {$var} instead in /home/yelogiftcodingsi/public_html/app/Traits/BinanceTrait.php on line 22
+[12-Jun-2024 08:50:03 UTC] PHP Deprecated:  Using ${var} in strings is deprecated, use {$var} instead in /home/yelogiftcodingsi/public_html/app/Traits/BinanceTrait.php on line 22
+[12-Jun-2024 08:50:03 UTC] PHP Deprecated:  Using ${var} in strings is deprecated, use {$var} instead in /home/yelogiftcodingsi/public_html/app/Traits/BinanceTrait.php on line 22
+[12-Jun-2024 08:50:03 UTC] PHP Deprecated:  Using ${var} in strings is deprecated, use {$var} instead in /home/yelogiftcodingsi/public_html/app/Traits/BinanceTrait.php on line 49
+[12-Jun-2024 08:50:03 UTC] PHP Deprecated:  Using ${var} in strings is deprecated, use {$var} instead in /home/yelogiftcodingsi/public_html/app/Traits/BinanceTrait.php on line 49
+[12-Jun-2024 08:50:03 UTC] PHP Deprecated:  Using ${var} in strings is deprecated, use {$var} instead in /home/yelogiftcodingsi/public_html/app/Traits/BinanceTrait.php on line 49
+[12-Jun-2024 08:50:03 UTC] PHP Deprecated:  Using ${var} in strings is deprecated, use {$var} instead in /home/yelogiftcodingsi/public_html/app/Traits/BinanceTrait.php on line 49
+[12-Jun-2024 08:50:03 UTC] PHP Deprecated:  Using ${var} in strings is deprecated, use {$var} instead in /home/yelogiftcodingsi/public_html/app/Traits/BinanceTrait.php on line 49
+[12-Jun-2024 08:50:03 UTC] PHP Deprecated:  Using ${var} in strings is deprecated, use {$var} instead in /home/yelogiftcodingsi/public_html/app/Traits/BinanceTrait.php on line 49
+[12-Jun-2024 08:50:03 UTC] PHP Deprecated:  Using ${var} in strings is deprecated, use {$var} instead in /home/yelogiftcodingsi/public_html/app/Traits/BinanceTrait.php on line 22
+[12-Jun-2024 08:50:03 UTC] PHP Deprecated:  Using ${var} in strings is deprecated, use {$var} instead in /home/yelogiftcodingsi/public_html/app/Traits/BinanceTrait.php on line 22
+[12-Jun-2024 08:50:03 UTC] PHP Deprecated:  Using ${var} in strings is deprecated, use {$var} instead in /home/yelogiftcodingsi/public_html/app/Traits/BinanceTrait.php on line 49
+[12-Jun-2024 08:50:03 UTC] PHP Deprecated:  Using ${var} in strings is deprecated, use {$var} instead in /home/yelogiftcodingsi/public_html/app/Traits/BinanceTrait.php on line 49
+[12-Jun-2024 08:50:03 UTC] PHP Deprecated:  Using ${var} in strings is deprecated, use {$var} instead in /home/yelogiftcodingsi/public_html/app/Traits/BinanceTrait.php on line 49
+[12-Jun-2024 10:10:47 UTC] PHP Deprecated:  Using ${var} in strings is deprecated, use {$var} instead in /home/yelogiftcodingsi/public_html/app/Traits/BinanceTrait.php on line 22
+[12-Jun-2024 10:10:47 UTC] PHP Deprecated:  Using ${var} in strings is deprecated, use {$var} instead in /home/yelogiftcodingsi/public_html/app/Traits/BinanceTrait.php on line 22
+[12-Jun-2024 10:10:47 UTC] PHP Deprecated:  Using ${var} in strings is deprecated, use {$var} instead in /home/yelogiftcodingsi/public_html/app/Traits/BinanceTrait.php on line 49
+[12-Jun-2024 10:10:47 UTC] PHP Deprecated:  Using ${var} in strings is deprecated, use {$var} instead in /home/yelogiftcodingsi/public_html/app/Traits/BinanceTrait.php on line 49
+[12-Jun-2024 10:10:47 UTC] PHP Deprecated:  Using ${var} in strings is deprecated, use {$var} instead in /home/yelogiftcodingsi/public_html/app/Traits/BinanceTrait.php on line 49
+[12-Jun-2024 10:41:51 UTC] PHP Deprecated:  Using ${var} in strings is deprecated, use {$var} instead in /home/yelogiftcodingsi/public_html/app/Traits/BinanceTrait.php on line 22
+[12-Jun-2024 10:41:51 UTC] PHP Deprecated:  Using ${var} in strings is deprecated, use {$var} instead in /home/yelogiftcodingsi/public_html/app/Traits/BinanceTrait.php on line 22
+[12-Jun-2024 10:41:51 UTC] PHP Deprecated:  Using ${var} in strings is deprecated, use {$var} instead in /home/yelogiftcodingsi/public_html/app/Traits/BinanceTrait.php on line 49
+[12-Jun-2024 10:41:51 UTC] PHP Deprecated:  Using ${var} in strings is deprecated, use {$var} instead in /home/yelogiftcodingsi/public_html/app/Traits/BinanceTrait.php on line 49
+[12-Jun-2024 10:41:51 UTC] PHP Deprecated:  Using ${var} in strings is deprecated, use {$var} instead in /home/yelogiftcodingsi/public_html/app/Traits/BinanceTrait.php on line 49
+[13-Jun-2024 10:00:50 UTC] PHP Deprecated:  Using ${var} in strings is deprecated, use {$var} instead in /home/yelogiftcodingsi/public_html/app/Traits/BinanceTrait.php on line 22
+[13-Jun-2024 10:00:50 UTC] PHP Deprecated:  Using ${var} in strings is deprecated, use {$var} instead in /home/yelogiftcodingsi/public_html/app/Traits/BinanceTrait.php on line 22
+[13-Jun-2024 10:00:50 UTC] PHP Deprecated:  Using ${var} in strings is deprecated, use {$var} instead in /home/yelogiftcodingsi/public_html/app/Traits/BinanceTrait.php on line 49
+[13-Jun-2024 10:00:50 UTC] PHP Deprecated:  Using ${var} in strings is deprecated, use {$var} instead in /home/yelogiftcodingsi/public_html/app/Traits/BinanceTrait.php on line 49
+[13-Jun-2024 10:00:50 UTC] PHP Deprecated:  Using ${var} in strings is deprecated, use {$var} instead in /home/yelogiftcodingsi/public_html/app/Traits/BinanceTrait.php on line 49
+[13-Jun-2024 10:03:00 UTC] PHP Deprecated:  Using ${var} in strings is deprecated, use {$var} instead in /home/yelogiftcodingsi/public_html/app/Traits/BinanceTrait.php on line 22
+[13-Jun-2024 10:03:00 UTC] PHP Deprecated:  Using ${var} in strings is deprecated, use {$var} instead in /home/yelogiftcodingsi/public_html/app/Traits/BinanceTrait.php on line 22
+[13-Jun-2024 10:03:00 UTC] PHP Deprecated:  Using ${var} in strings is deprecated, use {$var} instead in /home/yelogiftcodingsi/public_html/app/Traits/BinanceTrait.php on line 49
+[13-Jun-2024 10:03:00 UTC] PHP Deprecated:  Using ${var} in strings is deprecated, use {$var} instead in /home/yelogiftcodingsi/public_html/app/Traits/BinanceTrait.php on line 49
+[13-Jun-2024 10:03:00 UTC] PHP Deprecated:  Using ${var} in strings is deprecated, use {$var} instead in /home/yelogiftcodingsi/public_html/app/Traits/BinanceTrait.php on line 49
+[13-Jun-2024 10:04:52 UTC] PHP Deprecated:  Using ${var} in strings is deprecated, use {$var} instead in /home/yelogiftcodingsi/public_html/app/Traits/BinanceTrait.php on line 22
+[13-Jun-2024 10:04:52 UTC] PHP Deprecated:  Using ${var} in strings is deprecated, use {$var} instead in /home/yelogiftcodingsi/public_html/app/Traits/BinanceTrait.php on line 22
+[13-Jun-2024 10:04:52 UTC] PHP Deprecated:  Using ${var} in strings is deprecated, use {$var} instead in /home/yelogiftcodingsi/public_html/app/Traits/BinanceTrait.php on line 49
+[13-Jun-2024 10:04:52 UTC] PHP Deprecated:  Using ${var} in strings is deprecated, use {$var} instead in /home/yelogiftcodingsi/public_html/app/Traits/BinanceTrait.php on line 49
+[13-Jun-2024 10:04:52 UTC] PHP Deprecated:  Using ${var} in strings is deprecated, use {$var} instead in /home/yelogiftcodingsi/public_html/app/Traits/BinanceTrait.php on line 49
+[13-Jun-2024 10:06:26 UTC] PHP Deprecated:  Using ${var} in strings is deprecated, use {$var} instead in /home/yelogiftcodingsi/public_html/app/Traits/BinanceTrait.php on line 22
+[13-Jun-2024 10:06:26 UTC] PHP Deprecated:  Using ${var} in strings is deprecated, use {$var} instead in /home/yelogiftcodingsi/public_html/app/Traits/BinanceTrait.php on line 22
+[13-Jun-2024 10:06:26 UTC] PHP Deprecated:  Using ${var} in strings is deprecated, use {$var} instead in /home/yelogiftcodingsi/public_html/app/Traits/BinanceTrait.php on line 49
+[13-Jun-2024 10:06:26 UTC] PHP Deprecated:  Using ${var} in strings is deprecated, use {$var} instead in /home/yelogiftcodingsi/public_html/app/Traits/BinanceTrait.php on line 49
+[13-Jun-2024 10:06:26 UTC] PHP Deprecated:  Using ${var} in strings is deprecated, use {$var} instead in /home/yelogiftcodingsi/public_html/app/Traits/BinanceTrait.php on line 49
+[13-Jun-2024 12:06:57 UTC] PHP Deprecated:  Using ${var} in strings is deprecated, use {$var} instead in /home/yelogiftcodingsi/public_html/app/Traits/BinanceTrait.php on line 22
+[13-Jun-2024 12:06:57 UTC] PHP Deprecated:  Using ${var} in strings is deprecated, use {$var} instead in /home/yelogiftcodingsi/public_html/app/Traits/BinanceTrait.php on line 22
+[13-Jun-2024 12:06:57 UTC] PHP Deprecated:  Using ${var} in strings is deprecated, use {$var} instead in /home/yelogiftcodingsi/public_html/app/Traits/BinanceTrait.php on line 49
+[13-Jun-2024 12:06:57 UTC] PHP Deprecated:  Using ${var} in strings is deprecated, use {$var} instead in /home/yelogiftcodingsi/public_html/app/Traits/BinanceTrait.php on line 49
+[13-Jun-2024 12:06:57 UTC] PHP Deprecated:  Using ${var} in strings is deprecated, use {$var} instead in /home/yelogiftcodingsi/public_html/app/Traits/BinanceTrait.php on line 49
+[25-Jun-2024 08:26:59 UTC] PHP Warning:  POST Content-Length of 11077632 bytes exceeds the limit of 8388608 bytes in Unknown on line 0
+[25-Jun-2024 08:27:00 UTC] PHP Warning:  POST Content-Length of 11077632 bytes exceeds the limit of 8388608 bytes in Unknown on line 0
+[25-Jun-2024 08:27:03 UTC] PHP Warning:  POST Content-Length of 11077632 bytes exceeds the limit of 8388608 bytes in Unknown on line 0
+[25-Jun-2024 08:27:04 UTC] PHP Warning:  POST Content-Length of 11077632 bytes exceeds the limit of 8388608 bytes in Unknown on line 0

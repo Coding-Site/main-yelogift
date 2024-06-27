@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Admin;
 use App\Models\Setting;
 use App\Models\User;
+use App\Models\BinanceFee;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -83,6 +84,10 @@ class DatabaseSeeder extends Seeder
         $setting->key = 'manual-enable';
         $setting->value = '1';
         $setting->save();
+
+        $fee = new BinanceFee();
+        $fee->description = 'binanace-fee';
+        $fee->save();
 
 
 

@@ -1,9 +1,19 @@
 <?php
 
-use App\Http\Controllers\User\CheckoutController;
-use App\Http\Controllers\User\OrderController;
 use Illuminate\Http\Request;
+use App\Mail\TestSendHostMail;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
+
+Route::get('send', function () {
+    Mail::to('a.mansour.code@gmail.com')->send(new TestSendHostMail);
+    return 'send';
+});
+
+Route::get('mailer', function () {
+    Mail::mailer('smtp')->to('a.mansour.code@gmail.com')->send(new TestSendHostMail);
+    return 'send';
+});
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -51,6 +61,13 @@ Route::prefix('admin')->group(function(){
             Route::delete('/delete/{id}','destroy');
         });
         Route::prefix('contact')->controller(\App\Http\Controllers\Admin\ContactsController::class)->group(function(){
+            Route::get('/','index');
+            Route::get('/show/{id}','show');
+            Route::post('/store','store');
+            Route::put('/update/{id}','update');
+            Route::delete('/delete/{id}','destroy');
+        });
+        Route::prefix('credintial')->controller(\App\Http\Controllers\Admin\credintialsController::class)->group(function(){
             Route::get('/','index');
             Route::get('/show/{id}','show');
             Route::post('/store','store');
@@ -170,6 +187,9 @@ Route::prefix('footer')->controller(\App\Http\Controllers\Admin\TableFooterContr
 Route::prefix('contact')->controller(\App\Http\Controllers\Admin\ContactsController::class)->group(function(){
     Route::get('/','index');
 });
+Route::prefix('credintials')->controller(\App\Http\Controllers\Admin\credintialsController::class)->group(function(){
+    Route::get('/','index');
+});
 Route::prefix('advertismant')->controller(\App\Http\Controllers\AdvertismentController::class)->group(function(){
     Route::get('/','index');
 });
@@ -208,8 +228,8 @@ Route::prefix('user')->group(function(){
        Route::post('/crypto','attach_payment_id');
        Route::get('cancel/{id}','cancelOrder');
        Route::delete('delete/{id}','deleteOrder');
-       /*Route::get('/binancepay/callback','returnCallback');
-       Route::get('/binancepay/cancel','cancelCallback');*/
+       Route::get('/binancepay/callback','returnCallback');
+       Route::get('/binancepay/cancel','cancelCallback');
 
     });
     Route::prefix('reviews')->middleware('auth:web')->controller(\App\Http\Controllers\User\ProductReviewController::class)->group(function(){

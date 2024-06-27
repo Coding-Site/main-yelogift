@@ -17,7 +17,7 @@ class NotificationController extends Controller
      */
     public function index()
     {
-        $notifications = Notification::get();
+        $notifications = Notification::where('type', 1)->get();
         $this->setData($notifications);
         return $this->returnResponse();
     }

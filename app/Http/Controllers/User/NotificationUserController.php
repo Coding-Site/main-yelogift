@@ -18,7 +18,9 @@ class NotificationUserController extends Controller
         ->orWhere(function ($query) {
             $query->where('type', 0)
             ->where('user_id', Auth()->user()->id);
-        })->get();
+        })
+        ->orderBy('created_at', 'desc')
+        ->get();
         $readNotifications = [];
         $unreadNotifications = [];
         $unreadCount = 0;

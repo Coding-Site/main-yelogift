@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\Product;
+use App\Models\BinanceFee;
 use App\Models\Notification;
 use App\Models\Order;
 use App\Models\User;
@@ -170,7 +171,8 @@ class OrderController extends Controller
                 $product->price = $cart->product_part->price;
                 $product->save();
             }
-            $order->price = $price;
+            $bf = BinanceFee::first();
+            $order->price = $price + $price*$bf->percent/100;
             $order->save();
             Cart::where('user_id', auth()->user()->id)->delete();
 
@@ -278,7 +280,7 @@ class OrderController extends Controller
         $client = User::find($order->user_id);
 
         $order_status = (new BinancePay("binancepay/openapi/v2/order/query"))
-                            ->query(['merchantTradeNo' => $order->merchant_trade_no]);
+                            ->query(['merchantTradeNo' => $order->payment_id]);
 
         // Save transaction status or whatever you like according to the order status
         if($order_status['status'] == 'SUCCESS'){

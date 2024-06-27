@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use Exception;
 use App\Traits\APIHandleClass;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
@@ -178,26 +180,39 @@ class CategoryController extends Controller
             $this->setStatusMessage(false);
             return $this->returnResponse();
         }
+        
         $category = Category::findOrFail($id);
+        DB::beginTransaction();
+
+        try {
         if($category->order > $request->order){
             $categories = Category::whereBetween('order', 
-            [$request->order, $category->order])->get();
+            [$request->order, $category->order-1])->get();
             foreach($categories as $c){
-                $c->order += 1;
-                $c->save();
+                $c->order =$c->order + 1;
             }
 
         }else if($category->order < $request->order){
             $categories = Category::whereBetween('order', 
-            [$category->order, $request->order])->get();
+            [$category->order+1, $request->order])->get();
             foreach($categories as $c){
-                $c->order -= 1;
-                $c->save();
+                $c->order =$c->order - 1;
             }
         }
         $category->order = $request->order;
         $category->save();
+        foreach ($categories as $c) {
+            $c->save();
+        }
+        DB::commit();
         $this->setMessage('reorder success');
         return $this->returnResponse();
+    } catch (Exception $e) {
+        DB::rollBack();
+        $this->setMessage('Reorder failed');
+        $this->setStatusCode(500);
+        $this->setStatusMessage(false);
+        return $this->returnResponse();
+    }
     }
 }

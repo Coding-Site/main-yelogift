@@ -11,10 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('binance_fees', function (Blueprint $table) {
+        Schema::create('credentials', function (Blueprint $table) {
             $table->id();
-            $table->string('description')->nullable();
-            $table->string('percent')->nullable()->default(0);
+            $table->string('client_id')->nullable();
+            $table->string('client_secret')->nullable();
+            $table->string('redirect_url')->nullable();
+            $table->string('scope')->nullable();
+            $table->string('state')->nullable();
             $table->timestamps();
         });
     }
@@ -24,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('binance_fee');
+        Schema::dropIfExists('credentials');
     }
 };
