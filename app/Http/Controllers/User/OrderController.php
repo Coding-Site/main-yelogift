@@ -181,8 +181,8 @@ class OrderController extends Controller
                 $product->price = $cart->product_part->price;
                 $product->save();
             }
-            $bf = BinanceFee::first();
-            $order->price = $price + $price*$bf->percent/100;
+            
+            $order->price = $price;
             $order->save();
             Cart::where('user_id', auth()->user()->id)->delete();
 
@@ -223,9 +223,11 @@ class OrderController extends Controller
 
 
         $order = Order::with(['OrderProduct', 'OrderProduct.product'])->find($request->order_id);
+        $bf = BinanceFee::first();
         // return Response($order);
         // $pay = $this->initiateBinancePay($order->id,'Order From Website','order from '.$order->name.' from email '.$order->email.' by id '.$order->id ,$order->price);
-
+        $order->price = $order->price + $order->price*$bf->percent/100;
+        $order->save();
 
         $user = auth()->user();
         $data['order_amount'] =  $order->price;
