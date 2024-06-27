@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('binance_fees', function (Blueprint $table) {
             $table->id();
             $table->string('description')->nullable();
+            $table->string('percent')->nullable()->default(0);
             $table->timestamps();
         });
     }

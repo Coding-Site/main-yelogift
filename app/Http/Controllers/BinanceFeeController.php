@@ -23,9 +23,10 @@ class BinanceFeeController extends Controller
     {
         $bf =new BinanceFee();
         $bf->description = $request->description;
+        $bf->percent = $request->percent;
         $bf->save();
         return response()->json([
-            'message' => 'bf description created successfully',
+            'message' => 'bf created successfully',
             'data' => $bf,
         ]);
     }
@@ -34,6 +35,7 @@ class BinanceFeeController extends Controller
     {
         $bf = BinanceFee::first();
         $bf->description = $request->description;
+        $bf->percent = $request->percent;
         $bf->save();
        
         return response()->json([
