@@ -8,6 +8,7 @@ use App\Traits\APIHandleClass;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
@@ -178,13 +179,16 @@ class CategoryController extends Controller
             $this->setStatusMessage(false);
             return $this->returnResponse();
         }
+        
         $category = Category::findOrFail($id);
+        DB::beginTransaction();
+
+        try {
         if($category->order > $request->order){
             $categories = Category::whereBetween('order', 
             [$request->order, $category->order])->get();
             foreach($categories as $c){
                 $c->order += 1;
-                $c->save();
             }
 
         }else if($category->order < $request->order){
@@ -192,12 +196,22 @@ class CategoryController extends Controller
             [$category->order, $request->order])->get();
             foreach($categories as $c){
                 $c->order -= 1;
-                $c->save();
             }
         }
         $category->order = $request->order;
         $category->save();
+        foreach ($categories as $c) {
+            $c->save();
+        }
+        DB::commit();
         $this->setMessage('reorder success');
         return $this->returnResponse();
+    } catch (\Exception $e) {
+        DB::rollBack();
+        $this->setMessage('Reorder failed');
+        $this->setStatusCode(500);
+        $this->setStatusMessage(false);
+        return $this->returnResponse();
+    }
     }
 }
