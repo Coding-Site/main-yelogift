@@ -182,9 +182,9 @@ class CategoryController extends Controller
         }
         
         $category = Category::findOrFail($id);
-        DB::beginTransaction();
+        // DB::beginTransaction();
 
-        // try {
+        try {
         if($category->order > $request->order){
             $categories = Category::whereBetween('order', 
             [$request->order, $category->order-1])->get();
@@ -204,15 +204,15 @@ class CategoryController extends Controller
         foreach ($categories as $c) {
             $c->save();
         }
-        DB::commit();
+        // DB::commit();
         $this->setMessage('reorder success');
         return $this->returnResponse();
-    // } catch (Exception $e) {
-    //     DB::rollBack();
-    //     $this->setMessage('Reorder failed');
-    //     $this->setStatusCode(500);
-    //     $this->setStatusMessage(false);
-    //     return $this->returnResponse();
-    // }
+    } catch (Exception $e) {
+        DB::rollBack();
+        $this->setMessage('Reorder failed');
+        $this->setStatusCode(500);
+        $this->setStatusMessage(false);
+        return $this->returnResponse();
+    }
     }
 }
