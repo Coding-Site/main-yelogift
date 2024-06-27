@@ -36,10 +36,17 @@ class OrderController extends Controller
     public function index()
     {
         // Retrieve the orders with their related products for the authenticated user
-        $order = Order::with(['OrderProduct', 'OrderProduct.product','OrderProduct.product_part'])
+        $orders = Order::with(['OrderProduct', 'OrderProduct.product','OrderProduct.product_part','OrderProduct.order_code'])
             ->where('user_id', auth()->user()->id)
             ->orderBy('created_at', 'desc')
             ->get();
+        foreach($orders as $order) {
+                foreach($order->OrderProduct as $product) {
+                    foreach($product->order_code as $code) {
+                        $code->decrypt_code = decrypt($code->code);
+                   };
+                 };
+            };
 
         // Set the order data and return the response
         $this->setData($order);

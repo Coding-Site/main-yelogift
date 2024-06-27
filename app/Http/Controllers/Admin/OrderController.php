@@ -170,7 +170,7 @@ class OrderController extends Controller
         array_push($sending_codes, [$codes, $product, $product_part]);
     }
         $client = User::find($confirmed_order->user_id);
-        Mail::to($client->email)->send(new SendCodesEmail($client->name,$sending_codes));
+        
         $notification = new Notification;
         $notification->title = 'codes sent';
         $notification->message = 'order confirmed and your codes sent to your email, check your inbox';
@@ -178,6 +178,7 @@ class OrderController extends Controller
         $notification->user_id = $client->id;
         $notification->save();
         // Set the success response
+        Mail::to($client->email)->send(new SendCodesEmail($client->name,$sending_codes));
         $this->setMessage('Email sent successfully');
         return $this->returnResponse();
     }
