@@ -160,7 +160,7 @@ class OrderController extends Controller
             $order = new Order();
             $order->user_id = auth()->user()->id;
             $order->name = $request->name?$request->name:"none";
-            $order->email = $request->email?$request->email:"none";
+            $order->email = auth()->user()->email;
             $order->phone = $request->phone?$request->phone:"none";
             $order->country = $request->country?$request->country:"none";
             $order->price = $price;
