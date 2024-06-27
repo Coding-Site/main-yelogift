@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use Exception;
 use App\Traits\APIHandleClass;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -186,16 +187,16 @@ class CategoryController extends Controller
         try {
         if($category->order > $request->order){
             $categories = Category::whereBetween('order', 
-            [$request->order, $category->order])->get();
+            [$request->order, $category->order-1])->get();
             foreach($categories as $c){
-                $c->order += 1;
+                $c->order =$c->order + 1;
             }
 
         }else if($category->order < $request->order){
             $categories = Category::whereBetween('order', 
-            [$category->order, $request->order])->get();
+            [$category->order+1, $request->order])->get();
             foreach($categories as $c){
-                $c->order -= 1;
+                $c->order =$c->order - 1;
             }
         }
         $category->order = $request->order;
@@ -206,7 +207,7 @@ class CategoryController extends Controller
         DB::commit();
         $this->setMessage('reorder success');
         return $this->returnResponse();
-    } catch (\Exception $e) {
+    } catch (Exception $e) {
         DB::rollBack();
         $this->setMessage('Reorder failed');
         $this->setStatusCode(500);
