@@ -49,7 +49,7 @@ class OrderController extends Controller
             };
 
         // Set the order data and return the response
-        $this->setData($order);
+        $this->setData($orders);
         return $this->returnResponse();
     }
     public function get($id){
