@@ -110,10 +110,10 @@ class OrderController extends Controller
         // Validate the request
         $validator = Validator::make($request->all(), [
             'order_id'=>'required|exists:orders,id',
-            'order_codes'=>'required|array',
-            'order_codes.*.order_product_id' => 'required|exists:order_products,id',
-            'order_codes.*.product_part_id' => 'required|exists:product_parts,id',
-            'order_codes.*.code' => 'required',
+            'order_codes'=>'nullable|array',
+            'order_codes.*.order_product_id' => 'nullable|exists:order_products,id',
+            'order_codes.*.product_part_id' => 'nullable|exists:product_parts,id',
+            'order_codes.*.code' => 'nullable',
         ]);
 
         // If the validation fails, return the error response
