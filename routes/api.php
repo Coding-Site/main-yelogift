@@ -57,6 +57,13 @@ Route::prefix('admin')->group(function(){
             Route::put('/update/{id}','update');
             Route::delete('/delete/{id}','destroy');
         });
+        Route::prefix('credintial')->controller(\App\Http\Controllers\Admin\credintialsController::class)->group(function(){
+            Route::get('/','index');
+            Route::get('/show/{id}','show');
+            Route::post('/store','store');
+            Route::put('/update/{id}','update');
+            Route::delete('/delete/{id}','destroy');
+        });
         Route::prefix('product')->group(function(){
             Route::controller(\App\Http\Controllers\Admin\ProductController::class)->group(function(){
                 Route::get('/','index');
