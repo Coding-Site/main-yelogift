@@ -228,8 +228,8 @@ Route::prefix('user')->group(function(){
        Route::post('/crypto','attach_payment_id');
        Route::get('cancel/{id}','cancelOrder');
        Route::delete('delete/{id}','deleteOrder');
-       /*Route::get('/binancepay/callback','returnCallback');
-       Route::get('/binancepay/cancel','cancelCallback');*/
+       Route::get('/binancepay/callback','returnCallback');
+       Route::get('/binancepay/cancel','cancelCallback');
 
     });
     Route::prefix('reviews')->middleware('auth:web')->controller(\App\Http\Controllers\User\ProductReviewController::class)->group(function(){
