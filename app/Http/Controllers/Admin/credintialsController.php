@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Traits\APIHandleClass;
-use App\Models\Credintial;
+use App\Models\Credential;
 use Illuminate\Support\Facades\Validator;
 
 class credintialsController extends Controller
@@ -16,7 +16,7 @@ class credintialsController extends Controller
      */
     public function index()
     {
-        $credintials = Credintial::get();
+        $credintials = Credential::get();
         $this->setData($credintials);
         return $this->returnResponse();
     }
@@ -42,7 +42,7 @@ class credintialsController extends Controller
         }
 
         // Create a new category instance
-        $credintial = new Credintial;
+        $credintial = new Credential;
 
         // Assign the request data to the category model
         $credintial->client_id = $request->client_id;
@@ -64,7 +64,7 @@ class credintialsController extends Controller
      */
     public function show(string $id)
     {
-        $credintial = Credintial::find($id);
+        $credintial = Credential::find($id);
         if (!$credintial){
             return Response('object not found',404);
         }
@@ -82,7 +82,7 @@ class credintialsController extends Controller
             'scope' => 'nullable',
             'state' => 'nullable',
         ]);
-        $credintial = Credintial::find($id);
+        $credintial = Credential::find($id);
         if (!$credintial){
             return Response('object not found',404);
         }
@@ -114,7 +114,7 @@ class credintialsController extends Controller
      */
     public function destroy(string $id)
     {
-        $credintial = Credintial::find($id);
+        $credintial = Credential::find($id);
         if (!$credintial){
             return Response('object not found',404);
         }
