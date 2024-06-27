@@ -187,6 +187,9 @@ Route::prefix('footer')->controller(\App\Http\Controllers\Admin\TableFooterContr
 Route::prefix('contact')->controller(\App\Http\Controllers\Admin\ContactsController::class)->group(function(){
     Route::get('/','index');
 });
+Route::prefix('credintials')->controller(\App\Http\Controllers\Admin\credintialsController::class)->group(function(){
+    Route::get('/','index');
+});
 Route::prefix('advertismant')->controller(\App\Http\Controllers\AdvertismentController::class)->group(function(){
     Route::get('/','index');
 });
