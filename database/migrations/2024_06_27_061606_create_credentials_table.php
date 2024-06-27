@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('credentials', function (Blueprint $table) {
             $table->id();
-            $table->string('client_id');
-            $table->string('client_secret');
-            $table->string('redirect_url');
-            $table->string('scope');
-            $table->string('state');
+            $table->string('client_id')->nullable();
+            $table->string('client_secret')->nullable();
+            $table->string('redirect_url')->nullable();
+            $table->string('scope')->nullable();
+            $table->string('state')->nullable();
             $table->timestamps();
         });
     }
