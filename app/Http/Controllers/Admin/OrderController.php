@@ -165,6 +165,7 @@ class OrderController extends Controller
     $sending_codes = array();
     foreach($confirmed_order->orderProduct as $order_product){
         $codes = OrderCode::where('order_product_id',$order_product->id)->get();
+        foreach ($codes as $code) {$code->code = decrypt($code->code);}
         $product = Product::find($order_product->product_id);
         $product_part = ProductPart::find($order_product->product_part_id);
         array_push($sending_codes, [$codes, $product, $product_part]);
