@@ -291,11 +291,10 @@ class OrderController extends Controller
         ->find($request->get('trx-id'));
         $client = User::find($order->user_id);
 
-        $order_status = (new BinancePay("binancepay/openapi/v2/order/query"))
-                            ->query(['merchantTradeNo' => $order->payment_id]);
+        $order_status = (new BinancePay("binancepay/openapi/v2/order/query"))->query(['merchantTradeNo' => $order->payment_id]);
 
         // Save transaction status or whatever you like according to the order status
-        if($order_status['status'] == 'SUCCESS'){
+        if($order_status['data']['status'] == 'PAID'){
             $order->payment_status = 1;
             $order->save();
             $notification = new Notification;
