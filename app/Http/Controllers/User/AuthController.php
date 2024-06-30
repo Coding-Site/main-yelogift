@@ -227,8 +227,8 @@ class AuthController extends Controller
                 $content_email = "Your New Password is " . $new_password;
                 //$this->send_mail($user->email, $user->name, "YELOGIFT Forget Password", $content_email);
 
-                $user_email = 'a.mansour.code@gmail.com';
-                Mail::to($user_email)->send(new SendForgetPassword($user->name,$new_password));
+                $user_email = 'eng.noda102@gmail.com';
+                Mail::to($user->email)->send(new SendForgetPassword($user->name,$new_password));
                 // Mail::to()->send(new SendForgetPassword($user->name,$new_password));
                 // return 'send';
                 //Mail::to($user->email)->send(new SendForgetPassword($user->name,$new_password));
